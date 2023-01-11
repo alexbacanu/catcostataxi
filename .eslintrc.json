@@ -1,0 +1,11 @@
+{
+  "extends": "next/core-web-vitals",
+  "overrides": [
+    // Config for TypeScript
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["tailwindcss"],
+      "extends": ["plugin:tailwindcss/recommended", "next/core-web-vitals"]
+    }
+  ]
+}
