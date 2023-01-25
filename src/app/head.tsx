@@ -8,5 +8,5 @@ export default function Head() {
       <meta name="keywords" content="cat costa taxi, cat costa uber, cat costa bolt" />
       <link rel="icon" href="/favicon.ico" />
     </>
-  );
+  )
 }
