@@ -1,6 +1,6 @@
 import { getMongoKeys, getMongoValue } from "@/lib/helpers/mongodb"
-import Header from "@/ui/Estimate/UIHeader"
-import Taxis from "@/ui/Estimate/UITaxis"
+import Directions from "@/ui/Estimate/Directions"
+import MapSection from "@/ui/Estimate/MapSection"
 
 type Props = {
   params: {
@@ -17,10 +17,10 @@ export default async function PIDPage({ params }: Props) {
   const { from, to } = routeData
 
   return (
-    <div>
-      <Header from={from} to={to} />
-      <Taxis />
-    </div>
+    <>
+      <Directions from={from} to={to} />
+      <MapSection from={from} to={to} />
+    </>
   )
 }
 

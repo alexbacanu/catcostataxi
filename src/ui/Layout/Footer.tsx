@@ -2,12 +2,12 @@ import { IconBrandFacebook, IconBrandGithub, IconBrandTwitter } from "@tabler/ic
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-900/10 dark:border-white/10">
-      <div className="container mx-auto justify-between space-y-6 p-6 sm:flex sm:space-y-0">
+    <footer className="border-t border-neutral-800/10 transition dark:border-white/10">
+      <div className="home-section flex-col gap-y-4 py-6 sm:flex-row">
         <div className="flex items-center justify-center">
-          <p>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</p>
+          Copyright &copy; {new Date().getFullYear()} catcostataxi.ro
         </div>
-        <div className="flex items-center justify-center space-x-8">
+        <div className="flex items-center justify-center space-x-6">
           <IconBrandGithub />
           <IconBrandTwitter />
           <IconBrandFacebook />

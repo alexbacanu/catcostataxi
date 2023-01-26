@@ -1,14 +1,16 @@
 import { getMongoList } from "@/lib/helpers/mongodb"
-import Directions from "@/ui/Home/Directions"
-import Locations from "@/ui/Home/Locations"
+import Estimator from "@/ui/Home/Estimator"
+import Recents from "@/ui/Home/Recents"
+import Taxi from "@/ui/Home/Taxi"
 
 export default async function HomePage() {
   const recentSearches = await getMongoList()
 
   return (
     <>
-      <Directions />
-      <Locations recentSearches={recentSearches} />
+      <Estimator />
+      <Recents recentSearches={recentSearches} />
+      <Taxi />
     </>
   )
 }

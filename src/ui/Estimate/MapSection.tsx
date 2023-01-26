@@ -8,7 +8,7 @@ type Props = {
   to: string
 }
 
-export default function Map({ from, to }: Props) {
+export default function MapSection({ from, to }: Props) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
     libraries: ["places"],
