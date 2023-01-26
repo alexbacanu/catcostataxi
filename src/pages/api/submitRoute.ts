@@ -1,6 +1,7 @@
-import redis from "@/lib/clients/redis"
+import clientPromise from "@/lib/clients/mongoClient"
 import hashPair from "@/lib/helpers/hash"
-import { NextApiRequest, NextApiResponse } from "next"
+
+import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function submitRoute(req: NextApiRequest, res: NextApiResponse) {
   const { id, tripData } = req.body
@@ -29,11 +30,30 @@ export default async function submitRoute(req: NextApiRequest, res: NextApiRespo
     return
   }
 
-  const requestedRoute = await redis.get(id)
+  const client = await clientPromise
+  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+
+  const requestedRoute = await db.collection("routes").findOne({ id })
+  const searchData = { id, from, to }
 
   if (!requestedRoute) {
-    await redis.set(id, JSON.stringify(tripData))
+    await db.collection("routes").insertOne({ id, from, to })
+
+    const recentList = await db.collection("recent").findOne()
+
+    if (recentList) {
+      await db.collection("recent").updateOne({ _id: recentList._id }, { $push: { recent: searchData } })
+      const recent = await db.collection("recent").findOne()
+
+      if (recent && recent.recent.length > 10) {
+        await db.collection("recent").updateOne({ _id: recent._id }, { $pop: { recent: -1 } })
+      }
+    } else {
+      await db.collection("recent").insertOne({ recent: [searchData] })
+    }
   }
+
+  // client.close()
 
   return res.status(200).json({
     body: "Success",

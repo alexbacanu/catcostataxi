@@ -1,93 +1,107 @@
-import { IconHistory, IconMapPin } from "@tabler/icons-react"
+import { IconHistory } from "@tabler/icons-react"
+import Link from "next/link"
 
-export default function Locations() {
+type Props = {
+  recentSearches: { id: string; from: string; to: string }[]
+}
+
+export default function Locations({ recentSearches }: Props) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-3">
+    <div className="mx-auto flex max-w-7xl items-center justify-between p-8">
+      <div className="flex items-center justify-center">
         {/* Left */}
-        <div className="col-span-2 space-y-2">
-          <div className="group relative flex flex-col items-center">
-            <div className="p-6 transition hover:bg-zinc-50 hover:dark:bg-zinc-800/50 sm:rounded-2xl">
-              <h2 className="pb-1 text-2xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-                Verifica preturile in orasul tau
-              </h2>
+        {/* <div>
+          <div>
+            <div>
+              <h2>Verifica preturile in orasul tau</h2>
 
-              <p className="pb-6 text-sm text-zinc-600 dark:text-zinc-400">
-                Verifica daca serviciile ca Uber sunt disponibile in orasul tau si la ce pret
-              </p>
+              <p>Verifica daca serviciile ca Uber sunt disponibile in orasul tau si la ce pret</p>
 
-              <div className="relative rounded-md shadow-md">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-                  <span className="text-zinc-500 dark:text-zinc-300 sm:text-xs">
+              <div>
+                <div>
+                  <span>
                     <IconMapPin />
                   </span>
                 </div>
-                <input
-                  type="text"
-                  name="from"
-                  id="from"
-                  className="h-10 w-full items-center rounded-md bg-white/80 pl-9 text-sm text-zinc-800 ring-1 ring-zinc-900/10 transition placeholder:text-zinc-600 hover:ring-zinc-900/20 focus:bg-white focus:outline-none dark:bg-white/5 dark:text-zinc-100 dark:ring-inset dark:ring-white/10 placeholder:dark:text-zinc-200 dark:hover:ring-white/20 focus:dark:bg-white/10 focus:dark:ring-white/60 lg:flex"
-                  placeholder="Introdu o locatie..."
-                />
+                <input type="text" name="from" id="from" placeholder="Introdu o locatie..." />
               </div>
 
-              <div className="flex items-center justify-center space-x-4 pt-6 text-base font-medium text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-300">
-                <a
-                  href="#"
-                  className="inline-flex justify-center overflow-hidden rounded-md bg-zinc-900 py-2 px-4 text-white transition hover:bg-zinc-700 dark:bg-zinc-400/10 dark:ring-1 dark:ring-inset dark:ring-zinc-400/20 dark:hover:bg-zinc-400/10 dark:hover:ring-zinc-300"
-                >
-                  Verifica preturi
-                </a>
-                <span className="font-light">sau</span>
-                <a href="#" className="whitespace-nowrap">
-                  vezi locatiile disponibile...
-                </a>
+              <div>
+                <a href="#">Verifica preturi</a>
+                <span>sau</span>
+                <a href="#">vezi locatiile disponibile...</a>
               </div>
             </div>
           </div>
+        </div> */}
+
+        <div className="m-6 w-1/3 space-y-4 rounded-md p-4 shadow-lg ring-1 ring-zinc-900/10 dark:bg-neutral-900 dark:ring-white/10">
+          <h2 className="flex justify-center space-x-2">
+            <IconHistory />
+            <span>Cautari Recente</span>
+          </h2>
+
+          <ol className="space-y-2">
+            {recentSearches.map((item) => {
+              const { from, to, id } = item
+
+              return (
+                <li key={id} className="line-clamp-1">
+                  <Link href={`/estimat/${id}`}>
+                    <span>{from}</span>
+                    {" -> "}
+                    <span>{to}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ol>
         </div>
 
-        {/* Right */}
-        <div className="col-span-1 space-y-2">
-          <div className="rounded-md border border-zinc-100 p-6 dark:border-zinc-700/40">
-            <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              <IconHistory />
-              <span className="pl-4 pb-4">Cautari recente</span>
-            </h2>
+        <div className="m-6 w-1/3 space-y-4 rounded-md p-4 shadow-lg ring-1 ring-zinc-900/10 dark:bg-neutral-900 dark:ring-white/10">
+          <h2 className="flex justify-center space-x-2">
+            <IconHistory />
+            <span>Cautari Populare</span>
+          </h2>
 
-            <ol className="space-y-2">
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Plaza Romania - Centrul Vechi
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Ateneul Roman - Bucuresti Obor
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Autogara Militari - Tineretului
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Parcul Regele Mihai I - AFI Cotroceni
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Gara de Nord - Chiajna
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Parcul Drumul Taberei - Aviatorilor
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Autogara Militari - Tineretului
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Parcul Regele Mihai I - AFI Cotroceni
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Gara de Nord - Chiajna
-              </li>
-              <li className="w-full flex-none text-sm font-light text-zinc-900 dark:text-zinc-100">
-                Parcul Drumul Taberei - Aviatorilor
-              </li>
-            </ol>
-          </div>
+          <ol className="space-y-2">
+            {recentSearches.map((item) => {
+              const { from, to, id } = item
+
+              return (
+                <li key={id} className="line-clamp-1">
+                  <Link href={`/estimat/${id}`}>
+                    <span>{from}</span>
+                    {" -> "}
+                    <span>{to}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
+
+        <div className="m-6 w-1/3 space-y-4 rounded-md p-4 shadow-lg ring-1 ring-zinc-900/10 dark:bg-neutral-900 dark:ring-white/10">
+          <h2 className="flex justify-center space-x-2">
+            <IconHistory />
+            <span>Orase Populare</span>
+          </h2>
+
+          <ol className="space-y-2">
+            {recentSearches.map((item) => {
+              const { from, to, id } = item
+
+              return (
+                <li key={id} className="line-clamp-1">
+                  <Link href={`/estimat/${id}`}>
+                    <span>{from}</span>
+                    {" -> "}
+                    <span>{to}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ol>
         </div>
       </div>
     </div>

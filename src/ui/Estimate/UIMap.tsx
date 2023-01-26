@@ -35,19 +35,17 @@ export default function Map({ from, to }: Props) {
   if (!isLoaded) return <div>Is not loaded yet</div>
 
   return (
-    <section>
-      <GoogleMap
-        zoom={10}
-        mapContainerStyle={{ width: "100%", height: "50vh" }}
-        options={{
-          zoomControl: false,
-          streetViewControl: false,
-          mapTypeControl: false,
-          fullscreenControl: false,
-        }}
-      >
-        {mapDirections && <DirectionsRenderer directions={mapDirections} />}
-      </GoogleMap>
-    </section>
+    <GoogleMap
+      zoom={10}
+      mapContainerStyle={{ width: "100%", height: "50vh" }}
+      options={{
+        zoomControl: false,
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      }}
+    >
+      {mapDirections && <DirectionsRenderer directions={mapDirections} />}
+    </GoogleMap>
   )
 }
