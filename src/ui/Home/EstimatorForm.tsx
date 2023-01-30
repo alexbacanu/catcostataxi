@@ -5,35 +5,14 @@ import { Combobox, Transition } from "@headlessui/react"
 import { IconMapPin } from "@tabler/icons-react"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
-import { Fragment, useCallback, useEffect, useRef, useState } from "react"
-import usePlacesAutocomplete from "use-places-autocomplete"
+import { Fragment, useEffect, useRef, useState } from "react"
+import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
 
 export default function EstimatorForm() {
-  const [from, setFrom] = useState("")
-  const [to, setTo] = useState("")
   const router = useRouter()
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    if (from === "" || to === "") return
-
-    const uniqueId = hashPair(from, to)
-    const tripData = { from, to }
-
-    const result = await fetch("/api/submitRoute", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: uniqueId ?? "",
-        tripData: tripData ?? "",
-      }),
-    })
-
-    // TODO: Make a proper error:
-    if (result.ok) router.push(`/estimate/${uniqueId}`)
-  }
+  const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>()
+  const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>()
 
   const {
     init,
@@ -58,13 +37,43 @@ export default function EstimatorForm() {
     }
   }, [init])
 
-  const handleAddress = useCallback(
-    async (address: string) => {
-      setValue(address, false)
-      clearSuggestions()
-    },
-    [clearSuggestions, setValue]
-  )
+  const getLocality = async (location: google.maps.places.AutocompletePrediction) => {
+    const result = await getDetails({ placeId: location.place_id })
+    if (!result || typeof result === "string") return
+
+    const area = result.address_components?.find((component) => component.types.includes("administrative_area_level_2"))
+    if (area) return area.long_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    const locality = result.address_components?.find((component) => component.types.includes("locality"))
+    return locality?.long_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!selectedFrom || !selectedTo) return
+
+    const id = hashPair(selectedFrom.description, selectedTo.description)
+
+    const tripData = {
+      from: selectedFrom.description,
+      fromLoc: await getLocality(selectedFrom),
+      to: selectedTo.description,
+      toLoc: await getLocality(selectedTo),
+    }
+
+    const result = await fetch("/api/submitRoute", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        tripData,
+      }),
+    })
+
+    // TODO: Make a proper error:
+    if (result.ok) router.push(`/estimate/${id}`)
+  }
 
   return (
     <>
@@ -76,7 +85,7 @@ export default function EstimatorForm() {
       <form className="w-full space-y-6 text-justify text-neutral-800 lg:w-auto" onSubmit={handleSubmit}>
         <div className="space-y-1">
           <h1>Estimeaza cat costa un taxi</h1>
-          <p>Uber & mai multe servicii, afla instant cat costa o cursa de taxi!</p>
+          <h3>Uber & mai multe servicii, afla instant cat costa o cursa de taxi!</h3>
         </div>
 
         <div className="relative">
@@ -87,19 +96,19 @@ export default function EstimatorForm() {
           </div>
 
           <Combobox
-            id="from"
-            as="div"
-            onChange={(address: string) => {
-              handleAddress(address)
-              setFrom(address)
+            value={selectedFrom}
+            onChange={(address) => {
+              clearSuggestions()
+              return setSelectedFrom(address)
             }}
             disabled={!ready}
           >
             <Combobox.Input
-              id="from-input"
-              as="input"
               placeholder="De la"
               onChange={(event) => setValue(event.target.value)}
+              displayValue={(data: google.maps.places.AutocompletePrediction) => {
+                return data.description
+              }}
               className="input-base"
             />
 
@@ -118,17 +127,17 @@ export default function EstimatorForm() {
                   <div className="relative cursor-default select-none py-2 px-4">Introduceti o locatie</div>
                 ) : (
                   status === "OK" &&
-                  data.map(({ place_id, description }) => (
+                  data.map((location) => (
                     <Combobox.Option
-                      key={place_id}
-                      value={description}
+                      key={location.place_id}
+                      value={location}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 px-4 ${
                           active ? "bg-teal-900 text-white" : "text-neutral-800"
                         }`
                       }
                     >
-                      {description}
+                      {location.description}
                     </Combobox.Option>
                   ))
                 )}
@@ -144,20 +153,13 @@ export default function EstimatorForm() {
             </span>
           </div>
 
-          <Combobox
-            id="to"
-            as="div"
-            onChange={(address: string) => {
-              handleAddress(address)
-              setTo(address)
-            }}
-            disabled={!ready}
-          >
+          <Combobox value={selectedTo} onChange={setSelectedTo} disabled={!ready}>
             <Combobox.Input
-              id="to-input"
-              as="input"
               placeholder="Pana la"
               onChange={(event) => setValue(event.target.value)}
+              displayValue={(data: google.maps.places.AutocompletePrediction) => {
+                return data.description
+              }}
               className="input-base"
             />
 
@@ -176,17 +178,17 @@ export default function EstimatorForm() {
                   <div className="relative cursor-default select-none py-2 px-4">Introduceti o locatie</div>
                 ) : (
                   status === "OK" &&
-                  data.map(({ place_id, description }) => (
+                  data.map((location) => (
                     <Combobox.Option
-                      key={place_id}
-                      value={description}
+                      key={location.place_id}
+                      value={location}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 px-4 ${
                           active ? "bg-teal-900 text-white" : "text-neutral-800"
                         }`
                       }
                     >
-                      {description}
+                      {location.description}
                     </Combobox.Option>
                   ))
                 )}

@@ -14,22 +14,28 @@ export default function RecentsCard({ recentSearches }: Props) {
       </h3>
 
       <ol className="divide-y divide-dashed divide-black/10 dark:divide-white/10">
-        {recentSearches.map((item) => {
-          const { from, to, id } = item
+        {recentSearches ? (
+          recentSearches.map((item) => {
+            const { from, to, id } = item
 
-          return (
-            <li key={id}>
-              <Link
-                href={`/estimate/${id}`}
-                className="my-1 rounded-md p-1 outline-none line-clamp-1 hover:text-amber-500 focus:outline-dashed focus:outline-1 focus:outline-neutral-200/80 lg:rounded-lg"
-              >
-                {from}
-                {" -> "}
-                {to}
-              </Link>
-            </li>
-          )
-        })}
+            return (
+              <li key={id}>
+                <Link
+                  href={`/estimate/${id}`}
+                  className="my-1 rounded-md p-1 outline-none line-clamp-1 hover:text-amber-500 focus:outline-dashed focus:outline-1 focus:outline-neutral-200/80 lg:rounded-lg"
+                >
+                  {from}
+                  {" -> "}
+                  {to}
+                </Link>
+              </li>
+            )
+          })
+        ) : (
+          <div className="my-1 rounded-md p-1 outline-none line-clamp-1 hover:text-amber-500 focus:outline-dashed focus:outline-1 focus:outline-neutral-200/80 lg:rounded-lg">
+            No recent searches
+          </div>
+        )}
       </ol>
     </div>
   )

@@ -3,11 +3,11 @@ import Image from "next/image"
 export default function RecentsImage() {
   return (
     <Image
-      src="/undraw_right_direction.svg"
-      className="hidden lg:flex"
+      src="/undraw_up_to_date.svg"
       alt="Recent routes"
-      width={380}
-      height={320}
+      className="hidden lg:block"
+      width={611 * 0.6}
+      height={545 * 0.6}
       priority
     />
   )

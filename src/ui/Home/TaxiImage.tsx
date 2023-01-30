@@ -25,7 +25,15 @@ export default function TaxiImage() {
         </defs>
       </svg>
 
-      <Image src="/undraw_duplicate.svg" alt="Add your taxi call to action" width={592} height={411} priority />
+      <div className="flex items-center justify-center pr-12 pt-6 lg:pt-0">
+        <Image
+          src="/undraw_duplicate.svg"
+          alt="Add your taxi call to action"
+          width={865 * 0.6}
+          height={601 * 0.6}
+          priority
+        />
+      </div>
     </>
   )
 }

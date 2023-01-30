@@ -1,6 +1,6 @@
-import { getMongoKeys, getMongoValue } from "@/lib/helpers/mongodb"
+import { getMongoKeys, getMongoTaxis, getMongoValue } from "@/lib/helpers/mongodb"
 import Directions from "@/ui/Estimate/Directions"
-import MapSection from "@/ui/Estimate/MapSection"
+import MapList from "@/ui/Estimate/MapList"
 
 type Props = {
   params: {
@@ -13,19 +13,23 @@ export default async function PIDPage({ params }: Props) {
 
   // TODO: Make skeleton
   if (!routeData) return <div>Not able to get route data</div>
+  const { from, fromLoc, to, toLoc } = routeData
 
-  const { from, to } = routeData
+  const companiesData = await getMongoTaxis({ city: fromLoc })
+  if (!companiesData) return <div>Not able to get companies data</div>
 
   return (
     <>
       <Directions from={from} to={to} />
-      <MapSection from={from} to={to} />
+      <MapList from={from} to={to} companies={companiesData} />
     </>
   )
 }
 
 export async function generateStaticParams() {
   const routes = await getMongoKeys()
+
+  if (!routes) return
 
   return routes.map((route: string) => ({
     rid: route,

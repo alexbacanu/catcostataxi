@@ -1,6 +1,6 @@
 import clientPromise from "@/lib/clients/mongoClient"
 import hashPair from "@/lib/helpers/hash"
-
+import type { Recents, Routes } from "@/lib/helpers/mongodb"
 import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function submitRoute(req: NextApiRequest, res: NextApiResponse) {
@@ -20,7 +20,7 @@ export default async function submitRoute(req: NextApiRequest, res: NextApiRespo
     return
   }
 
-  const { from, to } = tripData
+  const { from, fromLoc, to, toLoc } = tripData
   const hashedId = hashPair(from, to)
 
   if (hashedId !== id) {
@@ -33,23 +33,23 @@ export default async function submitRoute(req: NextApiRequest, res: NextApiRespo
   const client = await clientPromise
   const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
 
-  const requestedRoute = await db.collection("routes").findOne({ id })
-  const searchData = { id, from, to }
+  const requestedRoute = await db.collection("routes").findOne<Routes>({ id })
 
   if (!requestedRoute) {
-    await db.collection("routes").insertOne({ id, from, to })
+    const searchData = { id, from, fromLoc, to, toLoc }
+    await db.collection("routes").insertOne(searchData)
 
-    const recentList = await db.collection("recent").findOne()
+    const recentList = await db.collection("recents").findOne<Recents>()
 
     if (recentList) {
-      await db.collection("recent").updateOne({ _id: recentList._id }, { $push: { recent: searchData } })
-      const recent = await db.collection("recent").findOne()
+      await db.collection("recents").updateOne({ _id: recentList._id }, { $push: { recents: searchData } })
+      const popped = await db.collection("recents").findOne<Recents>()
 
-      if (recent && recent.recent.length > 10) {
-        await db.collection("recent").updateOne({ _id: recent._id }, { $pop: { recent: -1 } })
+      if (popped && popped.recents.length > 10) {
+        await db.collection("recents").updateOne({ _id: popped._id }, { $pop: { recents: -1 } })
       }
     } else {
-      await db.collection("recent").insertOne({ recent: [searchData] })
+      await db.collection("recents").insertOne({ recents: [searchData] })
     }
   }
 

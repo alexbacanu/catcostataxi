@@ -12,17 +12,17 @@
   }
 
   h3 {
-    @apply text-lg font-bold tracking-tighter md:text-xl lg:text-2xl;
+    @apply text-lg font-light tracking-tighter md:text-xl lg:text-2xl;
   }
 
   p {
-    @apply text-lg font-medium tracking-tight md:text-xl lg:text-2xl;
+    @apply text-base font-light tracking-tight md:text-lg;
   }
 }
 
 @layer components {
   .home-section {
-    @apply mx-auto flex max-w-7xl items-center justify-between px-8 py-16;
+    @apply mx-auto flex max-w-6xl items-center justify-between px-8 py-12;
   }
 
   .card-base {
