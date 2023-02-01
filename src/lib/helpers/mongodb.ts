@@ -29,8 +29,8 @@ export type TaxiCompanies = {
   website?: string
   dayPrice: number
   nightPrice: number
-  premiumDayPrice?: number
-  premiumNightPrice?: number
+  premiumDayPrice: number
+  premiumNightPrice: number
   disabled: boolean
   dateAdded: string
   dateModified: string

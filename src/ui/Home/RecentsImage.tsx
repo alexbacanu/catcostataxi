@@ -6,8 +6,8 @@ export default function RecentsImage() {
       src="/undraw_up_to_date.svg"
       alt="Recent routes"
       className="hidden lg:block"
-      width={611 * 0.6}
-      height={545 * 0.6}
+      width={611 * 0.4}
+      height={545 * 0.4}
       priority
     />
   )

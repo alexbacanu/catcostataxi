@@ -20,8 +20,10 @@ export default async function PIDPage({ params }: Props) {
 
   return (
     <>
-      <Directions from={from} to={to} />
-      <MapList from={from} to={to} companies={companiesData} />
+      <div>
+        <Directions from={from} to={to} />
+        <MapList from={from} to={to} companies={companiesData} />
+      </div>
     </>
   )
 }

@@ -30,15 +30,15 @@
   }
 
   .input-base {
-    @apply h-10 w-full rounded-md border-0 bg-white/20 pl-9 shadow-md ring-1 ring-neutral-800/20 transition placeholder:text-neutral-600 hover:bg-white/40 focus:bg-white/40 focus:ring-[1.5px] focus:ring-neutral-800/80;
+    @apply h-10 w-full disabled:cursor-not-allowed rounded-lg border-0 bg-white/20 pl-9 shadow-md ring-1 ring-neutral-800/20 transition placeholder:text-neutral-600 hover:bg-white/40 focus:bg-white/40 focus:ring-[1.5px] focus:ring-neutral-800/80;
   }
 
   .input-modal {
-    @apply absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white/60 transition text-base shadow-xl backdrop-blur-md;
+    @apply absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white/60 transition text-base shadow-xl backdrop-blur-md;
   }
 
   .button-base {
-    @apply cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-4 py-3 shadow-md outline-none transition hover:shadow-lg focus:ring-[1.5px];
+    @apply cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-3 shadow-md outline-none transition hover:shadow-lg focus:ring-[1.5px];
   }
 
   .button-primary {

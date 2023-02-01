@@ -10,6 +10,7 @@ type Props = {
 export default function Prices({ mapDirections, companies }: Props) {
   return (
     <section className="transition">
+      <PricesSponsors />
       <div className="home-section gap-x-16">
         <PricesList mapDirections={mapDirections} companies={companies} />
         <PricesSponsors />
