@@ -1,10 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@headlessui/react': ^1.7.8
+  '@ctrl/react-adsense': ^1.6.1
+  '@headlessui/react': ^1.7.9
   '@next/font': 13.1.6
   '@react-google-maps/api': ^2.18.1
-  '@tabler/icons-react': ^2.1.2
+  '@tabler/icons-react': ^2.2.0
   '@tailwindcss/forms': ^0.5.3
   '@tailwindcss/line-clamp': ^0.4.2
   '@tailwindcss/typography': ^0.5.9
@@ -30,10 +31,11 @@ specifiers:
   use-places-autocomplete: ^4.0.0
 
 dependencies:
-  '@headlessui/react': 1.7.8_biqbaboplfbrettd7655fr4n2y
+  '@ctrl/react-adsense': 1.6.1
+  '@headlessui/react': 1.7.9_biqbaboplfbrettd7655fr4n2y
   '@next/font': 13.1.6
   '@react-google-maps/api': 2.18.1_biqbaboplfbrettd7655fr4n2y
-  '@tabler/icons-react': 2.1.2_react@18.2.0
+  '@tabler/icons-react': 2.2.0_react@18.2.0
   mongodb: 5.0.0
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -69,6 +71,12 @@ packages:
       regenerator-runtime: 0.13.11
     dev: true
 
+  /@ctrl/react-adsense/1.6.1:
+    resolution: {integrity: sha512-pa8/rl1fWzufBjJlTaAFqc0Y7f87RYQJscxs23ZxMv7aqR4nfnUkDK5HwF26dMnrR8sMXFg2OVni9Tr6XgRt7A==}
+    dependencies:
+      tslib: 2.5.0
+    dev: false
+
   /@eslint/eslintrc/1.4.1:
     resolution: {integrity: sha512-XXrH9Uarn0stsyldqDYq8r++mROmWRI1xKMXa640Bb//SY1+ECYX6VzT6Lcx5frD0V30XieqJ0oX9I2Xj5aoMA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -99,8 +107,8 @@ packages:
       supercluster: 7.1.5
     dev: false
 
-  /@headlessui/react/1.7.8_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-zcwb0kd7L05hxmoAMIioEaOn235Dg0fUO+iGbLPgLVSjzl/l39V6DTpC2Df49PE5aG5/f5q0PZ9ZHZ78ENNV+A==}
+  /@headlessui/react/1.7.9_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Bobh/+mDciu8kEE2hvdukFYjbfaG4MEkK/6TjWOgqcODLKYpRhWPKPE+dCcCSz/YrwjFVrEAMOiWtfk6sW20/w==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
@@ -329,18 +337,18 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@tabler/icons-react/2.1.2_react@18.2.0:
-    resolution: {integrity: sha512-DrJrr7e7+tzsqm3KFw1gg9Pfapz+gNA2bwv78tdlMKVQ5G6bfEtKVugzqqpgLfCJN/CgcM1ZROGrLtdmV/O6gw==}
+  /@tabler/icons-react/2.2.0_react@18.2.0:
+    resolution: {integrity: sha512-4dIT/XL2VVTrqTR9mRMXSbM8/Pe9AmaiciItP+So8bpZy5dakwkc1zT5JtDFEbcv5YEi73rlnyuHdAhwRC1NGA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tabler/icons': 2.1.2
+      '@tabler/icons': 2.2.0
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
 
-  /@tabler/icons/2.1.2:
-    resolution: {integrity: sha512-+CPB+BSqVDP4+/d+cHSaGwG460C3sob7EJkQ+ZS8xV6bRER64OsCP92O7M+uYBhJFDWuf6poCeSETNZNcFa2nA==}
+  /@tabler/icons/2.2.0:
+    resolution: {integrity: sha512-s2mm+7JqmLObKdU89Dtiy+USmUpOlACsoXZZPykjAJZC4pK3wMYxLsclJxViWLeLTb6Bc0oga92V7R+9nrj1ZQ==}
     dev: false
 
   /@tailwindcss/forms/0.5.3_tailwindcss@3.2.4:
@@ -741,7 +749,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001450
-      electron-to-chromium: 1.4.284
+      electron-to-chromium: 1.4.286
       node-releases: 2.0.9
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -941,8 +949,8 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /electron-to-chromium/1.4.284:
-    resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
+  /electron-to-chromium/1.4.286:
+    resolution: {integrity: sha512-Vp3CVhmYpgf4iXNKAucoQUDcCrBQX3XLBtwgFqP9BUXuucgvAV9zWp1kYU7LL9j4++s9O+12cb3wMtN4SJy6UQ==}
     dev: true
 
   /emoji-regex/9.2.2:

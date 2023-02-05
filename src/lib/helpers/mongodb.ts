@@ -1,7 +1,8 @@
 import clientPromise from "@/lib/clients/mongoClient"
+import type { Condition, ObjectId } from "mongodb"
 
 export type Recents = {
-  _id: string
+  _id: Condition<ObjectId>
   recents: {
     id: string
     from: string
@@ -39,7 +40,7 @@ export type TaxiCompanies = {
 export async function getMongoKeys() {
   const client = await clientPromise
 
-  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+  const db = client.db(process.env.MONGODB_NAME ?? "")
   const keys = await db.collection("routes").find<Routes>({}).toArray()
   const ids = keys.map((object) => object.id)
 
@@ -51,7 +52,7 @@ export async function getMongoKeys() {
 export async function getMongoValue(key: string) {
   const client = await clientPromise
 
-  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+  const db = client.db(process.env.MONGODB_NAME ?? "")
   const value = await db.collection("routes").findOne<Routes>({ id: key })
 
   if (!value) return console.log("😱 Error: No route found with that specific id")
@@ -62,7 +63,7 @@ export async function getMongoValue(key: string) {
 export async function getMongoList() {
   const client = await clientPromise
 
-  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+  const db = client.db(process.env.MONGODB_NAME ?? "")
   const list = await db.collection("recents").findOne<Recents>()
 
   if (!list) return console.log("😱 Error: No recent routes found")
@@ -74,7 +75,7 @@ export async function getMongoList() {
 export async function getMongoTaxis(filter: { city: string }) {
   const client = await clientPromise
 
-  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+  const db = client.db(process.env.MONGODB_NAME ?? "")
   const companies = await db.collection("taxiCompanies").find<TaxiCompanies>(filter).toArray()
 
   if (!companies) return console.log("😱 Error: No taxi companies found")

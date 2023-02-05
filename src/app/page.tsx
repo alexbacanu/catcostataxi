@@ -9,7 +9,7 @@ export default async function HomePage() {
   return (
     <>
       <Estimator />
-      <Recents recentSearches={recentSearches} />
+      {recentSearches && <Recents recentSearches={recentSearches} />}
       <Taxi />
     </>
   )

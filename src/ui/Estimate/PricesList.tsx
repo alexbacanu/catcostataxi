@@ -25,7 +25,14 @@ export default function PricesList({ mapDirections, companies }: Props) {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = parseFloat(e.target.value)
 
-      if (value >= 0 && value <= 99 && /^\d*(\.\d{0,2})?$/.test(value)) {
+      if (e.target.value === "") {
+        setPriceData({
+          ...priceData,
+          [field]: 0,
+        })
+      }
+
+      if (value >= 0 && value <= 99 && /^\d*(\.\d{0,2})?$/.test(e.target.value)) {
         setPriceData({
           ...priceData,
           [field]: value,

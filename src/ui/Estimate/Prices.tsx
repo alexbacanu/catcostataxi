@@ -1,6 +1,5 @@
 import type { TaxiCompanies } from "@/lib/helpers/mongodb"
 import PricesList from "./PricesList"
-import PricesSponsors from "./PricesSponsors"
 
 type Props = {
   mapDirections: google.maps.DirectionsResult
@@ -10,10 +9,8 @@ type Props = {
 export default function Prices({ mapDirections, companies }: Props) {
   return (
     <section className="transition">
-      <PricesSponsors />
-      <div className="home-section gap-x-16">
+      <div className="home-section py-6">
         <PricesList mapDirections={mapDirections} companies={companies} />
-        <PricesSponsors />
       </div>
     </section>
   )

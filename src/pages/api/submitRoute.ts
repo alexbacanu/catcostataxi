@@ -31,7 +31,7 @@ export default async function submitRoute(req: NextApiRequest, res: NextApiRespo
   }
 
   const client = await clientPromise
-  const db = client.db(process.env.NEXT_PUBLIC_MONGODB_DB_NAME ?? "")
+  const db = client.db(process.env.MONGODB_NAME ?? "")
 
   const requestedRoute = await db.collection("routes").findOne<Routes>({ id })
 

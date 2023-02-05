@@ -13,7 +13,7 @@ export default async function PIDPage({ params }: Props) {
 
   // TODO: Make skeleton
   if (!routeData) return <div>Not able to get route data</div>
-  const { from, fromLoc, to, toLoc } = routeData
+  const { from, fromLoc, to } = routeData
 
   const companiesData = await getMongoTaxis({ city: fromLoc })
   if (!companiesData) return <div>Not able to get companies data</div>

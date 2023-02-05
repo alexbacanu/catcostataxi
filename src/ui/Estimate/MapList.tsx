@@ -4,7 +4,6 @@ import type { TaxiCompanies } from "@/lib/helpers/mongodb"
 import { DirectionsRenderer, GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 import { useEffect, useState } from "react"
 import Prices from "./Prices"
-import PricesSponsors from "./PricesSponsors"
 
 type Props = {
   from: string
@@ -43,26 +42,19 @@ export default function MapList({ from, to, companies }: Props) {
 
   return (
     <>
-      <div className="home-section flex py-0">
-        <div className="w-4/5">
-          {" "}
-          <GoogleMap
-            zoom={10}
-            mapContainerStyle={{ width: "100%", height: "50vh" }}
-            options={{
-              zoomControl: false,
-              streetViewControl: false,
-              mapTypeControl: false,
-              fullscreenControl: false,
-            }}
-          >
-            <>{mapDirections && <DirectionsRenderer directions={mapDirections} />}</>
-          </GoogleMap>
-        </div>
-        <div className="w-1/5">
-          {" "}
-          <PricesSponsors />
-        </div>
+      <div className="home-section py-6 pb-0">
+        <GoogleMap
+          zoom={10}
+          mapContainerClassName="card-base w-full h-[50vh]"
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+          }}
+        >
+          {mapDirections && <DirectionsRenderer directions={mapDirections} />}
+        </GoogleMap>
       </div>
 
       {mapDirections && <Prices mapDirections={mapDirections} companies={companies} />}

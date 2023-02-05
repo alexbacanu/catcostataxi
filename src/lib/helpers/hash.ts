@@ -1,7 +1,7 @@
 import { createHash } from "crypto"
 
 export default function hashPair(from: string, to: string) {
-  const secretSauce = process.env.NEXT_PUBLIC_SECRET_SAUCE
+  const secretSauce = process.env.SECRET_SAUCE
   const hashedPair = createHash("sha256")
     .update(from + to + secretSauce)
     .digest("hex")
