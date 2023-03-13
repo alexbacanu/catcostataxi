@@ -1,6 +1,7 @@
 "use client"
 
 import hashPair from "@/helpers/hasher"
+import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { Combobox, Transition } from "@headlessui/react"
 import { IconMapPin } from "@tabler/icons-react"
 import Image from "next/image"
@@ -13,6 +14,7 @@ export default function SearchCard() {
   const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>()
   const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>()
   const [isLoading, setIsLoading] = useState(false)
+  const captchaRef = useRef<HCaptcha>(null)
 
   const {
     init,
@@ -56,9 +58,17 @@ export default function SearchCard() {
     return findComponent("country")
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    // Execute the hCaptcha when the form is submitted
+    captchaRef.current?.execute()
+  }
+
+  async function onHCapchaChange(captchaCode: string) {
+    if (!captchaCode) return
     if (!selectedFrom || !selectedTo) return
+
     setIsLoading(true)
 
     const data = {
@@ -69,6 +79,7 @@ export default function SearchCard() {
         toAddress: selectedTo.description,
         toLoc: await getLocality(selectedTo),
       },
+      captchaCode,
     }
 
     try {
@@ -85,6 +96,8 @@ export default function SearchCard() {
       }
 
       router.push(`/directions/${data.id}`)
+
+      captchaRef.current?.resetCaptcha()
 
       setIsLoading(false)
     } catch (error) {
@@ -115,6 +128,14 @@ export default function SearchCard() {
             {toInput()}
 
             <div className="flex justify-center">
+              <HCaptcha
+                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
+                onVerify={onHCapchaChange}
+                ref={captchaRef}
+                size="invisible"
+                theme="dark"
+                languageOverride="ro"
+              />
               <button
                 type="submit"
                 className="button-base button-primary flex gap-x-2 disabled:cursor-not-allowed"
