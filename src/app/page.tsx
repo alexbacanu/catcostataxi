@@ -1,16 +1,19 @@
-import { getMongoList } from "@/lib/helpers/mongodb"
-import Estimator from "@/ui/Home/Estimator"
-import Recents from "@/ui/Home/Recents"
-import Taxi from "@/ui/Home/Taxi"
+import AddCompanyCard from "@/components/Home/AddCompanyCard"
+import RecentsCard from "@/components/Home/RecentsCard"
+import SearchCard from "@/components/Home/SearchCard"
+import { fetchRecentRoutes } from "@/helpers/mongo"
 
 export default async function HomePage() {
-  const recentSearches = await getMongoList()
+  const recentRoutes = await fetchRecentRoutes()
 
   return (
     <>
-      <Estimator />
-      {recentSearches && <Recents recentSearches={recentSearches} />}
-      <Taxi />
+      {/* !TODO: Modify SearchCard to use Zustand */}
+      {/* !TODO: Get directions on the server side */}
+      {/* !TODO: Convert @react-google-maps/api to Javascript Google Maps API */}
+      <SearchCard />
+      <RecentsCard recentRoutes={recentRoutes} />
+      <AddCompanyCard />
     </>
   )
 }

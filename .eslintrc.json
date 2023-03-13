@@ -1,29 +1,32 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
-  "rules": {
-    "prettier/prettier": ["error"]
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
   },
-  "overrides": [
-    // Configuration for TypeScript files
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "plugins": ["@typescript-eslint", "tailwindcss"],
-      "extends": ["plugin:tailwindcss/recommended", "next/core-web-vitals", "plugin:prettier/recommended"],
-      "parserOptions": {
-        "project": "./tsconfig.json"
+  "ignorePatterns": ["next.config.js", "postcss.config.js", "tailwind.config.js"],
+  "plugins": ["@typescript-eslint", "tailwindcss", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"]
       },
-      "rules": {
-        "prettier/prettier": ["error"],
-        "no-multi-spaces": "warn",
-        "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
-        "react/require-default-props": "off", // Allow non-defined react props as undefined
-        "react/jsx-props-no-spreading": "off", // _app.tsx uses spread operator and also, react-hook-form
-        "react-hooks/exhaustive-deps": "off", // Incorrectly report needed dependency with Next.js router
-        "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
-        "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
-        "import/prefer-default-export": "off", // Named export is easier to refactor automatically
-        "@typescript-eslint/no-unused-vars": "off"
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
       }
-    }
-  ]
+    ]
+  }
 }

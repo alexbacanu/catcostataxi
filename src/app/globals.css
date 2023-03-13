@@ -21,31 +21,35 @@
 }
 
 @layer components {
-  .home-section {
-    @apply mx-auto flex max-w-6xl items-center justify-between px-8 py-12;
+  .layout-bg {
+    @apply antialiased transition bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200;
+  }
+
+  .layout-mx {
+    @apply mx-auto px-4 py-6 max-w-6xl flex justify-between items-center;
   }
 
   .card-base {
-    @apply rounded-lg shadow-lg lg:rounded-xl lg:shadow-xl ring-1 bg-neutral-100/60 dark:bg-neutral-900 dark:ring-neutral-200/10  ring-neutral-800/10;
+    @apply p-4 rounded-lg lg:rounded-xl shadow-lg lg:shadow-xl ring-1 bg-neutral-100/60 dark:bg-neutral-900 ring-neutral-800/10 dark:ring-neutral-200/10;
   }
 
   .input-base {
-    @apply h-10 w-full disabled:cursor-not-allowed rounded-lg border-0 bg-white/20 pl-9 shadow-md ring-1 ring-neutral-800/20 transition placeholder:text-neutral-600 hover:bg-white/40 focus:bg-white/40 focus:ring-[1.5px] focus:ring-neutral-800/80;
+    @apply h-10 pl-9 w-full rounded-lg shadow-md border-0 bg-white/20 hover:bg-white/40 focus:bg-white/40 ring-1 focus:ring-2 ring-neutral-800/20 focus:ring-neutral-800/80 placeholder:text-neutral-600 disabled:cursor-not-allowed transition outline-none;
   }
 
   .input-modal {
-    @apply absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white/60 transition text-base shadow-xl backdrop-blur-md;
+    @apply z-50 max-h-60 mt-1 w-full absolute overflow-auto rounded-lg bg-white/60 transition text-base shadow-xl backdrop-blur-md;
   }
 
   .button-base {
-    @apply cursor-pointer items-center justify-center whitespace-nowrap rounded-lg px-4 py-3 shadow-md outline-none transition hover:shadow-lg focus:ring-[1.5px];
+    @apply px-4 py-3 items-center justify-center rounded-lg shadow-md hover:shadow-lg outline-none focus:ring-1 cursor-pointer whitespace-nowrap antialiased transition;
   }
 
   .button-primary {
-    @apply bg-teal-900 text-white hover:bg-teal-800 focus:ring-neutral-200;
+    @apply text-white bg-teal-900 hover:bg-teal-800 focus:ring-neutral-200;
   }
 
   .button-secondary {
-    @apply bg-white/60 text-neutral-800 backdrop-blur-md hover:bg-white/80 focus:ring-neutral-800;
+    @apply text-neutral-800 bg-white/60 hover:bg-white/80 focus:ring-neutral-800 backdrop-blur-md;
   }
 }
