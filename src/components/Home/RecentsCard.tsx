@@ -1,3 +1,5 @@
+"use client"
+
 import type { Route } from "@/helpers/mongo"
 import { IconHistory } from "@tabler/icons-react"
 import Image from "next/image"
@@ -18,11 +20,6 @@ export default function RecentsCard({ recentRoutes }: Props) {
         height={545 * 0.4}
         priority
       />
-
-      <div className="card-base max-w-lg space-y-4">
-        Ads
-        {/* <AdUnit data-ad-slot="4225008821" data-ad-format="auto" data-full-width-responsive="true" /> */}
-      </div>
 
       <div className="card-base max-w-lg space-y-4">
         <h3 className="flex items-center justify-center gap-x-2">

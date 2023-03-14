@@ -1,4 +1,5 @@
 import { IconBrandFacebook, IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react"
+import { Analytics } from "@vercel/analytics/react"
 import { Inter } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <Children />
         <Footer />
+        <Analytics />
       </body>
     </html>
   )
@@ -55,10 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <footer className="border-t border-neutral-800/10 transition dark:border-white/10">
         <div className="layout-mx flex-col gap-y-4 sm:flex-row">
           <div className="flex gap-x-4">
-            <p>Home</p>
+            <Link href="/">Acasa</Link>
+            <Link href="/privacy">Politica de confidentialitate</Link>
             <p>Contact</p>
             <p>About</p>
-            <p>Privacy</p>
             <p>GDPR</p>
           </div>
           <div className="space-y-2">

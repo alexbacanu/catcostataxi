@@ -1,3 +1,4 @@
+import BookingCard from "@/components/Directions/BookingCard"
 import EstimateCard from "@/components/Directions/EstimateCard"
 import MapCard from "@/components/Directions/MapCard"
 import TaxiListCard from "@/components/Directions/TaxiListCard"
@@ -21,6 +22,7 @@ export default async function DirectionsPage({ params }: Props) {
     <>
       <TitleCard route={route} />
       <MapCard route={route} />
+      <BookingCard />
       <EstimateCard companies={companies} />
       <TaxiListCard companies={companies} />
     </>

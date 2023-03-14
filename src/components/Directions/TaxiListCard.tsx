@@ -1,6 +1,7 @@
 import type { Company } from "@/helpers/mongo"
 import { IconList, IconPhone } from "@tabler/icons-react"
 import Image from "next/image"
+
 type Props = {
   companies?: Company[]
 }
