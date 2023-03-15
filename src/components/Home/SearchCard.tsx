@@ -1,7 +1,6 @@
 "use client"
 
 import hashPair from "@/helpers/hasher"
-import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { Combobox, Transition } from "@headlessui/react"
 import { IconMapPin } from "@tabler/icons-react"
 import Image from "next/image"
@@ -14,7 +13,6 @@ export default function SearchCard() {
   const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>()
   const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>()
   const [isLoading, setIsLoading] = useState(false)
-  const captchaRef = useRef<HCaptcha>(null)
 
   const {
     init,
@@ -58,15 +56,8 @@ export default function SearchCard() {
     return findComponent("country")
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    // Execute the hCaptcha when the form is submitted
-    captchaRef.current?.execute()
-  }
-
-  async function onHCapchaChange(captchaCode: string) {
-    if (!captchaCode) return
     if (!selectedFrom || !selectedTo) return
 
     setIsLoading(true)
@@ -79,7 +70,6 @@ export default function SearchCard() {
         toAddress: selectedTo.description,
         toLoc: await getLocality(selectedTo),
       },
-      captchaCode,
     }
 
     try {
@@ -92,12 +82,11 @@ export default function SearchCard() {
       })
 
       if (!response.ok) {
+        console.error(response.status, response.statusText)
         throw new Error("Network response was not ok.")
       }
 
       router.push(`/directions/${data.id}`)
-
-      captchaRef.current?.resetCaptcha()
 
       setIsLoading(false)
     } catch (error) {
@@ -121,21 +110,12 @@ export default function SearchCard() {
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
         <form className="layout-mx" onSubmit={handleSubmit}>
           <div className="mx-auto space-y-4 md:mx-0">
-            <h1>Estimeaza cat costa un taxi</h1>
-            <h3>Afla instant cat costa o cursa de taxi!</h3>
+            <h1>Estimeaza costul unei curse de taxi</h1>
 
             {fromInput()}
             {toInput()}
 
             <div className="flex justify-center">
-              <HCaptcha
-                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
-                onVerify={onHCapchaChange}
-                ref={captchaRef}
-                size="invisible"
-                theme="dark"
-                languageOverride="ro"
-              />
               <button
                 type="submit"
                 className="button-base button-primary flex gap-x-2 disabled:cursor-not-allowed"
