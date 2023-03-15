@@ -4,12 +4,17 @@ import MapCard from "@/components/Directions/MapCard"
 import TaxiListCard from "@/components/Directions/TaxiListCard"
 import TitleCard from "@/components/Directions/TitleCard"
 import { fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
+import type { Metadata } from "next"
 import Image from "next/image"
 
 type Props = {
   params: {
     rid: string
   }
+}
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const route = await fetchSingleRoute(params.rid)
+  return { title: `Cat costa taxi de la ${route?.fromAddress} pana la ${route?.toAddress}` }
 }
 
 export default async function DirectionsPage({ params }: Props) {
