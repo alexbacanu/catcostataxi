@@ -3,7 +3,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
     typedRoutes: true,
+    mdxRs: true,
   },
 }
 
-module.exports = nextConfig
+const withMDX = require("@next/mdx")()
+module.exports = withMDX(nextConfig)
