@@ -4,19 +4,19 @@
 
 @layer base {
   h1 {
-    @apply text-3xl font-extrabold tracking-tighter md:text-4xl lg:text-5xl;
+    @apply text-3xl font-extrabold tracking-tighter md:text-4xl;
   }
 
   h2 {
-    @apply text-2xl font-extrabold tracking-tighter md:text-3xl lg:text-4xl;
+    @apply text-xl font-semibold tracking-tighter md:text-2xl;
   }
 
   h3 {
-    @apply text-lg font-light tracking-tighter md:text-xl lg:text-2xl;
+    @apply text-base font-normal tracking-tighter md:text-lg;
   }
 
   p {
-    @apply text-base font-light tracking-tight md:text-lg;
+    @apply text-base font-light tracking-tight;
   }
 }
 

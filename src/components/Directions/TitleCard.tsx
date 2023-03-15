@@ -14,13 +14,13 @@ export default function TitleCard({ route }: Props) {
           </h2>
         */}
         <div className="text-lg">
-          <div>de la</div>
+          <h1>de la</h1>
           <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
             {route.fromAddress}
           </div>
         </div>
         <div className="text-lg">
-          <div>pana la</div>
+          <h1>pana la</h1>
           <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
             {route.toAddress}
           </div>

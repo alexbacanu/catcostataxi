@@ -162,7 +162,7 @@ export default function EstimateCard({ companies }: Props) {
             <table className="w-full text-left">
               <tbody>
                 <tr>
-                  <th className="w-full text-right font-semibold text-amber-400">
+                  <th scope="row" className="w-full text-right font-semibold text-amber-400">
                     {modifyToggle ? (
                       <input
                         value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
@@ -178,9 +178,7 @@ export default function EstimateCard({ companies }: Props) {
                     )}
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/km)
-                  </td>
+                  <td className="text-xs">(lei/km)</td>
                 </tr>
 
                 <tr>
@@ -188,9 +186,7 @@ export default function EstimateCard({ companies }: Props) {
                     <span className="p-1 px-2">{totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}</span>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/total)
-                  </td>
+                  <td className="text-xs">(lei/total)</td>
                 </tr>
               </tbody>
             </table>
@@ -226,9 +222,7 @@ export default function EstimateCard({ companies }: Props) {
                     )}
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/km)
-                  </td>
+                  <td className="text-xs">(lei/km)</td>
                 </tr>
 
                 <tr>
@@ -238,14 +232,16 @@ export default function EstimateCard({ companies }: Props) {
                     </span>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/total)
-                  </td>
+                  <td className="text-xs">(lei/total)</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+        <p className="pt-2 text-xs italic">
+          Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și altele
+          conditii neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative.
+        </p>
       </div>
     </section>
   )
@@ -323,9 +319,7 @@ function LoadingRoute() {
                     <div className="w-full rounded-lg p-1 px-2 text-right">0</div>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/km)
-                  </td>
+                  <td className="text-xs">(lei/km)</td>
                 </tr>
 
                 <tr>
@@ -333,9 +327,7 @@ function LoadingRoute() {
                     <span className="p-1 px-2">0</span>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/total)
-                  </td>
+                  <td className="text-xs">(lei/total)</td>
                 </tr>
               </tbody>
             </table>
@@ -359,9 +351,7 @@ function LoadingRoute() {
                     <div className="w-full rounded-lg p-1 px-2 text-right">0</div>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/km)
-                  </td>
+                  <td className="text-xs">(lei/km)</td>
                 </tr>
 
                 <tr>
@@ -369,9 +359,7 @@ function LoadingRoute() {
                     <span className="p-1 px-2">0</span>
                   </th>
 
-                  <td scope="row" className="text-xs">
-                    (lei/total)
-                  </td>
+                  <td className="text-xs">(lei/total)</td>
                 </tr>
               </tbody>
             </table>

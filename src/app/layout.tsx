@@ -6,7 +6,7 @@ import Link from "next/link"
 import "./globals.css"
 
 export const metadata = {
-  title: "Cat costa taxi",
+  title: "Cat Costa Taxi",
   description: "Aplicatie pentru verificarea pretului unui taxi",
 }
 
@@ -49,19 +49,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   }
 
   function Children() {
-    return <main className="min-h-screen">{children}</main>
+    return <main className="min-h-[80.5vh]">{children}</main>
   }
 
   function Footer() {
     return (
       <footer className="border-t border-neutral-800/10 transition dark:border-white/10">
         <div className="layout-mx flex-col gap-y-4 sm:flex-row">
-          <div className="flex gap-x-4">
-            <Link href="/">Acasa</Link>
+          <div className="flex flex-col gap-x-4 gap-y-2 self-start text-lg font-light tracking-tight sm:flex-row md:self-center">
+            <Link href="/about">Despre noi</Link>
             <Link href="/privacy">Politica de confidentialitate</Link>
-            <p>Contact</p>
-            <p>About</p>
-            <p>GDPR</p>
+            <Link href="/terms">Termeni si conditii</Link>
+            <Link href="/contact">Contact</Link>
           </div>
           <div className="space-y-2">
             <div className="flex w-full justify-evenly">

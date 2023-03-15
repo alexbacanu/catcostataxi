@@ -22,10 +22,10 @@ export default function RecentsCard({ recentRoutes }: Props) {
       />
 
       <div className="card-base max-w-lg space-y-4">
-        <h3 className="flex items-center justify-center gap-x-2">
+        <div className="flex items-center justify-center gap-x-2">
           <IconHistory className="h-6 w-6" />
-          <span className="uppercase">Cautari Recente</span>
-        </h3>
+          <span className="text-xl uppercase">Cautari Recente</span>
+        </div>
 
         <ol className="space-y-2 divide-y divide-dashed divide-black/10 dark:divide-white/10">
           {recentRoutes && recentRoutes.length > 0 ? (
