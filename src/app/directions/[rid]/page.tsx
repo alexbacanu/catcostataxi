@@ -3,7 +3,7 @@ import EstimateCard from "@/components/Directions/EstimateCard"
 import MapCard from "@/components/Directions/MapCard"
 import TaxiListCard from "@/components/Directions/TaxiListCard"
 import TitleCard from "@/components/Directions/TitleCard"
-import { fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
+import { fetchAllRoutesIds, fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
 import type { Metadata } from "next"
 import Image from "next/image"
 
@@ -12,6 +12,15 @@ type Props = {
     rid: string
   }
 }
+
+export async function generateStaticParams() {
+  const routes = await fetchAllRoutesIds()
+
+  return routes.map((route: string) => ({
+    rid: route,
+  }))
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const route = await fetchSingleRoute(params.rid)
   return { title: `Cat costa taxi de la ${route?.fromAddress} pana la ${route?.toAddress}` }
@@ -44,22 +53,3 @@ function NoRouteFound() {
     </section>
   )
 }
-
-// export async function generateStaticParams() {
-//   const client = await clientPromise
-//   const db = client.db(process.env.MONGO_DB ?? "")
-//   const routes = db.collection("routes")
-
-//   const allRoutes = await routes.find({}).sort("createdAt", -1).project<Route>({ _id: 0, hash: 1 }).toArray()
-//   if (allRoutes.length == 0) console.warn("😱 Warning: No routes found")
-
-//   const allRoutesIds = allRoutes.map((object) => object.hash)
-
-//   if (!allRoutesIds) return
-
-//   const returned = allRoutesIds.map((route) => ({
-//     rid: route,
-//   }))
-
-//   return returned
-// }
