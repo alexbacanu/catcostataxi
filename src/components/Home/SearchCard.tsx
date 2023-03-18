@@ -86,14 +86,14 @@ export default function SearchCard() {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!selectedFrom) {
+    if (!selectedFrom.description) {
       setFromError("Campul 'De la' este obligatoriu")
       return
     } else {
       setFromError("")
     }
 
-    if (!selectedTo) {
+    if (!selectedTo.description) {
       setToError("Campul 'Pana la' este obligatoriu")
       return
     } else {
@@ -127,8 +127,8 @@ export default function SearchCard() {
         throw new Error("Network response was not ok.")
       }
 
-      setIsLoading(false)
       router.push(`/directions/${data.id}`)
+      setIsLoading(false)
     } catch (error) {
       toast.error("A aparut o eroare, va rugam incercati mai tarziu.")
       console.error("Error:", error)
