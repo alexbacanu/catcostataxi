@@ -7,12 +7,38 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
 import { Fragment, useEffect, useRef, useState } from "react"
+import { toast, Toaster } from "react-hot-toast"
 import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
 
 export default function SearchCard() {
-  const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>()
-  const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>()
+  const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>({
+    description: "",
+    matched_substrings: [],
+    place_id: "",
+    structured_formatting: {
+      main_text: "",
+      main_text_matched_substrings: [],
+      secondary_text: "",
+    },
+    terms: [],
+    types: [],
+  })
+  const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>({
+    description: "",
+    matched_substrings: [],
+    place_id: "",
+    structured_formatting: {
+      main_text: "",
+      main_text_matched_substrings: [],
+      secondary_text: "",
+    },
+    terms: [],
+    types: [],
+  })
   const [isLoading, setIsLoading] = useState(false)
+
+  const [fromError, setFromError] = useState("")
+  const [toError, setToError] = useState("")
 
   const {
     init,
@@ -28,6 +54,7 @@ export default function SearchCard() {
     debounce: 400,
     initOnMount: false,
   })
+
   const initRef = useRef(init)
   const router = useRouter()
 
@@ -56,9 +83,22 @@ export default function SearchCard() {
     return findComponent("country")
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!selectedFrom || !selectedTo) return
+
+    if (!selectedFrom) {
+      setFromError("Campul 'De la' este obligatoriu")
+      return
+    } else {
+      setFromError("")
+    }
+
+    if (!selectedTo) {
+      setToError("Campul 'Pana la' este obligatoriu")
+      return
+    } else {
+      setToError("")
+    }
 
     setIsLoading(true)
 
@@ -83,13 +123,14 @@ export default function SearchCard() {
 
       if (!response.ok) {
         console.error(response.status, response.statusText)
+        setIsLoading(false)
         throw new Error("Network response was not ok.")
       }
 
-      router.push(`/directions/${data.id}`)
-
       setIsLoading(false)
+      router.push(`/directions/${data.id}`)
     } catch (error) {
+      toast.error("A aparut o eroare, va rugam incercati mai tarziu.")
       console.error("Error:", error)
     }
   }
@@ -108,7 +149,7 @@ export default function SearchCard() {
         onReady={initRef.current}
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
-        <form className="layout-mx" onSubmit={handleSubmit}>
+        <form className="layout-mx" onSubmit={onSubmit}>
           <div className="mx-auto space-y-4 md:mx-0">
             <h1>Estimeaza costul unei curse de taxi</h1>
 
@@ -157,6 +198,7 @@ export default function SearchCard() {
             height={532 * 0.6}
             priority
           />
+          <Toaster />
         </form>
       </section>
     </>
@@ -184,7 +226,7 @@ export default function SearchCard() {
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
               return data.description
             }}
-            className="input-base"
+            className={`${fromError ? "border border-red-500" : "border-0"} input-base`}
           />
 
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -233,7 +275,7 @@ export default function SearchCard() {
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
               return data.description
             }}
-            className="input-base"
+            className={`${toError ? "border border-red-500" : ""} input-base`}
           />
 
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">

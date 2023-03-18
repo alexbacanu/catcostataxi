@@ -22,15 +22,21 @@ export async function POST(request: NextRequest) {
   // }
 
   if (!id || !tripData.fromAddress || !tripData.toAddress) {
-    return new NextResponse("ID or Trip Data cannot be empty", { status: 400 })
+    return new NextResponse("ID or Trip Data cannot be empty", {
+      status: 400,
+      statusText: "ID or Trip Data cannot be empty",
+    })
   }
 
   if (id.length !== 8) {
-    return new NextResponse("Wrong ID", { status: 400 })
+    return new NextResponse("Wrong ID", { status: 400, statusText: "Wrong ID" })
   }
 
   if (hashPair(tripData.fromAddress, tripData.toAddress) !== id) {
-    return new NextResponse("ID does not match Trip Data", { status: 400 })
+    return new NextResponse("ID does not match Trip Data", {
+      status: 400,
+      statusText: "ID does not match Trip Data",
+    })
   }
 
   // try {
@@ -57,11 +63,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const response = await submitRoute(id, tripData)
-
     return NextResponse.json(response)
   } catch (error) {
     console.error(error)
-
     return new NextResponse("Something went wrong", { status: 400 })
   }
 }

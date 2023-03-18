@@ -2,25 +2,26 @@
 
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { IconSend } from "@tabler/icons-react"
+import { IconHourglassEmpty, IconSend } from "@tabler/icons-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast, Toaster } from "react-hot-toast"
 import { z } from "zod"
 
 export default function Contact() {
   // Zod
   const zodSchema = z.object({
-    firstName: z.string().min(1, { message: "First name is required" }),
-    lastName: z.string().min(1, { message: "Last name is required" }),
-    email: z.string().min(1, { message: "Email is required" }).email({
-      message: "Must be a valid email",
+    firstName: z.string().min(1, { message: "Prenumele este obligatoriu" }),
+    lastName: z.string().min(1, { message: "Numele este obligatoriu" }),
+    email: z.string().min(1, { message: "E-mailul este obligatoriu" }).email({
+      message: "Trebuie să fie un e-mail valid",
     }),
-    message: z.string().min(1, { message: "Message is required" }),
+    message: z.string().min(1, { message: "Mesajul este obligatoriu" }),
     terms: z.boolean().refine((val) => val === true, {
-      message: "You must accept the terms and conditions",
+      message: "Trebuie sa accepti termenii si conditiile",
     }),
-    hcaptcha: z.string().min(1, { message: "Captcha is required" }),
+    hcaptcha: z.string().min(1, { message: "Captcha este obligatoriu" }),
   })
 
   type ValidationSchema = z.infer<typeof zodSchema>
@@ -60,10 +61,14 @@ export default function Contact() {
         throw new Error("Network response was not ok.")
       }
 
+      // Reset captcha
       captchaRef.current?.resetCaptcha()
+
+      // Reset form
       reset()
+      toast.success("E-mail trimis cu succes!")
     } catch (error) {
-      alert("Failed to send message, please try again later.")
+      toast.error("E-mail nu a fost trimis, va rugam incercati mai tarziu.")
     }
   }
 
@@ -171,10 +176,20 @@ export default function Contact() {
           className="button-base button-primary flex w-full items-center gap-x-2 disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
-          <IconSend />
-          {isSubmitting ? "Se trimite..." : "Trimite"}
+          {isSubmitting ? (
+            <>
+              <IconHourglassEmpty />
+              <span>Se trimite...</span>
+            </>
+          ) : (
+            <>
+              <IconSend />
+              <span>Trimite</span>
+            </>
+          )}
         </button>
       </div>
+      <Toaster />
       {/* <p className="text-sm">
         Acest site este protejat de{" "}
         <a className="text-amber-500" href="https://www.hCaptcha.com">
