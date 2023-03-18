@@ -4,6 +4,7 @@ specifiers:
   '@hcaptcha/react-hcaptcha': ^1.4.4
   '@hcaptcha/types': ^1.0.3
   '@headlessui/react': ^1.7.13
+  '@hookform/resolvers': ^2.9.11
   '@next/mdx': ^13.2.4
   '@react-google-maps/api': ^2.18.1
   '@tabler/icons-react': ^2.10.0
@@ -11,6 +12,7 @@ specifiers:
   '@types/google.maps': ^3.52.2
   '@types/mdx': ^2.0.3
   '@types/node': 18.15.3
+  '@types/nodemailer': ^6.4.7
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@typescript-eslint/eslint-plugin': ^5.55.0
@@ -24,29 +26,36 @@ specifiers:
   eslint-plugin-tailwindcss: ^3.10.1
   mongodb: ^5.1.0
   next: 13.2.4
+  nodemailer: ^6.9.1
   postcss: ^8.4.21
   prettier: ^2.8.4
   react: 18.2.0
   react-dom: 18.2.0
+  react-hook-form: ^7.43.6
   server-only: ^0.0.1
   tailwindcss: ^3.2.7
   typescript: 4.9.5
   use-places-autocomplete: ^4.0.0
+  zod: ^3.21.4
   zustand: ^4.3.6
 
 dependencies:
   '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
   '@headlessui/react': 1.7.13_biqbaboplfbrettd7655fr4n2y
+  '@hookform/resolvers': 2.9.11_react-hook-form@7.43.6
   '@next/mdx': 13.2.4
   '@react-google-maps/api': 2.18.1_biqbaboplfbrettd7655fr4n2y
   '@tabler/icons-react': 2.10.0_react@18.2.0
   '@vercel/analytics': 0.1.11_react@18.2.0
   mongodb: 5.1.0
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
+  nodemailer: 6.9.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.43.6_react@18.2.0
   server-only: 0.0.1
   use-places-autocomplete: 4.0.0_react@18.2.0
+  zod: 3.21.4
   zustand: 4.3.6_react@18.2.0
 
 devDependencies:
@@ -55,6 +64,7 @@ devDependencies:
   '@types/google.maps': 3.52.2
   '@types/mdx': 2.0.3
   '@types/node': 18.15.3
+  '@types/nodemailer': 6.4.7
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@typescript-eslint/eslint-plugin': 5.55.0_342y7v4tc7ytrrysmit6jo4wri
@@ -153,6 +163,14 @@ packages:
       client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@hookform/resolvers/2.9.11_react-hook-form@7.43.6:
+    resolution: {integrity: sha512-bA3aZ79UgcHj7tFV7RlgThzwSSHZgvfbt2wprldRkYBcMopdMvHyO17Wwp/twcJasNFischFfS7oz8Katz8DdQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.43.6_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:
@@ -427,6 +445,12 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
+
+  /@types/nodemailer/6.4.7:
+    resolution: {integrity: sha512-f5qCBGAn/f0qtRcd4SEn88c8Fp3Swct1731X4ryPKqS61/A3LmmzN8zaEz7hneJvpjFbUUgY7lru/B/7ODTazg==}
+    dependencies:
+      '@types/node': 18.15.3
+    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -2121,6 +2145,11 @@ packages:
     resolution: {integrity: sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==}
     dev: true
 
+  /nodemailer/6.9.1:
+    resolution: {integrity: sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -2411,6 +2440,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.43.6_react@18.2.0:
+    resolution: {integrity: sha512-zEXpju7XnrszIW5AMIjGw3ta/NmhkXG02fnSbIt4MfCegdQhmLkAfeM8bba87Co3oyBDsp8wONP8POcRToPBVw==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
@@ -2934,6 +2972,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod/3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: false
 
   /zustand/4.3.6_react@18.2.0:
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
