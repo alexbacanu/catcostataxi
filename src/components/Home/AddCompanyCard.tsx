@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 
 export default function AddCompanyCard() {
   return (
@@ -9,12 +8,13 @@ export default function AddCompanyCard() {
           <h1 className="text-4xl md:text-5xl">Adauga compania ta de taxi</h1>
           <p className="text-lg md:text-xl">Primeste reclama gratuita pentru firma ta</p>
           <div className="flex flex-col items-center gap-6 pt-6 sm:flex-row">
-            <Link href="/" className="button-base button-primary">
+            <p className="button-base button-secondary">Disponibil in curand</p>
+            {/* <Link href="/" className="button-base button-primary">
               Adauga companie
             </Link>
             <Link href="/" className="button-base button-secondary">
               Afla mai multe <span aria-hidden="true">→</span>
-            </Link>
+            </Link> */}
           </div>
         </div>
 
