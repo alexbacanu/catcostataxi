@@ -11,7 +11,7 @@ type Props = {
   companies?: Company[]
 }
 
-export default function EstimateCard({ companies }: Props) {
+export default function TaxiPrices({ companies }: Props) {
   const [nightToggle, setNightToggle] = useState(false)
   const [modifyToggle, setModifyToggle] = useState(false)
   const [priceData, setPriceData] = useState(calculatePriceData(companies))

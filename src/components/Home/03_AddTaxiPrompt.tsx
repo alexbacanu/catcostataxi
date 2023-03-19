@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function AddCompanyCard() {
+export default function AddTaxiPrompt() {
   return (
     <section className="layout-mx pt-0">
       <div className="card-base relative isolate flex w-full flex-col items-center gap-4 overflow-hidden bg-amber-400 p-10 md:flex-row md:p-12">

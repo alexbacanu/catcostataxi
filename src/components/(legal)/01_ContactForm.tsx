@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import { toast, Toaster } from "react-hot-toast"
 import { z } from "zod"
 
-export default function Contact() {
+export default function ContactForm() {
   // Zod
   const zodSchema = z.object({
     firstName: z.string().min(1, { message: "Prenumele este obligatoriu" }),

@@ -11,7 +11,7 @@ type Props = {
   route: Route
 }
 
-export default function MapCard({ route }: Props) {
+export default function RouteMap({ route }: Props) {
   const [mapDirections, setMapDirections] = useState<google.maps.DirectionsResult>()
 
   const { init, ready } = usePlacesAutocomplete({

@@ -1,6 +1,7 @@
-import AddCompanyCard from "@/components/Home/AddCompanyCard"
+import AddressForm from "@/components/Home/01_AddressForm"
+import PopularRoutes from "@/components/Home/02_PopularRoutes"
+import AddTaxiPrompt from "@/components/Home/03_AddTaxiPrompt"
 import RecentsCard from "@/components/Home/RecentsCard"
-import SearchCard from "@/components/Home/SearchCard"
 import { fetchRecentRoutes } from "@/helpers/mongo"
 
 export default async function HomePage() {
@@ -11,9 +12,10 @@ export default async function HomePage() {
       {/* !TODO: Modify SearchCard to use Zustand */}
       {/* !TODO: Get directions on the server side */}
       {/* !TODO: Convert @react-google-maps/api to Javascript Google Maps API */}
-      <SearchCard />
+      <AddressForm />
+      <PopularRoutes />
       <RecentsCard recentRoutes={recentRoutes} />
-      <AddCompanyCard />
+      <AddTaxiPrompt />
     </>
   )
 }

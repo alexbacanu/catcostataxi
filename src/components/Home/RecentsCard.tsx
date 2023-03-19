@@ -1,5 +1,3 @@
-"use client"
-
 import type { Route } from "@/helpers/mongo"
 import { IconHistory } from "@tabler/icons-react"
 import Image from "next/image"

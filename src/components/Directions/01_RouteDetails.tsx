@@ -4,7 +4,7 @@ type Props = {
   route: Route
 }
 
-export default function TitleCard({ route }: Props) {
+export default function RouteDetails({ route }: Props) {
   return (
     <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
       <div className="layout-mx flex-col items-start gap-2 pt-2 md:flex-row">

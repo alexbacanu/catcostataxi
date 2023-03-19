@@ -2,7 +2,7 @@
 
 import hashPair from "@/helpers/hasher"
 import { Combobox, Transition } from "@headlessui/react"
-import { IconMapPin } from "@tabler/icons-react"
+import { IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
@@ -10,7 +10,7 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { toast, Toaster } from "react-hot-toast"
 import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
 
-export default function SearchCard() {
+export default function AddressForm() {
   const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>({
     description: "",
     matched_substrings: [],
@@ -135,6 +135,12 @@ export default function SearchCard() {
     }
   }
 
+  const handleSwitch = () => {
+    if (!selectedTo.description || !selectedFrom.description) return
+    setSelectedFrom(selectedTo)
+    setSelectedTo(selectedFrom)
+  }
+
   useEffect(() => {
     if (!initRef.current) {
       initRef.current = init
@@ -220,14 +226,24 @@ export default function SearchCard() {
           }}
           disabled={!ready}
         >
-          <Combobox.Input
-            placeholder="De la"
-            onChange={(event) => setValue(event.target.value)}
-            displayValue={(data: google.maps.places.AutocompletePrediction) => {
-              return data.description
-            }}
-            className={`${fromError ? "border border-red-500" : "border-0"} input-base`}
-          />
+          <div className="flex gap-x-2">
+            <Combobox.Input
+              placeholder="De la"
+              onChange={(event) => setValue(event.target.value)}
+              displayValue={(data: google.maps.places.AutocompletePrediction) => {
+                return data.description
+              }}
+              className={`${fromError ? "border border-red-500" : "border-0"} input-base`}
+            />
+
+            <div
+              className="input-base flex w-10 items-center justify-center py-0 px-2 hover:cursor-pointer"
+              onClick={handleSwitch}
+            >
+              <IconSwitchVertical />
+              {/* <IconArrowsUpDown /> */}
+            </div>
+          </div>
 
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">

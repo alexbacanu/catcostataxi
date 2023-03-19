@@ -6,7 +6,7 @@ type Props = {
   companies?: Company[]
 }
 
-export default function TaxiListCard({ companies }: Props) {
+export default function TaxiList({ companies }: Props) {
   return (
     <section className="layout-mx flex flex-col gap-y-4 pt-0">
       <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">

@@ -1,8 +1,8 @@
-import BookingCard from "@/components/Directions/BookingCard"
-import EstimateCard from "@/components/Directions/EstimateCard"
-import MapCard from "@/components/Directions/MapCard"
-import TaxiListCard from "@/components/Directions/TaxiListCard"
-import TitleCard from "@/components/Directions/TitleCard"
+import RouteDetails from "@/components/Directions/01_RouteDetails"
+import RouteMap from "@/components/Directions/02_RouteMap"
+import Affiliate from "@/components/Directions/03_Affiliate"
+import TaxiPrices from "@/components/Directions/04_TaxiPrices"
+import TaxiList from "@/components/Directions/05_TaxiList"
 import { fetchAllRoutesIds, fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -34,11 +34,11 @@ export default async function DirectionsPage({ params }: Props) {
 
   return (
     <>
-      <TitleCard route={route} />
-      <MapCard route={route} />
-      <BookingCard />
-      <EstimateCard companies={companies} />
-      <TaxiListCard companies={companies} />
+      <RouteDetails route={route} />
+      <RouteMap route={route} />
+      <Affiliate />
+      <TaxiPrices companies={companies} />
+      <TaxiList companies={companies} />
     </>
   )
 }
