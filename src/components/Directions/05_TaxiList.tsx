@@ -8,7 +8,7 @@ type Props = {
 
 export default function TaxiList({ companies }: Props) {
   return (
-    <section className="layout-mx flex flex-col gap-y-4 pt-0">
+    <section className="layout-mx flex flex-col">
       <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">
         {/* Title */}
         <div className="flex items-center">
@@ -24,7 +24,13 @@ export default function TaxiList({ companies }: Props) {
               .map((company, index) => (
                 <div key={index} className="flex items-center gap-x-2 py-1">
                   <div className="hidden md:block">
-                    <Image src="/taxi_driver_two_color.svg" alt="Taxi driver" width={406 * 0.2} height={306 * 0.2} />
+                    <Image
+                      src="/taxi_driver_two_color.svg"
+                      alt="Taxi driver"
+                      width={406 * 0.2}
+                      height={306 * 0.2}
+                      priority
+                    />
                   </div>
                   <div className="flex-auto">
                     <div className="whitespace-nowrap capitalize tracking-tighter">{company.name}</div>

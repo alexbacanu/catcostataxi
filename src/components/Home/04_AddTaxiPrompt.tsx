@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function AddTaxiPrompt() {
   return (
-    <section className="layout-mx pt-0">
+    <section className="layout-mx">
       <div className="card-base relative isolate flex w-full flex-col items-center gap-4 overflow-hidden bg-amber-400 p-10 md:flex-row md:p-12">
         <div className="mx-auto space-y-2 text-neutral-800">
           <h1 className="text-4xl md:text-5xl">Adaugă compania ta de taxi</h1>
@@ -44,8 +44,8 @@ export default function AddTaxiPrompt() {
           src="/undraw_duplicate.svg"
           alt="Add your taxi"
           className="h-60 w-auto md:h-60 lg:h-80"
-          width={865 * 0.6}
-          height={601 * 0.6}
+          width={721 * 0.6}
+          height={600 * 0.6}
           priority
         />
       </div>

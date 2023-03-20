@@ -8,7 +8,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
 import { Fragment, useEffect, useRef, useState } from "react"
-import { toast, Toaster } from "react-hot-toast"
+import { Toaster, toast } from "react-hot-toast"
 import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
 
 export default function AddressForm() {
@@ -132,7 +132,7 @@ export default function AddressForm() {
         onReady={initRef.current}
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
-        <form className="layout-mx" onSubmit={onSubmit}>
+        <form className="layout-mx mb-6" onSubmit={onSubmit}>
           <div className="mx-auto space-y-4 md:mx-0">
             <h1>Estimează costul unei curse de taxi</h1>
 
@@ -142,10 +142,9 @@ export default function AddressForm() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="button-base button-primary flex gap-x-2 disabled:cursor-not-allowed"
+                className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                Calculează estimat
                 {isLoading ? (
                   <div role="status">
                     <svg
@@ -167,7 +166,7 @@ export default function AddressForm() {
                     <span className="sr-only">Se încarcă...</span>
                   </div>
                 ) : (
-                  ""
+                  "Calculează estimat"
                 )}
               </button>
             </div>
@@ -176,9 +175,9 @@ export default function AddressForm() {
           <Image
             src="/undraw_right_direction.svg"
             alt="Estimate taxi cost"
-            className="hidden h-80 w-auto md:flex md:h-60 lg:h-80"
-            width={630 * 0.6}
-            height={532 * 0.6}
+            className="hidden md:flex"
+            width={630 * 0.5}
+            height={532 * 0.5}
             priority
           />
           <Toaster />

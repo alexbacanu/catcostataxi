@@ -6,13 +6,13 @@ import Image from "next/image"
 
 export default function PopularRoutesAirplane() {
   return (
-    <section className="layout-mx">
+    <section className="layout-mx gap-x-12">
       <Image
         src="/undraw_airport.svg"
-        alt="Recent routes"
-        className="hidden p-6 md:flex"
-        width={550 * 0.65}
-        height={488.5 * 0.65}
+        alt="Rute aeroport"
+        className="hidden lg:flex"
+        width={495 * 0.5}
+        height={488 * 0.5}
         priority
       />
 
@@ -23,7 +23,7 @@ export default function PopularRoutesAirplane() {
             {popularAirports.map((obj) => (
               <button
                 key={obj.city}
-                className="button-secondary m-1 cursor-pointer rounded-lg py-2 px-4 text-sm font-medium hover:bg-teal-900 hover:text-neutral-200"
+                className="m-1.5 cursor-pointer rounded-lg bg-neutral-800 p-2 text-sm font-medium text-neutral-200 hover:bg-teal-900 hover:text-neutral-200"
                 onClick={() => useAddressStore.setState({ addressFrom: obj.routeData })}
               >
                 {obj.destination}

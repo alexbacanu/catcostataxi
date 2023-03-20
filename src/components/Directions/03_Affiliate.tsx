@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Affiliate() {
   return (
-    <section className="layout-mx flex flex-col gap-y-4 pt-0">
+    <section className="layout-mx flex flex-col">
       <div className="card-base flex w-full flex-row justify-between gap-y-2 bg-blue-900 py-4 px-6 ring-neutral-200">
         {/* Title */}
         <div className="flex items-center">

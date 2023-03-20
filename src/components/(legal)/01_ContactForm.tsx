@@ -12,16 +12,16 @@ import { z } from "zod"
 export default function ContactForm() {
   // Zod
   const zodSchema = z.object({
-    firstName: z.string().min(1, { message: "Prenumele este obligatoriu" }),
-    lastName: z.string().min(1, { message: "Numele este obligatoriu" }),
-    email: z.string().min(1, { message: "E-mailul este obligatoriu" }).email({
-      message: "Trebuie să fie un e-mail valid",
+    firstName: z.string().min(1, { message: "Câmp obligatoriu" }),
+    lastName: z.string().min(1, { message: "Câmp obligatoriu" }),
+    email: z.string().min(1, { message: "Câmp obligatoriu" }).email({
+      message: "Vă rog introduceți un e-mail valid",
     }),
-    message: z.string().min(1, { message: "Mesajul este obligatoriu" }),
+    message: z.string().min(1, { message: "Câmp obligatoriu" }),
     terms: z.boolean().refine((val) => val === true, {
-      message: "Trebuie sa accepti termenii si conditiile",
+      message: "Acordul dvs. este necesar pentru a trimite mesajul",
     }),
-    hcaptcha: z.string().min(1, { message: "Captcha este obligatoriu" }),
+    hcaptcha: z.string().min(1, { message: "Câmp obligatoriu" }),
   })
 
   type ValidationSchema = z.infer<typeof zodSchema>
@@ -140,7 +140,7 @@ export default function ContactForm() {
       </div>
       <div className="flex flex-col items-center text-sm">
         <div className="flex w-full items-center gap-x-2">
-          <div className="flex w-full grow flex-col">
+          <div className="flex w-full flex-col">
             <div>
               <input id="terms" className="h-4 w-4" type="checkbox" {...register("terms")} />
               <span className="w-auto px-2">
@@ -153,8 +153,8 @@ export default function ContactForm() {
                   Termeni și condiții
                 </Link>
               </span>
+              {errors.terms && <span className="text-xs italic text-red-500">{errors.terms.message}</span>}
             </div>
-            {errors.terms && <p className="text-xs italic text-red-500">{errors.terms.message}</p>}
           </div>
           <div className="flex flex-col">
             <HCaptcha
@@ -190,21 +190,6 @@ export default function ContactForm() {
         </button>
       </div>
       <Toaster />
-      {/* <p className="text-sm">
-        Acest site este protejat de{" "}
-        <a className="text-amber-500" href="https://www.hCaptcha.com">
-          hCaptcha
-        </a>{" "}
-        și se aplică{" "}
-        <a className="italic text-amber-500" href="https://www.hcaptcha.com/privacy">
-          Politica de confidențialitate
-        </a>{" "}
-        și{" "}
-        <a className="italic text-amber-500" href="https://www.hcaptcha.com/terms">
-          Termenii și condițiile
-        </a>{" "}
-        serviciului.
-      </p> */}
     </form>
   )
 }

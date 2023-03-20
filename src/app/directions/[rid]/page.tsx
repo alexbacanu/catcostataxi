@@ -46,7 +46,7 @@ export default async function DirectionsPage({ params }: Props) {
 function NoRouteFound() {
   return (
     <section className="layout-mx flex h-screen flex-col justify-start">
-      <h2 className="mb-6">Ne pare rău, nu am găsit nicio rută</h2>
+      <h1 className="mb-6 py-6">Ne pare rău, nu am găsit nicio rută</h1>
       <div className="relative h-[36rem] w-[36rem]">
         <Image src="/undraw_exploring.svg" alt="No route found" fill priority />
       </div>
