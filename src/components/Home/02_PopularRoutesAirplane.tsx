@@ -25,7 +25,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "Bacău",
-      destination: "Bacău (BCM)",
+      destination: "George Enescu Bacău (BCM)",
       routeData: {
         description: "George Enescu International Airport, Strada Aeroportului, Bacău, Romania",
         matched_substrings: [],
@@ -42,7 +42,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "Baia Mare",
-      destination: "Maramureș (BAY)",
+      destination: "Maramureș Baia Mare (BAY)",
       routeData: {
         description: "Aeroportul Internațional Maramureş Baia Mare, Tăuții-Măgherăuș, Romania",
         matched_substrings: [],
@@ -59,7 +59,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "București",
-      destination: "București (OTP)",
+      destination: "Henri Coandă București (OTP)",
       routeData: {
         description: "Aeroportul Internațional Henri Coandă (OTP), Calea Bucureştilor, Otopeni, Romania",
         matched_substrings: [],
@@ -76,7 +76,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "Cluj-Napoca",
-      destination: "Cluj-Napoca (CLJ)",
+      destination: "Avram Iancu Cluj (CLJ)",
       routeData: {
         description: "Aeroportul Internațional Avram Iancu Cluj-Napoca (CLJ), Strada Traian Vuia, Cluj-Napoca, Romania",
         matched_substrings: [],
@@ -86,23 +86,6 @@ export default function PopularRoutesAirplane() {
           main_text: "Aeroportul Internațional Avram Iancu Cluj-Napoca (CLJ)",
           main_text_matched_substrings: [],
           secondary_text: "Strada Traian Vuia, Cluj-Napoca, Romania",
-        },
-        terms: [],
-        types: ["airport", "point_of_interest", "establishment"],
-      },
-    },
-    {
-      city: "Constanța",
-      destination: "Constanța (CND)",
-      routeData: {
-        description: "Mihail Kogălniceanu International Airport, Strada Tudor Vladimirescu, Romania",
-        matched_substrings: [],
-        place_id: "ChIJnYMAg_qKukARfxuucKL_SP8",
-        reference: "ChIJnYMAg_qKukARfxuucKL_SP8",
-        structured_formatting: {
-          main_text: "Mihail Kogălniceanu International Airport",
-          main_text_matched_substrings: [],
-          secondary_text: "Strada Tudor Vladimirescu, Romania",
         },
         terms: [],
         types: ["airport", "point_of_interest", "establishment"],
@@ -120,6 +103,23 @@ export default function PopularRoutesAirplane() {
           main_text: "Aeroportul Internațional Craiova",
           main_text_matched_substrings: [],
           secondary_text: "Calea București, Craiova, Romania",
+        },
+        terms: [],
+        types: ["airport", "point_of_interest", "establishment"],
+      },
+    },
+    {
+      city: "Constanța",
+      destination: "Mihail Kogălniceanu Constanța (CND)",
+      routeData: {
+        description: "Mihail Kogălniceanu International Airport, Strada Tudor Vladimirescu, Romania",
+        matched_substrings: [],
+        place_id: "ChIJnYMAg_qKukARfxuucKL_SP8",
+        reference: "ChIJnYMAg_qKukARfxuucKL_SP8",
+        structured_formatting: {
+          main_text: "Mihail Kogălniceanu International Airport",
+          main_text_matched_substrings: [],
+          secondary_text: "Strada Tudor Vladimirescu, Romania",
         },
         terms: [],
         types: ["airport", "point_of_interest", "establishment"],
@@ -197,7 +197,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "Suceava",
-      destination: "Suceava (SCV)",
+      destination: "Ștefan cel Mare Suceava (SCV)",
       routeData: {
         description: 'Aeroportul Internațional "Ștefan cel Mare" Suceava, Orașul Salcea, Romania',
         matched_substrings: [],
@@ -214,7 +214,7 @@ export default function PopularRoutesAirplane() {
     },
     {
       city: "Târgu Mureș",
-      destination: "Târgu Mureș (TGM)",
+      destination: "Transilvania Târgu Mureș (TGM)",
       routeData: {
         description: "Târgu Mureș Transilvania Airport, DN15, Ungheni, Romania",
         matched_substrings: [],
@@ -254,15 +254,15 @@ export default function PopularRoutesAirplane() {
         src="/undraw_airport.svg"
         alt="Recent routes"
         className="hidden p-6 md:flex"
-        width={550 * 0.6}
-        height={488.5 * 0.6}
+        width={550 * 0.65}
+        height={488.5 * 0.65}
         priority
       />
 
       <div className="card-base flex">
         <div className="flex flex-col items-center">
           <h2 className="pb-4">Selectează rapid un aeroport</h2>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center">
             {popularRoutes.map((obj) => (
               <button
                 key={obj.city}
