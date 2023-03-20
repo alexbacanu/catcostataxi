@@ -1,11 +1,10 @@
 import AddressForm from "@/components/Home/01_AddressForm"
-import PopularRoutes from "@/components/Home/02_PopularRoutes"
-import AddTaxiPrompt from "@/components/Home/03_AddTaxiPrompt"
-import RecentsCard from "@/components/Home/RecentsCard"
-import { fetchRecentRoutes } from "@/helpers/mongo"
+import PopularRoutesAirplane from "@/components/Home/02_PopularRoutesAirplane"
+import PopularRoutesTrain from "@/components/Home/03_PopularRoutesTrain"
+import AddTaxiPrompt from "@/components/Home/04_AddTaxiPrompt"
 
 export default async function HomePage() {
-  const recentRoutes = await fetchRecentRoutes()
+  // const recentRoutes = await fetchRecentRoutes()
 
   return (
     <>
@@ -13,8 +12,8 @@ export default async function HomePage() {
       {/* !TODO: Get directions on the server side */}
       {/* !TODO: Convert @react-google-maps/api to Javascript Google Maps API */}
       <AddressForm />
-      <PopularRoutes />
-      <RecentsCard recentRoutes={recentRoutes} />
+      <PopularRoutesAirplane />
+      <PopularRoutesTrain />
       <AddTaxiPrompt />
     </>
   )

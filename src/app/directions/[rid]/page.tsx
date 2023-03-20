@@ -23,6 +23,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const route = await fetchSingleRoute(params.rid)
+
   return { title: `Cat costa taxi de la ${route?.fromAddress} pana la ${route?.toAddress}` }
 }
 
