@@ -1,4 +1,83 @@
 {
+  // NextJS
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules\\.pnpm\\typescript@4.9.5\\node_modules\\typescript\\lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Extensions
+  "eslint.format.enable": true,
+  "eslint.useESLintClass": true,
+  "importCost.fontStyle": "italic",
+  "npm.packageManager": "pnpm",
+  "prettier.printWidth": 120,
+  "reactSnippets.settings.importReactOnTop": false,
+  "isort.args": ["--profile", "black"],
+
+  // Formatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+
+  // Editor
+  "editor.bracketPairColorization.enabled": true,
+  "editor.fontLigatures": true,
+  "editor.guides.bracketPairs": true,
+  "editor.inlayHints.fontSize": 10,
+  "editor.inlineSuggest.enabled": true,
+  "editor.linkedEditing": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.stickyScroll.enabled": true,
+
+  // Explorer
+  "explorer.fileNesting.enabled": true,
+  "explorer.sortOrder": "type",
+
+  // Terminal
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+
+  // Files
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+
+  // Hide files fron explorer
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.git": true,
+    "**/.mypy_cache/**": true,
+    "**/.next": true,
+    "**/.venv": true,
+    "**/*.pyc": true,
+    "**/node_modules/": true
+  },
+
+  // Exclude files from search
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/.git": true,
+    "**/.mypy_cache/**": true,
+    "**/.next": true,
+    "**/.venv": true,
+    "**/*.pyc": true,
+    "**/node_modules": true
+  },
+
+  // Exlude fies & folders for watcher service
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.venv/**": true,
+    "**/node_modules/**": true
+  }
+
+  // Others
 }
