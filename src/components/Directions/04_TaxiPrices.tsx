@@ -82,31 +82,9 @@ export default function TaxiPrices({ companies }: Props) {
   }
 
   return (
-    <section className="layout-mx flex flex-col gap-y-6 pt-0">
-      <div className="flex w-full flex-col justify-between gap-6 sm:flex-row">
-        {/* Distance Card */}
-        <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
-          <div className="flex items-center">
-            <IconRoute2 />
-            <span className="pl-2">Distanță</span>
-          </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">{distance.text}</p>
-        </div>
-
-        {/* Duration Card */}
-        <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
-          <div className="flex items-center">
-            {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
-            <span className="pl-2">Durată</span>
-          </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">
-            {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
-          </p>
-        </div>
-      </div>
-
+    <section className="layout-mx flex flex-col gap-8 lg:flex-row">
       {/* Ride Card */}
-      <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">
+      <div className="card-base flex h-[216px] flex-col justify-between gap-y-2 py-4 px-6">
         {/* Top */}
         <div className="flex justify-between">
           {/* Title */}
@@ -149,17 +127,17 @@ export default function TaxiPrices({ companies }: Props) {
         {/* List */}
         <div className="flex flex-col gap-x-8 gap-y-4 sm:flex-row">
           {/* Left */}
-          <div className="flex w-full items-center justify-start gap-x-6">
+          <div className="flex w-full items-center justify-center gap-x-6">
             {/* Image */}
             <div className="relative flex shrink-0 items-center justify-center p-2">
-              <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.15} height={361 * 0.15} priority />
+              <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.18} height={361 * 0.18} priority />
               <div className="absolute bottom-0 rounded-md bg-white/20 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
                 Standard
               </div>
             </div>
 
             {/* Table */}
-            <table className="w-full text-left">
+            <table className="text-left">
               <tbody>
                 <tr>
                   <th scope="row" className="w-full text-right font-semibold text-amber-400">
@@ -172,38 +150,38 @@ export default function TaxiPrices({ companies }: Props) {
                         className="w-full rounded-lg bg-white/10 p-1 px-2 text-right"
                       />
                     ) : (
-                      <div className="w-full rounded-lg p-1 px-2 text-right">
-                        {nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                      </div>
+                      <div className="p-1 px-2 text-lg">{nightToggle ? priceData.nightPrice : priceData.dayPrice}</div>
                     )}
                   </th>
 
-                  <td className="text-xs">(lei/km)</td>
+                  <td>lei/km</td>
                 </tr>
 
                 <tr>
                   <th className="text-right font-semibold text-amber-400">
-                    <span className="p-1 px-2">{totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}</span>
+                    <span className="p-1 px-2 text-lg">
+                      {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
+                    </span>
                   </th>
 
-                  <td className="text-xs">(lei/total)</td>
+                  <td>lei/total</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           {/* Right */}
-          <div className="flex w-full items-center justify-start gap-x-6">
+          <div className="flex w-full items-center justify-center gap-x-6">
             {/* Image */}
             <div className="relative flex shrink-0 items-center justify-center p-2">
-              <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.15} height={361 * 0.15} priority />
+              <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.18} height={361 * 0.18} priority />
               <div className="absolute bottom-0 rounded-md bg-indigo-400/30 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
                 Premium
               </div>
             </div>
 
             {/* Table */}
-            <table className="w-full text-left">
+            <table className="text-left">
               <tbody>
                 <tr>
                   <th className="w-full text-right font-semibold text-amber-400">
@@ -216,23 +194,23 @@ export default function TaxiPrices({ companies }: Props) {
                         className="w-full rounded-lg bg-white/10 p-1 px-2 text-right"
                       />
                     ) : (
-                      <div className="w-full rounded-lg p-1 px-2 text-right">
+                      <div className="p-1 px-2 text-lg">
                         {nightToggle ? priceData.nightPricePlus : priceData.dayPricePlus}
                       </div>
                     )}
                   </th>
 
-                  <td className="text-xs">(lei/km)</td>
+                  <td>lei/km</td>
                 </tr>
 
                 <tr>
                   <th className="text-right font-semibold text-amber-400">
-                    <span className="p-1 px-2">
+                    <span className="p-1 px-2 text-lg">
                       {totalPrice(nightToggle ? "nightPricePlus" : "dayPricePlus").toFixed(2)}
                     </span>
                   </th>
 
-                  <td className="text-xs">(lei/total)</td>
+                  <td>lei/total</td>
                 </tr>
               </tbody>
             </table>
@@ -243,129 +221,33 @@ export default function TaxiPrices({ companies }: Props) {
           condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative.
         </p>
       </div>
-    </section>
-  )
-}
 
-function LoadingRoute() {
-  return (
-    <section className="layout-mx flex flex-col gap-y-6 pt-0">
-      <div className="flex w-full flex-col justify-between gap-6 sm:flex-row">
+      <div className="flex w-[512px] flex-col justify-between gap-8">
         {/* Distance Card */}
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
             <IconRoute2 />
             <span className="pl-2">Distanță</span>
           </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se încarcă...</p>
+          <p className="text-lg font-semibold text-amber-400 sm:text-xl">{distance.text}</p>
         </div>
 
         {/* Duration Card */}
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
-            <IconClockHour4 />
+            {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
             <span className="pl-2">Durată</span>
           </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se încarcă...</p>
-        </div>
-      </div>
-
-      {/* Ride Card */}
-      <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">
-        {/* Top */}
-        <div className="flex justify-between">
-          {/* Title */}
-          <div className="flex items-center">
-            <IconCurrencyDollar />
-            <span className="pl-2">Cursă</span>
-          </div>
-
-          {/* Custom */}
-          <div className="flex flex-auto items-center justify-end">
-            <button className="rounded-md bg-white/10 px-2 py-1 text-xs">Modifică</button>
-          </div>
-
-          {/* Divider */}
-          <div className="mx-4 my-1 w-[1px] grow-0 bg-white/10"></div>
-
-          {/* Toggle */}
-          <div className="flex items-center">
-            <IconSun className="h-4 w-4 text-amber-400" />
-            <Switch className={`${"bg-white/10"} relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}>
-              <span className="sr-only">Enable notifications</span>
-              <span className={`${"translate-x-1"} inline-block h-4 w-4 rounded-full bg-white transition`} />
-            </Switch>
-            <IconMoon className="h-4 w-4 text-indigo-500" />
-          </div>
-        </div>
-
-        {/* List */}
-        <div className="flex flex-col gap-x-8 gap-y-4 sm:flex-row">
-          {/* Left */}
-          <div className="flex w-full items-center justify-start gap-x-6">
-            {/* Image */}
-            <div className="relative flex shrink-0 items-center justify-center p-2">
-              <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.15} height={361 * 0.15} priority />
-              <div className="absolute bottom-0 rounded-md bg-white/20 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
-                Standard
-              </div>
-            </div>
-
-            {/* Table */}
-            <table className="w-full text-left">
-              <tbody>
-                <tr>
-                  <th className="w-full text-right font-semibold text-amber-400">
-                    <div className="w-full rounded-lg p-1 px-2 text-right">0</div>
-                  </th>
-
-                  <td className="text-xs">(lei/km)</td>
-                </tr>
-
-                <tr>
-                  <th className="text-right font-semibold text-amber-400">
-                    <span className="p-1 px-2">0</span>
-                  </th>
-
-                  <td className="text-xs">(lei/total)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Right */}
-          <div className="flex w-full items-center justify-start gap-x-6">
-            {/* Image */}
-            <div className="relative flex shrink-0 items-center justify-center p-2">
-              <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.15} height={361 * 0.15} priority />
-              <div className="absolute bottom-0 rounded-md bg-indigo-400/30 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
-                Premium
-              </div>
-            </div>
-
-            {/* Table */}
-            <table className="w-full text-left">
-              <tbody>
-                <tr>
-                  <th className="w-full text-right font-semibold text-amber-400">
-                    <div className="w-full rounded-lg p-1 px-2 text-right">0</div>
-                  </th>
-
-                  <td className="text-xs">(lei/km)</td>
-                </tr>
-
-                <tr>
-                  <th className="text-right font-semibold text-amber-400">
-                    <span className="p-1 px-2">0</span>
-                  </th>
-
-                  <td className="text-xs">(lei/total)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <p className="text-lg font-semibold text-amber-400 sm:text-xl">
+            {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
+          </p>
         </div>
       </div>
     </section>
   )
+}
+
+// TODO: REMOVE THIS
+function LoadingRoute() {
+  return <section className="layout-mx flex flex-col">Se incarca...</section>
 }
