@@ -131,13 +131,15 @@ export default function TaxiPrices({ companies }: Props) {
             <Switch
               checked={nightToggle}
               onChange={setNightToggle}
-              className={`${nightToggle ? "bg-indigo-500" : "bg-white/10"
-                } relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}
+              className={`${
+                nightToggle ? "bg-indigo-500" : "bg-white/10"
+              } relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}
             >
               <span className="sr-only">Enable notifications</span>
               <span
-                className={`${nightToggle ? "translate-x-6" : "translate-x-1"
-                  } inline-block h-4 w-4 rounded-full bg-white transition`}
+                className={`${
+                  nightToggle ? "translate-x-6" : "translate-x-1"
+                } inline-block h-4 w-4 rounded-full bg-white transition`}
               />
             </Switch>
             <IconMoon className="h-4 w-4 text-indigo-500" />

@@ -238,7 +238,8 @@ export default function AddressForm() {
                     key={location.place_id}
                     value={location}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 px-4 ${active ? "bg-teal-900 text-white" : "text-neutral-800"
+                      `relative cursor-default select-none py-2 px-4 ${
+                        active ? "bg-teal-900 text-white" : "text-neutral-800"
                       }`
                     }
                   >
@@ -293,7 +294,8 @@ export default function AddressForm() {
                     key={location.place_id}
                     value={location}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 px-4 ${active ? "bg-teal-900 text-white" : "text-neutral-800"
+                      `relative cursor-default select-none py-2 px-4 ${
+                        active ? "bg-teal-900 text-white" : "text-neutral-800"
                       }`
                     }
                   >
