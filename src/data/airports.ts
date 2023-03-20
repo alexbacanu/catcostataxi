@@ -225,7 +225,7 @@ export const popularAirports = [
   },
   {
     city: "Timişoara",
-    destination: "Timişoara (TSR)",
+    destination: "Traian Vuia Timişoara (TSR)",
     routeData: {
       description: "Timișoara International Airport, Strada Aeroportului, Timișoara, Romania",
       matched_substrings: [],
