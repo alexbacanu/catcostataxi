@@ -88,7 +88,7 @@ export default function TaxiPrices({ companies }: Props) {
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
             <IconRoute2 />
-            <span className="pl-2">Distanta</span>
+            <span className="pl-2">Distanță</span>
           </div>
           <p className="text-lg font-semibold text-amber-400 sm:text-xl">{distance.text}</p>
         </div>
@@ -97,7 +97,7 @@ export default function TaxiPrices({ companies }: Props) {
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
             {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
-            <span className="pl-2">Durata</span>
+            <span className="pl-2">Durată</span>
           </div>
           <p className="text-lg font-semibold text-amber-400 sm:text-xl">
             {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
@@ -112,13 +112,13 @@ export default function TaxiPrices({ companies }: Props) {
           {/* Title */}
           <div className="flex items-center">
             <IconCurrencyDollar />
-            <span className="pl-2">Cursa</span>
+            <span className="pl-2">Cursă</span>
           </div>
 
           {/* Custom */}
           <div className="flex flex-auto items-center justify-end">
             <button onClick={() => setModifyToggle(!modifyToggle)} className="rounded-md bg-white/10 px-2 py-1 text-xs">
-              {modifyToggle ? "Salveaza" : "Modifica"}
+              {modifyToggle ? "Salvează" : "Modifică"}
             </button>
           </div>
 
@@ -131,15 +131,13 @@ export default function TaxiPrices({ companies }: Props) {
             <Switch
               checked={nightToggle}
               onChange={setNightToggle}
-              className={`${
-                nightToggle ? "bg-indigo-500" : "bg-white/10"
-              } relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}
+              className={`${nightToggle ? "bg-indigo-500" : "bg-white/10"
+                } relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}
             >
               <span className="sr-only">Enable notifications</span>
               <span
-                className={`${
-                  nightToggle ? "translate-x-6" : "translate-x-1"
-                } inline-block h-4 w-4 rounded-full bg-white transition`}
+                className={`${nightToggle ? "translate-x-6" : "translate-x-1"
+                  } inline-block h-4 w-4 rounded-full bg-white transition`}
               />
             </Switch>
             <IconMoon className="h-4 w-4 text-indigo-500" />
@@ -239,8 +237,8 @@ export default function TaxiPrices({ companies }: Props) {
           </div>
         </div>
         <p className="pt-2 text-xs italic">
-          Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și altele
-          conditii neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative.
+          Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și alte
+          condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative.
         </p>
       </div>
     </section>
@@ -255,18 +253,18 @@ function LoadingRoute() {
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
             <IconRoute2 />
-            <span className="pl-2">Distanta</span>
+            <span className="pl-2">Distanță</span>
           </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se incarca...</p>
+          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se încarcă...</p>
         </div>
 
         {/* Duration Card */}
         <div className="card-base flex w-full flex-col items-center justify-start gap-y-2 py-4 px-6">
           <div className="flex items-center">
             <IconClockHour4 />
-            <span className="pl-2">Durata</span>
+            <span className="pl-2">Durată</span>
           </div>
-          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se incarca...</p>
+          <p className="text-lg font-semibold text-amber-400 sm:text-xl">Se încarcă...</p>
         </div>
       </div>
 
@@ -277,12 +275,12 @@ function LoadingRoute() {
           {/* Title */}
           <div className="flex items-center">
             <IconCurrencyDollar />
-            <span className="pl-2">Cursa</span>
+            <span className="pl-2">Cursă</span>
           </div>
 
           {/* Custom */}
           <div className="flex flex-auto items-center justify-end">
-            <button className="rounded-md bg-white/10 px-2 py-1 text-xs">Modifica</button>
+            <button className="rounded-md bg-white/10 px-2 py-1 text-xs">Modifică</button>
           </div>
 
           {/* Divider */}

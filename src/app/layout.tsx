@@ -58,8 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="layout-mx flex-col gap-y-4 sm:flex-row">
           <div className="flex flex-col gap-x-4 gap-y-2 self-start text-lg font-light tracking-tight sm:flex-row md:self-center">
             <Link href="/about">Despre noi</Link>
-            <Link href="/privacy">Politica de confidentialitate</Link>
-            <Link href="/terms">Termeni si conditii</Link>
+            <Link href="/privacy">Politica de confidențialitate</Link>
+            <Link href="/terms">Termeni și condiții</Link>
             <Link href="/contact">Contact</Link>
           </div>
           <div className="space-y-2">

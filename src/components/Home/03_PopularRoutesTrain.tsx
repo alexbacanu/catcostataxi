@@ -252,7 +252,7 @@ export default function PopularRoutesTrain() {
     <section className="layout-mx">
       <div className="card-base flex">
         <div className="flex flex-col items-center">
-          <h2 className="pb-4">Selecteaza rapid o gara</h2>
+          <h2 className="pb-4">Selectează rapid o gară</h2>
           <div className="flex flex-wrap">
             {popularRoutes.map((obj) => (
               <button

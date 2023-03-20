@@ -11,7 +11,7 @@ export default function Affiliate() {
           <span className="pl-2">Booking</span>
         </div>
         <div>
-          <Link href="/">Gaseste cele mai bune oferte pentru booking</Link>
+          <Link href="/">Găsește cele mai bune oferte pentru booking</Link>
         </div>
       </div>
     </section>

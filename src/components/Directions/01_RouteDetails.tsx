@@ -20,7 +20,7 @@ export default function RouteDetails({ route }: Props) {
           </div>
         </div>
         <div className="text-lg">
-          <h1>pana la</h1>
+          <h1>până la</h1>
           <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
             {route.toAddress}
           </div>

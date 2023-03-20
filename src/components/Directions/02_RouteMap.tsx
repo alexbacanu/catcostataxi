@@ -72,7 +72,7 @@ export default function RouteMap({ route }: Props) {
             {mapDirections && <DirectionsRenderer directions={mapDirections} />}
           </GoogleMap>
         ) : (
-          <div className="card-base flex h-[50vh] w-full items-center justify-center">Se incarca harta...</div>
+          <div className="card-base flex h-[50vh] w-full items-center justify-center">Se încarcă harta...</div>
         )}
       </section>
     </>

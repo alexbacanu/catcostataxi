@@ -69,14 +69,14 @@ export default function AddressForm() {
     event.preventDefault()
 
     if (!selectedFrom.description) {
-      setFromError("Campul 'De la' este obligatoriu")
+      setFromError("Câmpul 'De la' este obligatoriu")
       return
     } else {
       setFromError("")
     }
 
     if (!selectedTo.description) {
-      setToError("Campul 'Pana la' este obligatoriu")
+      setToError("Câmpul 'Până la' este obligatoriu")
       return
     } else {
       setToError("")
@@ -113,7 +113,7 @@ export default function AddressForm() {
       router.push(`/directions/${data.id}`)
       setIsLoading(false)
     } catch (error) {
-      toast.error("A aparut o eroare, va rugam incercati mai tarziu.")
+      toast.error("A apărut o eroare, vă rugăm încercați mai târziu.")
       console.error("Error:", error)
     }
   }
@@ -134,7 +134,7 @@ export default function AddressForm() {
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
         <form className="layout-mx" onSubmit={onSubmit}>
           <div className="mx-auto space-y-4 md:mx-0">
-            <h1>Estimeaza costul unei curse de taxi</h1>
+            <h1>Estimează costul unei curse de taxi</h1>
 
             {fromInput()}
             {toInput()}
@@ -145,7 +145,7 @@ export default function AddressForm() {
                 className="button-base button-primary flex gap-x-2 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                Calculeaza estimat
+                Calculează estimat
                 {isLoading ? (
                   <div role="status">
                     <svg
@@ -164,7 +164,7 @@ export default function AddressForm() {
                         fill="currentFill"
                       />
                     </svg>
-                    <span className="sr-only">Loading...</span>
+                    <span className="sr-only">Se încarcă...</span>
                   </div>
                 ) : (
                   ""
@@ -226,11 +226,11 @@ export default function AddressForm() {
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Nici un rezultat</div>
+                <div className="relative cursor-default select-none py-2 px-4">Niciun rezultat</div>
               ) : loading ? (
-                <div className="relative cursor-default select-none py-2 px-4">Se incarca...</div>
+                <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Introduceti o locatie</div>
+                <div className="relative cursor-default select-none py-2 px-4">Introduceți o locație</div>
               ) : (
                 status === "OK" &&
                 data.map((location) => (
@@ -238,8 +238,7 @@ export default function AddressForm() {
                     key={location.place_id}
                     value={location}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 px-4 ${
-                        active ? "bg-teal-900 text-white" : "text-neutral-800"
+                      `relative cursor-default select-none py-2 px-4 ${active ? "bg-teal-900 text-white" : "text-neutral-800"
                       }`
                     }
                   >
@@ -271,7 +270,7 @@ export default function AddressForm() {
           disabled={!ready}
         >
           <Combobox.Input
-            placeholder="Pana la"
+            placeholder="Până la"
             onChange={(event) => setValue(event.target.value)}
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
               return data.description
@@ -282,11 +281,11 @@ export default function AddressForm() {
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Nici un rezultat</div>
+                <div className="relative cursor-default select-none py-2 px-4">Niciun rezultat</div>
               ) : loading ? (
-                <div className="relative cursor-default select-none py-2 px-4">Se incarca...</div>
+                <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Introduceti o locatie</div>
+                <div className="relative cursor-default select-none py-2 px-4">Introduceți o locație</div>
               ) : (
                 status === "OK" &&
                 data.map((location) => (
@@ -294,8 +293,7 @@ export default function AddressForm() {
                     key={location.place_id}
                     value={location}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 px-4 ${
-                        active ? "bg-teal-900 text-white" : "text-neutral-800"
+                      `relative cursor-default select-none py-2 px-4 ${active ? "bg-teal-900 text-white" : "text-neutral-800"
                       }`
                     }
                   >

@@ -5,10 +5,10 @@ export default function AddTaxiPrompt() {
     <section className="layout-mx pt-0">
       <div className="card-base relative isolate flex w-full flex-col items-center gap-4 overflow-hidden bg-amber-400 p-10 md:flex-row md:p-12">
         <div className="mx-auto space-y-2 text-neutral-800">
-          <h1 className="text-4xl md:text-5xl">Adauga compania ta de taxi</h1>
-          <p className="text-lg md:text-xl">Primeste reclama gratuita pentru firma ta</p>
+          <h1 className="text-4xl md:text-5xl">Adaugă compania ta de taxi</h1>
+          <p className="text-lg md:text-xl">Primește reclamă gratuită pentru firma ta</p>
           <div className="flex flex-col items-center gap-6 pt-6 sm:flex-row">
-            <p className="button-base button-secondary">Disponibil in curand</p>
+            <p className="button-base button-secondary">Disponibil în curând</p>
             {/* <Link href="/" className="button-base button-primary">
               Adauga companie
             </Link>

@@ -13,7 +13,7 @@ export default function TaxiList({ companies }: Props) {
         {/* Title */}
         <div className="flex items-center">
           <IconList />
-          <span className="pl-2">Lista taxiuri</span>
+          <span className="pl-2">Listă taxiuri</span>
         </div>
 
         {/* List */}
@@ -39,7 +39,7 @@ export default function TaxiList({ companies }: Props) {
                 </div>
               ))
           ) : (
-            <div className="flex items-center gap-x-2 py-1 italic">Nici un taxi gasit in aceasta zona</div>
+            <div className="flex items-center gap-x-2 py-1 italic">Niciun taxi găsit în această zonă</div>
           )}
         </div>
       </div>

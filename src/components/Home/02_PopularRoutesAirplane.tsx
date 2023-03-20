@@ -261,7 +261,7 @@ export default function PopularRoutesAirplane() {
 
       <div className="card-base flex">
         <div className="flex flex-col items-center">
-          <h2 className="pb-4">Selecteaza rapid un aeroport</h2>
+          <h2 className="pb-4">Selectează rapid un aeroport</h2>
           <div className="flex flex-wrap">
             {popularRoutes.map((obj) => (
               <button

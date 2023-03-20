@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const route = await fetchSingleRoute(params.rid)
 
-  return { title: `Cat costa taxi de la ${route?.fromAddress} pana la ${route?.toAddress}` }
+  return { title: `Cât costă taxi de la ${route?.fromAddress} până la ${route?.toAddress}` }
 }
 
 export default async function DirectionsPage({ params }: Props) {
@@ -47,7 +47,7 @@ export default async function DirectionsPage({ params }: Props) {
 function NoRouteFound() {
   return (
     <section className="layout-mx flex h-screen flex-col justify-start">
-      <h2 className="mb-6">Ne pare rau, nu am gasit nici o ruta</h2>
+      <h2 className="mb-6">Ne pare rău, nu am găsit nicio rută</h2>
       <div className="relative h-[36rem] w-[36rem]">
         <Image src="/undraw_exploring.svg" alt="No route found" fill priority />
       </div>

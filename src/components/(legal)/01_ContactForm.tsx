@@ -68,7 +68,7 @@ export default function ContactForm() {
       reset()
       toast.success("E-mail trimis cu succes!")
     } catch (error) {
-      toast.error("E-mail nu a fost trimis, va rugam incercati mai tarziu.")
+      toast.error("E-mailul nu a fost trimis, vă rugăm încercați mai târziu.")
     }
   }
 
@@ -146,11 +146,11 @@ export default function ContactForm() {
               <span className="w-auto px-2">
                 Sunt de acord cu{" "}
                 <Link className="text-amber-500" href="/privacy">
-                  Politica de confidentialitate
+                  Politica de confidențialitate
                 </Link>{" "}
                 si{" "}
                 <Link className="text-amber-500" href="/terms">
-                  Termeni si conditii
+                  Termeni și condiții
                 </Link>
               </span>
             </div>
