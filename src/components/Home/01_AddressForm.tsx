@@ -1,6 +1,7 @@
 "use client"
 
 import hashPair from "@/helpers/hasher"
+import useAddressStore from "@/stores/addressStore"
 import { Combobox, Transition } from "@headlessui/react"
 import { IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
 import Image from "next/image"
@@ -11,31 +12,12 @@ import { toast, Toaster } from "react-hot-toast"
 import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
 
 export default function AddressForm() {
-  const [selectedFrom, setSelectedFrom] = useState<google.maps.places.AutocompletePrediction>({
-    description: "",
-    matched_substrings: [],
-    place_id: "",
-    structured_formatting: {
-      main_text: "",
-      main_text_matched_substrings: [],
-      secondary_text: "",
-    },
-    terms: [],
-    types: [],
-  })
-  const [selectedTo, setSelectedTo] = useState<google.maps.places.AutocompletePrediction>({
-    description: "",
-    matched_substrings: [],
-    place_id: "",
-    structured_formatting: {
-      main_text: "",
-      main_text_matched_substrings: [],
-      secondary_text: "",
-    },
-    terms: [],
-    types: [],
-  })
   const [isLoading, setIsLoading] = useState(false)
+
+  const selectedFrom = useAddressStore((state) => state.addressFrom)
+  const selectedTo = useAddressStore((state) => state.addressTo)
+  const resetAddress = useAddressStore((state) => state.reset)
+  const switchAddress = useAddressStore((state) => state.switch)
 
   const [fromError, setFromError] = useState("")
   const [toError, setToError] = useState("")
@@ -127,18 +109,13 @@ export default function AddressForm() {
         throw new Error("Network response was not ok.")
       }
 
+      resetAddress()
       router.push(`/directions/${data.id}`)
       setIsLoading(false)
     } catch (error) {
       toast.error("A aparut o eroare, va rugam incercati mai tarziu.")
       console.error("Error:", error)
     }
-  }
-
-  const handleSwitch = () => {
-    if (!selectedTo.description || !selectedFrom.description) return
-    setSelectedFrom(selectedTo)
-    setSelectedTo(selectedFrom)
   }
 
   useEffect(() => {
@@ -221,8 +198,9 @@ export default function AddressForm() {
         <Combobox
           value={selectedFrom}
           onChange={(address) => {
+            console.log(address)
             clearSuggestions()
-            return setSelectedFrom(address)
+            return useAddressStore.setState({ addressFrom: address })
           }}
           disabled={!ready}
         >
@@ -238,7 +216,7 @@ export default function AddressForm() {
 
             <div
               className="input-base flex w-10 items-center justify-center py-0 px-2 hover:cursor-pointer"
-              onClick={handleSwitch}
+              onClick={switchAddress}
             >
               <IconSwitchVertical />
               {/* <IconArrowsUpDown /> */}
@@ -284,7 +262,14 @@ export default function AddressForm() {
             <IconMapPin />
           </span>
         </div>
-        <Combobox value={selectedTo} onChange={setSelectedTo} disabled={!ready}>
+        <Combobox
+          value={selectedTo}
+          onChange={(address) => {
+            clearSuggestions()
+            return useAddressStore.setState({ addressTo: address })
+          }}
+          disabled={!ready}
+        >
           <Combobox.Input
             placeholder="Pana la"
             onChange={(event) => setValue(event.target.value)}

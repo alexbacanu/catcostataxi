@@ -1,7 +1,7 @@
 "use client"
 
 import type { Company } from "@/helpers/mongo"
-import useDirectionsStore from "@/stores/directionsStore"
+import useRoutesStore from "@/stores/routeStore"
 import { Switch } from "@headlessui/react"
 import { IconClockHour4, IconCurrencyDollar, IconMoon, IconRoute2, IconSun, IconTrafficCone } from "@tabler/icons-react"
 import Image from "next/image"
@@ -16,7 +16,7 @@ export default function TaxiPrices({ companies }: Props) {
   const [modifyToggle, setModifyToggle] = useState(false)
   const [priceData, setPriceData] = useState(calculatePriceData(companies))
 
-  const mapRoutes = useDirectionsStore((state) => state.mapDirections.routes)
+  const mapRoutes = useRoutesStore((state) => state.mapDirections.routes)
   if (!mapRoutes[0]) return <LoadingRoute />
 
   const { distance, duration, duration_in_traffic } = mapRoutes[0]?.legs[0] || {}

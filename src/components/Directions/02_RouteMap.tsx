@@ -1,7 +1,7 @@
 "use client"
 
 import type { Route } from "@/helpers/mongo"
-import useDirectionsStore from "@/stores/directionsStore"
+import useRoutesStore from "@/stores/routeStore"
 import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api"
 import Script from "next/script"
 import { useEffect, useRef, useState } from "react"
@@ -41,7 +41,7 @@ export default function RouteMap({ route }: Props) {
 
   useEffect(() => {
     if (!mapDirections) return
-    useDirectionsStore.setState({ mapDirections })
+    useRoutesStore.setState({ mapDirections })
   }, [mapDirections])
 
   useEffect(() => {
