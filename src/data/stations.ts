@@ -102,8 +102,8 @@ export const popularTrainStations = [
     },
   },
   {
-    city: "Buzau",
-    destination: "Buzau",
+    city: "Buzău",
+    destination: "Buzău",
     routeData: {
       description: "Gara Buzău, Bulevardul 1 Decembrie 1918, Buzău, Romania",
       matched_substrings: [],
@@ -120,7 +120,7 @@ export const popularTrainStations = [
   },
   {
     city: "Cluj Napoca",
-    destination: "Cluj Napoca",
+    destination: "Cluj-Napoca",
     routeData: {
       description: "Gara Cluj-Napoca, Strada Piața Gării, Cluj-Napoca, Romania",
       matched_substrings: [],
@@ -241,7 +241,7 @@ export const popularTrainStations = [
   },
   {
     city: "Piatra Neamț",
-    destination: "Piatra Neamț",
+    destination: "Piatra-Neamț",
     routeData: {
       description: "Gara Piatra Neamț, Strada Bistriței, Piatra Neamț, Romania",
       matched_substrings: [],
