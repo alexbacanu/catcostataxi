@@ -1,6 +1,5 @@
 import RouteDetails from "@/components/Directions/01_RouteDetails"
 import RouteMap from "@/components/Directions/02_RouteMap"
-import Affiliate from "@/components/Directions/03_Affiliate"
 import TaxiPrices from "@/components/Directions/04_TaxiPrices"
 import TaxiList from "@/components/Directions/05_TaxiList"
 import { fetchAllRoutesIds, fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
@@ -37,7 +36,7 @@ export default async function DirectionsPage({ params }: Props) {
     <>
       <RouteDetails route={route} />
       <RouteMap route={route} />
-      <Affiliate />
+      {/* <Affiliate /> */}
       <TaxiPrices companies={companies} />
       <TaxiList companies={companies} />
     </>
