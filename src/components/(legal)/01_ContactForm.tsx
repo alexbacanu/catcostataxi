@@ -2,12 +2,13 @@
 
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { IconHourglassEmpty, IconSend } from "@tabler/icons-react"
+import { IconSend } from "@tabler/icons-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
-import { toast, Toaster } from "react-hot-toast"
+import { Toaster, toast } from "react-hot-toast"
 import { z } from "zod"
+import LoadingButton from "../(helpers)/loadingButton"
 
 export default function ContactForm() {
   // Zod
@@ -139,7 +140,7 @@ export default function ContactForm() {
         </div>
       </div>
       <div className="flex flex-col items-center text-sm">
-        <div className="flex w-full items-center gap-x-2">
+        <div className="flex w-full flex-col items-center gap-4 sm:flex-row">
           <div className="flex w-full flex-col">
             <div>
               <input id="terms" className="h-4 w-4" type="checkbox" {...register("terms")} />
@@ -178,8 +179,7 @@ export default function ContactForm() {
         >
           {isSubmitting ? (
             <>
-              <IconHourglassEmpty />
-              <span>Se trimite...</span>
+              <LoadingButton />
             </>
           ) : (
             <>
