@@ -6,7 +6,7 @@ type Props = {
 
 export default function RouteDetails({ route }: Props) {
   return (
-    <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
+    <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 shadow-md transition">
       <div className="layout-mx mb-6 flex-col items-start gap-x-6 md:flex-row">
         <div className="space-y-2 text-lg">
           <h1>de la</h1>

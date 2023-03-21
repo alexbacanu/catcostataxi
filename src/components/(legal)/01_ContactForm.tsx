@@ -165,7 +165,7 @@ export default function ContactForm() {
                 setValue("hcaptcha", token, { shouldValidate: true })
               }}
               ref={captchaRef}
-              theme="dark"
+              theme="light"
             />
             {errors.hcaptcha && <p className="text-xs italic text-red-500">{errors.hcaptcha.message}</p>}
           </div>

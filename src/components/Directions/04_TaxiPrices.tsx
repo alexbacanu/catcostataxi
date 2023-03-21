@@ -95,28 +95,28 @@ export default function TaxiPrices({ companies }: Props) {
             <div className="flex flex-auto items-center justify-end">
               <button
                 onClick={() => setModifyToggle(!modifyToggle)}
-                className="rounded-md bg-white/10 px-2 py-1 text-xs"
+                className="rounded-md bg-black/10 px-2 py-1 text-xs ring-1 ring-neutral-800/20 hover:bg-black/5 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
               >
                 {modifyToggle ? "Salvează" : "Modifică"}
               </button>
             </div>
 
-            <div className="mx-4 my-1 w-[1px] grow-0 bg-white/10"></div>
+            <div className="mx-4 my-1 w-[1px] grow-0 bg-black/10 dark:bg-white/10"></div>
 
             <div className="flex items-center">
-              <IconSun className="h-4 w-4 text-amber-400" />
+              <IconSun className="h-4 w-4 font-bold text-amber-500 dark:font-semibold dark:text-amber-400" />
               <Switch
                 checked={nightToggle}
                 onChange={setNightToggle}
                 className={`${
-                  nightToggle ? "bg-indigo-500" : "bg-white/10"
-                } relative mx-1 inline-flex h-6 w-11 items-center rounded-full`}
+                  nightToggle ? "bg-indigo-500" : "bg-black/10 hover:bg-black/5 dark:bg-white/10 dark:hover:bg-white/5"
+                } relative mx-1 inline-flex h-6 w-11 items-center rounded-full ring-1 ring-neutral-800/20 dark:ring-neutral-200/20`}
               >
-                <span className="sr-only">Enable notifications</span>
+                <span className="sr-only">Schimba pretul</span>
                 <span
                   className={`${
                     nightToggle ? "translate-x-6" : "translate-x-1"
-                  } inline-block h-4 w-4 rounded-full bg-white transition`}
+                  } inline-block h-4 w-4 rounded-full bg-white ring-1 ring-neutral-800/20 transition dark:ring-neutral-200/20`}
                 />
               </Switch>
               <IconMoon className="h-4 w-4 text-indigo-500" />
@@ -128,7 +128,7 @@ export default function TaxiPrices({ companies }: Props) {
               {/* Image */}
               <div className="relative flex shrink-0 items-center justify-center p-2">
                 <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.18} height={361 * 0.18} priority />
-                <div className="absolute bottom-0 rounded-md bg-white/20 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
+                <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Standard
                 </div>
               </div>
@@ -137,14 +137,17 @@ export default function TaxiPrices({ companies }: Props) {
               <table className="text-left">
                 <tbody>
                   <tr>
-                    <th scope="row" className="w-full text-right font-semibold text-amber-400">
+                    <th
+                      scope="row"
+                      className="w-full text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400"
+                    >
                       {modifyToggle ? (
                         <input
                           value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
                           type="number"
                           step={0.01}
                           onChange={nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")}
-                          className="w-full rounded-lg bg-white/10 p-1 px-2 text-right"
+                          className="w-full rounded-lg bg-black/5 p-1 px-2 text-right ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                         />
                       ) : (
                         <div className="p-1 px-2 text-lg">
@@ -157,7 +160,7 @@ export default function TaxiPrices({ companies }: Props) {
                   </tr>
 
                   <tr>
-                    <th className="text-right font-semibold text-amber-400">
+                    <th className="text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
                       <span className="p-1 px-2 text-lg">
                         {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
                       </span>
@@ -174,7 +177,7 @@ export default function TaxiPrices({ companies }: Props) {
               {/* Image */}
               <div className="relative flex shrink-0 items-center justify-center p-2">
                 <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.18} height={361 * 0.18} priority />
-                <div className="absolute bottom-0 rounded-md bg-indigo-400/30 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px]">
+                <div className="absolute bottom-0 rounded-md bg-indigo-800/50 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-indigo-400/30">
                   Premium
                 </div>
               </div>
@@ -183,14 +186,14 @@ export default function TaxiPrices({ companies }: Props) {
               <table className="text-left">
                 <tbody>
                   <tr>
-                    <th className="w-full text-right font-semibold text-amber-400">
+                    <th className="w-full text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
                       {modifyToggle ? (
                         <input
                           value={nightToggle ? priceData.nightPricePlus : priceData.dayPricePlus}
                           type="number"
                           step={0.01}
                           onChange={nightToggle ? handleChange("nightPricePlus") : handleChange("dayPricePlus")}
-                          className="w-full rounded-lg bg-white/10 p-1 px-2 text-right"
+                          className="w-full rounded-lg bg-black/5 p-1 px-2 text-right ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                         />
                       ) : (
                         <div className="p-1 px-2 text-lg">
@@ -203,7 +206,7 @@ export default function TaxiPrices({ companies }: Props) {
                   </tr>
 
                   <tr>
-                    <th className="text-right font-semibold text-amber-400">
+                    <th className="text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
                       <span className="p-1 px-2 text-lg">
                         {totalPrice(nightToggle ? "nightPricePlus" : "dayPricePlus").toFixed(2)}
                       </span>
@@ -228,7 +231,9 @@ export default function TaxiPrices({ companies }: Props) {
               <IconRoute2 />
               <span className="pl-2">Distanță</span>
             </div>
-            <p className="text-lg font-semibold text-amber-400 sm:text-xl">{distance.text}</p>
+            <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
+              {distance.text}
+            </p>
             {/* --- */}
           </div>
           <div className="card-base flex grow items-center justify-between gap-x-2">
@@ -237,7 +242,7 @@ export default function TaxiPrices({ companies }: Props) {
               {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
               <span className="pl-2">Durată</span>
             </div>
-            <p className="text-lg font-semibold text-amber-400 sm:text-xl">
+            <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
               {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
             </p>
             {/* --- */}

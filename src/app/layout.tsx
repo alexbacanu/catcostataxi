@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   function Footer() {
     return (
-      <footer className="mt-6 border-t border-neutral-800/10 transition dark:border-white/10">
+      <footer className="mt-6 border-t border-neutral-800/10 bg-neutral-200/50 transition dark:border-white/10">
         <div className="layout-mx flex-col gap-4 py-4 lg:flex-row">
           <div className="flex flex-col gap-x-4 gap-y-2 text-center text-lg font-light tracking-tight md:flex-row md:self-center">
             <Link className="hover:text-amber-500" href="/about">

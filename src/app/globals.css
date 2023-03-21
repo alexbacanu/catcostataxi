@@ -30,7 +30,7 @@
   }
 
   .card-base {
-    @apply p-4 rounded-lg lg:rounded-xl shadow-lg lg:shadow-xl ring-1 bg-neutral-100/60 dark:bg-neutral-900 ring-neutral-800/10 dark:ring-neutral-200/10;
+    @apply p-4 rounded-lg lg:rounded-xl shadow-md lg:shadow-lg ring-1 bg-neutral-200/50 dark:bg-neutral-900 ring-neutral-800/10 dark:ring-neutral-200/10;
   }
 
   .input-base {
@@ -50,6 +50,10 @@
   }
 
   .button-secondary {
-    @apply text-neutral-800 bg-white/60 hover:bg-white/80 focus:ring-neutral-800 backdrop-blur-md;
+    @apply text-neutral-800 bg-white/60 hover:bg-white/80 focus:ring-neutral-800 backdrop-blur-md  ring-1 ring-neutral-800/10;
+  }
+
+  .button-neutral {
+    @apply dark:bg-neutral-800 dark:text-neutral-200 bg-white shadow-md text-neutral-800 hover:bg-teal-800 hover:text-white ring-1 ring-neutral-800/10 dark:ring-neutral-200/10;
   }
 }

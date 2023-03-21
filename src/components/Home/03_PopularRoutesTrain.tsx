@@ -14,7 +14,7 @@ export default function PopularRoutesTrain() {
             {popularTrainStations.map((obj) => (
               <button
                 key={obj.city}
-                className="m-1.5 cursor-pointer rounded-lg bg-neutral-800 p-2 text-sm font-medium text-neutral-200 hover:bg-teal-900 hover:text-neutral-200"
+                className="button-neutral m-1.5 cursor-pointer rounded-lg p-2 text-sm font-medium"
                 onClick={() => useAddressStore.setState({ addressFrom: obj.routeData })}
               >
                 {obj.destination}
