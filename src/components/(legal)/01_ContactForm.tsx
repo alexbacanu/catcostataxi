@@ -67,7 +67,7 @@ export default function ContactForm() {
 
       // Reset form
       reset()
-      toast.success("E-mail trimis cu succes!")
+      toast.success("E-mail trimis cu succes!", { duration: 5000 })
     } catch (error) {
       toast.error("E-mailul nu a fost trimis, vă rugăm încercați mai târziu.")
     }

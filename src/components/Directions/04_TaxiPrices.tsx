@@ -139,7 +139,9 @@ export default function TaxiPrices({ companies }: Props) {
                   <tr>
                     <th
                       scope="row"
-                      className="w-full text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400"
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      }  w-full text-right font-bold dark:font-semibold`}
                     >
                       {modifyToggle ? (
                         <input
@@ -160,7 +162,11 @@ export default function TaxiPrices({ companies }: Props) {
                   </tr>
 
                   <tr>
-                    <th className="text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
+                    <th
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      }  text-right font-bold dark:font-semibold`}
+                    >
                       <span className="p-1 px-2 text-lg">
                         {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
                       </span>
@@ -186,7 +192,11 @@ export default function TaxiPrices({ companies }: Props) {
               <table className="text-left">
                 <tbody>
                   <tr>
-                    <th className="w-full text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
+                    <th
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      }  w-full text-right font-bold dark:font-semibold`}
+                    >
                       {modifyToggle ? (
                         <input
                           value={nightToggle ? priceData.nightPricePlus : priceData.dayPricePlus}
@@ -206,7 +216,11 @@ export default function TaxiPrices({ companies }: Props) {
                   </tr>
 
                   <tr>
-                    <th className="text-right font-bold text-amber-500 dark:font-semibold dark:text-amber-400">
+                    <th
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      } text-right font-bold dark:font-semibold`}
+                    >
                       <span className="p-1 px-2 text-lg">
                         {totalPrice(nightToggle ? "nightPricePlus" : "dayPricePlus").toFixed(2)}
                       </span>
