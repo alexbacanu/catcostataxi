@@ -184,7 +184,12 @@ export default function AddressForm() {
           <div className="flex gap-x-4">
             <Combobox.Input
               placeholder="De la"
-              onChange={(event) => setValue(event.target.value)}
+              onChange={(event) => {
+                const inputValue = event.target.value
+                if (inputValue.length >= 4) {
+                  setValue(event.target.value)
+                }
+              }}
               displayValue={(data: google.maps.places.AutocompletePrediction) => {
                 return data.description
               }}
@@ -206,7 +211,9 @@ export default function AddressForm() {
               ) : loading ? (
                 <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Introduceți o locație</div>
+                <div className="relative cursor-default select-none py-2 px-4">
+                  Introduceți o locație (folosiți 4 sau mai multe caractere)
+                </div>
               ) : (
                 status === "OK" &&
                 data.map((location) => (
@@ -248,7 +255,12 @@ export default function AddressForm() {
         >
           <Combobox.Input
             placeholder="Până la"
-            onChange={(event) => setValue(event.target.value)}
+            onChange={(event) => {
+              const inputValue = event.target.value
+              if (inputValue.length >= 4) {
+                setValue(event.target.value)
+              }
+            }}
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
               return data.description
             }}
@@ -262,7 +274,9 @@ export default function AddressForm() {
               ) : loading ? (
                 <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Introduceți o locație</div>
+                <div className="relative cursor-default select-none py-2 px-4">
+                  Introduceți o locație (folosiți 4 sau mai multe caractere)
+                </div>
               ) : (
                 status === "OK" &&
                 data.map((location) => (
