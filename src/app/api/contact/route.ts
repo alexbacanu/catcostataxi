@@ -32,14 +32,20 @@ export async function POST(request: NextRequest) {
   }
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    service: process.env.EMAIL_SERVICE,
     auth: {
-      user: process.env.NODEMAILER_USER,
-      pass: process.env.NODEMAILER_PASS,
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
     },
   })
+
+  const options = {
+    sender: email,
+    replyTo: email,
+    to: `CatCostaTaxi <${process.env.EMAIL_USERNAME}>`,
+    subject: `Contact Form: ${firstName} ${lastName} (${email})`,
+    text: message,
+  }
 
   try {
     // Ping the hcaptcha verify API to verify the captcha code you received
@@ -53,11 +59,9 @@ export async function POST(request: NextRequest) {
     const captchaValidation = await response.json()
 
     if (captchaValidation.success) {
-      // DO EMAIL HERE
-      await transporter.sendMail({
-        to: `CatCostaTaxi < ${process.env.CCT_EMAIL} >`,
-        subject: `Contact Form: ${firstName}, ${lastName}`,
-        text: `${email} - ${message}`,
+      transporter.sendMail(options, (error, info) => {
+        if (error) console.log(error)
+        else console.log(info)
       })
       // Return 200 if everything is successful
       return NextResponse.json(response)
