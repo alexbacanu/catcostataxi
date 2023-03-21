@@ -1,6 +1,6 @@
 "use client"
 
-import LoadingButton from "@/components/(helpers)/loadingButton"
+import LoadingAnimation from "@/components/(helpers)/LoadingAnimation"
 import hashPair from "@/helpers/hasher"
 import useAddressStore from "@/stores/addressStore"
 import { Combobox, Transition } from "@headlessui/react"
@@ -134,7 +134,7 @@ export default function AddressForm() {
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 transition">
         <form className="layout-mx mb-6" onSubmit={onSubmit}>
-          <div className="mx-auto space-y-4 md:mx-0">
+          <div className="mx-auto space-y-6 md:mx-0">
             <h1>Estimează costul unei curse de taxi</h1>
 
             {fromInput()}
@@ -146,7 +146,7 @@ export default function AddressForm() {
                 className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                {isLoading ? <LoadingButton /> : "Calculează estimat"}
+                {isLoading ? <LoadingAnimation /> : "Calculează estimat"}
               </button>
             </div>
           </div>
@@ -181,7 +181,7 @@ export default function AddressForm() {
           }}
           disabled={!ready}
         >
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-4">
             <Combobox.Input
               placeholder="De la"
               onChange={(event) => setValue(event.target.value)}
@@ -196,7 +196,6 @@ export default function AddressForm() {
               onClick={switchAddress}
             >
               <IconSwitchVertical />
-              {/* <IconArrowsUpDown /> */}
             </div>
           </div>
 

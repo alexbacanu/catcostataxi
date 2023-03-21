@@ -1,5 +1,6 @@
 "use client"
 
+import LoadingAnimation from "@/components/(helpers)/LoadingAnimation"
 import HCaptcha from "@hcaptcha/react-hcaptcha"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { IconSend } from "@tabler/icons-react"
@@ -8,7 +9,6 @@ import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Toaster, toast } from "react-hot-toast"
 import { z } from "zod"
-import LoadingButton from "../(helpers)/loadingButton"
 
 export default function ContactForm() {
   // Zod
@@ -179,7 +179,7 @@ export default function ContactForm() {
         >
           {isSubmitting ? (
             <>
-              <LoadingButton />
+              <LoadingAnimation />
             </>
           ) : (
             <>

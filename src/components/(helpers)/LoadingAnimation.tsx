@@ -1,4 +1,4 @@
-export default function LoadingButton() {
+export default function LoadingAnimation() {
   return (
     <div role="status">
       <svg
