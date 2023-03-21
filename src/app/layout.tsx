@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   function Header() {
     return (
       <header className="z-30 bg-amber-400 shadow-md transition">
-        <div className="layout-mx py-4">
+        <div className="layout-mx justify-center py-4 md:justify-start">
           <Link href="/">
             <Image
               src="/logo.svg"
