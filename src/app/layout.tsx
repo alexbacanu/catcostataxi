@@ -1,4 +1,3 @@
-import { IconBrandFacebook, IconBrandGithub, IconBrandTwitter } from "@tabler/icons-react"
 import { Analytics } from "@vercel/analytics/react"
 import { Inter } from "next/font/google"
 import Image from "next/image"
@@ -71,11 +70,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
           </div>
           <div className="space-y-2">
-            <div className="flex w-full justify-evenly">
+            {/* <div className="flex w-full justify-evenly">
               <IconBrandGithub />
               <IconBrandTwitter />
               <IconBrandFacebook />
-            </div>
+            </div> */}
             <div>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</div>
           </div>
         </div>

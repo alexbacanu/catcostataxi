@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
     return new NextResponse("Unprocessable request, invalid captcha code", { status: 400 })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return new NextResponse("Something went wrong", { status: 400 })
   }
 }
