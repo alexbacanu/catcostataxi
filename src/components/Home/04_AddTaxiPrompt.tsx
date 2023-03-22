@@ -46,7 +46,6 @@ export default function AddTaxiPrompt() {
           className="h-60 w-auto md:h-60 lg:h-80"
           width={721 * 0.6}
           height={600 * 0.6}
-          priority
         />
       </div>
     </section>

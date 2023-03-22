@@ -127,7 +127,7 @@ export default function TaxiPrices({ companies }: Props) {
             <div className="flex grow items-center justify-center gap-x-6">
               {/* Image */}
               <div className="relative flex shrink-0 items-center justify-center p-2">
-                <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.18} height={361 * 0.18} priority />
+                <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.18} height={361 * 0.18} />
                 <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Standard
                 </div>
@@ -182,7 +182,7 @@ export default function TaxiPrices({ companies }: Props) {
             <div className="flex grow items-center justify-center gap-x-6">
               {/* Image */}
               <div className="relative flex shrink-0 items-center justify-center p-2">
-                <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.18} height={361 * 0.18} priority />
+                <Image src="/taxi-black.png" alt="Premium taxi" width={569 * 0.18} height={361 * 0.18} />
                 <div className="absolute bottom-0 rounded-md bg-indigo-800/50 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-indigo-400/30">
                   Premium
                 </div>

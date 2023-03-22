@@ -30,7 +30,6 @@ export default function PopularRoutesTrain() {
         className="hidden lg:flex"
         width={728 * 0.5}
         height={469 * 0.5}
-        priority
       />
     </section>
   )

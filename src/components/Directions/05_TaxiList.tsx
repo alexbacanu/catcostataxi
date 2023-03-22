@@ -24,13 +24,7 @@ export default function TaxiList({ companies }: Props) {
               .map((company, index) => (
                 <div key={index} className="flex items-center gap-x-2 py-1">
                   <div className="hidden md:block">
-                    <Image
-                      src="/taxi_driver_two_color.svg"
-                      alt="Taxi driver"
-                      width={406 * 0.2}
-                      height={306 * 0.2}
-                      priority
-                    />
+                    <Image src="/taxi_driver_two_color.svg" alt="Taxi driver" width={406 * 0.2} height={306 * 0.2} />
                   </div>
                   <div className="flex-auto">
                     <div className="whitespace-nowrap capitalize tracking-tighter">{company.name}</div>

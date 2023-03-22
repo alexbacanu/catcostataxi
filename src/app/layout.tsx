@@ -35,7 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               className="h-16 w-auto"
               width={211 * 0.6}
               height={110 * 0.6}
-              priority
             />
           </Link>
           {/*

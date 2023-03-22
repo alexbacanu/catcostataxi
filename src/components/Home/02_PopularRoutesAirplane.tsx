@@ -13,7 +13,6 @@ export default function PopularRoutesAirplane() {
         className="hidden lg:flex"
         width={495 * 0.5}
         height={488 * 0.5}
-        priority
       />
 
       <div className="card-base flex">
