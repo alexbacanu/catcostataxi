@@ -148,8 +148,8 @@ export default function TaxiPrices({ companies }: Props) {
             </div>
 
             {/* Prices */}
-            <div className="grid grid-cols-2 items-center">
-              <div>Per km (lei):</div>
+            <div className="grid grid-cols-2 items-center gap-2">
+              <div className="whitespace-nowrap">Per km (lei):</div>
               <div
                 className={`${
                   nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
@@ -167,7 +167,7 @@ export default function TaxiPrices({ companies }: Props) {
                   <div className="px-2">{nightToggle ? priceData.nightPrice : priceData.dayPrice}</div>
                 )}
               </div>
-              <div>Total (lei):</div>
+              <div className="whitespace-nowrap">Total (lei):</div>
               <div
                 className={`${
                   nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
