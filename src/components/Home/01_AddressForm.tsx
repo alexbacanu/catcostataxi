@@ -56,14 +56,13 @@ export default function AddressForm() {
       return component?.long_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     }
 
-    const areaLevel1 = findComponent("administrative_area_level_1")
-    if (areaLevel1) return areaLevel1
-
-    const areaLevel2 = findComponent("administrative_area_level_2")
-    if (areaLevel2) return areaLevel2
-
     const locality = findComponent("locality")
+    const areaLevel2 = findComponent("administrative_area_level_2")
+    const areaLevel1 = findComponent("administrative_area_level_1")
+
     if (locality) return locality
+    if (areaLevel2) return areaLevel2
+    if (areaLevel1) return areaLevel1
 
     return findComponent("country")
   }
