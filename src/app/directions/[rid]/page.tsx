@@ -2,7 +2,7 @@ import RouteDetails from "@/components/Directions/01_RouteDetails"
 import RouteMap from "@/components/Directions/02_RouteMap"
 import TaxiPrices from "@/components/Directions/04_TaxiPrices"
 import TaxiList from "@/components/Directions/05_TaxiList"
-import { fetchAllRoutesIds, fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
+import { fetchAllRoutesIds, fetchAvailableLocations, fetchCompaniesByLoc, fetchSingleRoute } from "@/helpers/mongo"
 import type { Metadata } from "next"
 import Image from "next/image"
 
@@ -30,15 +30,19 @@ export default async function DirectionsPage({ params }: Props) {
   const route = await fetchSingleRoute(params.rid)
   if (!route) return <NoRouteFound />
 
-  const companies = await fetchCompaniesByLoc(route.fromLoc)
+  const availableCities = await fetchAvailableLocations()
+
+  const initialCompanies = await fetchCompaniesByLoc(route.fromLoc)
+
+  const initialCity = initialCompanies.length !== 0 ? initialCompanies[0].city : ""
 
   return (
     <>
       <RouteDetails route={route} />
       <RouteMap route={route} />
       {/* <Affiliate /> */}
-      <TaxiPrices companies={companies} />
-      <TaxiList companies={companies} />
+      <TaxiPrices initialCompanies={initialCompanies} initialCity={initialCity} availableCities={availableCities} />
+      <TaxiList initialCompanies={initialCompanies} />
     </>
   )
 }

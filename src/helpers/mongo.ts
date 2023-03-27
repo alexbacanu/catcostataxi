@@ -42,6 +42,19 @@ export const fetchCompaniesByLoc = cache(async (city: string) => {
   return allCompanies
 })
 
+export const fetchAvailableLocations = cache(async () => {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGO_DB ?? "")
+  const companies = db.collection("companies")
+
+  const allLocations = await companies.find({}).project<Company>({ _id: 0, city: 1 }).toArray()
+  if (allLocations.length == 0) console.warn(`😱 Warning: No locations found`)
+
+  const uniqueLocations = allLocations.map((loc) => loc.city)
+
+  return uniqueLocations
+})
+
 export const fetchRecentRoutes = cache(async () => {
   const client = await clientPromise
   const db = client.db(process.env.MONGO_DB ?? "")

@@ -1,12 +1,18 @@
+"use client"
+
 import type { Company } from "@/helpers/mongo"
+import useLocationStore from "@/stores/locationStore"
 import { IconList, IconPhone } from "@tabler/icons-react"
 import Image from "next/image"
 
 type Props = {
-  companies?: Company[]
+  initialCompanies?: Company[]
 }
 
-export default function TaxiList({ companies }: Props) {
+export default function TaxiList({ initialCompanies }: Props) {
+  const companiesArray = useLocationStore((state) => state.companies)
+  const fetchedCompanies = companiesArray.length !== 0 ? companiesArray : initialCompanies
+
   return (
     <section className="layout-mx flex flex-col">
       <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">
@@ -18,8 +24,8 @@ export default function TaxiList({ companies }: Props) {
 
         {/* List */}
         <div className="flex flex-col gap-y-2">
-          {companies?.some((item) => item.placeholder === false) ? (
-            companies
+          {fetchedCompanies?.some((item) => item.placeholder === false) ? (
+            fetchedCompanies
               .filter((item) => item.placeholder === false)
               .map((company, index) => (
                 <div key={index} className="flex items-center gap-x-2 py-1">
