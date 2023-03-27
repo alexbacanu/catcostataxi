@@ -10,13 +10,14 @@ import { useRouter } from "next/navigation"
 import Script from "next/script"
 import { Fragment, useEffect, useRef, useState } from "react"
 import { Toaster, toast } from "react-hot-toast"
-import usePlacesAutocomplete, { getDetails } from "use-places-autocomplete"
+import usePlacesAutocomplete from "use-places-autocomplete"
 
 export default function AddressForm() {
   const [isLoading, setIsLoading] = useState(false)
 
   const selectedFrom = useAddressStore((state) => state.addressFrom)
   const selectedTo = useAddressStore((state) => state.addressTo)
+
   const resetAddress = useAddressStore((state) => state.reset)
   const switchAddress = useAddressStore((state) => state.switch)
 
@@ -43,30 +44,6 @@ export default function AddressForm() {
   const initRef = useRef(init)
   const router = useRouter()
 
-  async function getLocality(location: google.maps.places.AutocompletePrediction): Promise<string | undefined> {
-    const { place_id } = location
-    const details: string | google.maps.places.PlaceResult = (await getDetails({ placeId: place_id })) ?? {}
-
-    const address_components = typeof details === "string" ? undefined : details.address_components
-
-    const findComponent = (type: string) => {
-      const component = address_components?.find((component: google.maps.GeocoderAddressComponent) =>
-        component.types.includes(type)
-      )
-      return component?.long_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    }
-
-    const locality = findComponent("locality")
-    const areaLevel2 = findComponent("administrative_area_level_2")
-    const areaLevel1 = findComponent("administrative_area_level_1")
-
-    if (locality) return locality
-    if (areaLevel2) return areaLevel2
-    if (areaLevel1) return areaLevel1
-
-    return findComponent("country")
-  }
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
@@ -90,9 +67,7 @@ export default function AddressForm() {
       id: hashPair(selectedFrom.description, selectedTo.description),
       tripData: {
         fromAddress: selectedFrom.description,
-        fromLoc: await getLocality(selectedFrom),
         toAddress: selectedTo.description,
-        toLoc: await getLocality(selectedTo),
       },
     }
 

@@ -32,7 +32,10 @@ export default async function DirectionsPage({ params }: Props) {
 
   const availableCities = await fetchAvailableLocations()
 
-  const initialCompanies = await fetchCompaniesByLoc(route.fromLoc)
+  let initialCompanies = await fetchCompaniesByLoc(route.fromAddress)
+  if (initialCompanies.length === 0) {
+    initialCompanies = await fetchCompaniesByLoc(route.toAddress)
+  }
 
   const initialCity = initialCompanies.length !== 0 ? initialCompanies[0].city : ""
 

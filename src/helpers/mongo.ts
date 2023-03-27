@@ -6,9 +6,9 @@ export type Route = {
   _id?: Condition<ObjectId>
   hash: string
   fromAddress: string
-  fromLoc: string
+  fromLoc?: string
   toAddress: string
-  toLoc: string
+  toLoc?: string
   createdAt?: Date
 }
 
