@@ -146,22 +146,30 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
               {/* Select city */}
               {availableCities && (
                 <Listbox value={selectedCity} onChange={(location) => onInputChange(location)}>
-                  <div className="relative z-30 grow items-center sm:grow-0">
-                    <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                  <div className="relative z-30 grow items-center">
+                    <Listbox.Button className="peer relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
                       <span className="block truncate text-neutral-800">
-                        {selectedCity ? capitalize(selectedCity) : "Alegeti un oras"}
+                        {selectedCity ? capitalize(selectedCity) : "Alegeți un oraș"}
                       </span>
                       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                         <IconSelector className="h-5 w-5 text-neutral-500" aria-hidden="true" />
                       </span>
                     </Listbox.Button>
+                    <div
+                      role="tooltip"
+                      className="invisible absolute top-full z-40 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
+                    >
+                      <div className="cursor-default select-none p-1 text-neutral-800">
+                        Selectează o localitate pentru a folosi tariful per km corespondent
+                      </div>
+                    </div>
                     <Transition
                       as={Fragment}
                       leave="transition ease-in duration-100"
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                      <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
                         {availableCities.map((loc) => (
                           <Listbox.Option
                             key={loc}
@@ -188,26 +196,34 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
               )}
 
               {/* Empty div */}
-              <div className="hidden sm:block sm:grow"></div>
+              {/* <div className="hidden sm:block sm:grow"></div> */}
             </div>
 
             {/* Right */}
             <div className="flex justify-center gap-x-4 py-4 sm:py-0">
               {/* Toggle */}
-              <div className="flex items-center justify-end">
+              <div className="relative flex items-center justify-end">
                 <button
                   onClick={() => setModifyToggle(!modifyToggle)}
-                  className="rounded-md bg-black/10 px-2 py-1 text-xs ring-1 ring-neutral-800/20 hover:bg-black/5 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
+                  className="peer rounded-md bg-black/10 px-2 py-1 text-xs ring-1 ring-neutral-800/20 hover:bg-black/5 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                 >
                   {modifyToggle ? "Salvează" : "Modifică"}
                 </button>
+                <div
+                  role="tooltip"
+                  className="invisible absolute -inset-x-full top-full z-10 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
+                >
+                  <div className="cursor-default select-none p-1 text-neutral-800">
+                    Introdu manual tariful per km, în lei
+                  </div>
+                </div>
               </div>
 
               {/* Separator */}
               <div className="my-1 w-[1px] bg-black/10 dark:bg-white/10"></div>
 
               {/* Night price */}
-              <div className="flex items-center">
+              <div className="relative flex items-center">
                 <IconSun className="h-4 w-4 font-bold text-amber-500 dark:font-semibold dark:text-amber-400" />
                 <Switch
                   checked={nightToggle}
@@ -216,7 +232,7 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
                     nightToggle
                       ? "bg-indigo-500"
                       : "bg-black/10 hover:bg-black/5 dark:bg-white/10 dark:hover:bg-white/5"
-                  } relative mx-1 inline-flex h-6 w-11 items-center rounded-full ring-1 ring-neutral-800/20 dark:ring-neutral-200/20`}
+                  } peer relative mx-1 inline-flex h-6 w-11 items-center rounded-full ring-1 ring-neutral-800/20 dark:ring-neutral-200/20`}
                 >
                   <span className="sr-only">Schimbă prețul</span>
                   <span
@@ -226,6 +242,14 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
                   />
                 </Switch>
                 <IconMoon className="h-4 w-4 text-indigo-500" />
+                <div
+                  role="tooltip"
+                  className="invisible absolute -inset-x-full top-full z-10 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
+                >
+                  <div className="cursor-default select-none p-1 text-neutral-800">
+                    Schimbă între tariful de zi și noapte
+                  </div>
+                </div>
               </div>
             </div>
           </div>
