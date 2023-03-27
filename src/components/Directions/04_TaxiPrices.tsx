@@ -169,7 +169,7 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
                       leaveFrom="opacity-100"
                       leaveTo="opacity-0"
                     >
-                      <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
+                      <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none">
                         {availableCities.map((loc) => (
                           <Listbox.Option
                             key={loc}
@@ -305,7 +305,8 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
           {/* Disclaimer */}
           <p className="pt-2 text-xs italic">
             Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și alte
-            condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative.
+            condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative și nu
+            sunt neapărat actualizate.
           </p>
         </div>
         <div className="flex min-w-[28%] flex-row gap-8 lg:flex-col">
