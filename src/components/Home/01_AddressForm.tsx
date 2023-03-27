@@ -33,6 +33,8 @@ export default function AddressForm() {
   } = usePlacesAutocomplete({
     requestOptions: {
       componentRestrictions: { country: "ro" },
+      language: "ro",
+      region: "RO",
     },
     debounce: 400,
     initOnMount: false,
