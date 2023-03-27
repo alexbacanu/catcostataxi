@@ -52,10 +52,10 @@ export default function TaxiPrices({ companies }: Props) {
     }
 
     const defaultValue = {
-      dayPrice: 2.69,
-      nightPrice: 2.99,
-      dayPricePlus: 3.49,
-      nightPricePlus: 3.99,
+      dayPrice: 0,
+      nightPrice: 0,
+      dayPricePlus: 0,
+      nightPricePlus: 0,
     }
 
     if (!companies) return defaultValue
@@ -239,7 +239,7 @@ export default function TaxiPrices({ companies }: Props) {
           {/* --- */}
         </div>
         <div className="flex min-w-[28%] flex-row gap-8 lg:flex-col">
-          <div className="card-base flex grow items-center justify-between gap-x-2">
+          <div className="card-base flex grow flex-col items-center justify-between gap-x-2 sm:flex-row sm:justify-center">
             {/* --- */}
             <div className="flex items-center">
               <IconRoute2 />
@@ -250,7 +250,7 @@ export default function TaxiPrices({ companies }: Props) {
             </p>
             {/* --- */}
           </div>
-          <div className="card-base flex grow items-center justify-between gap-x-2">
+          <div className="card-base flex grow flex-col items-center justify-between gap-x-2 sm:flex-row sm:justify-center">
             {/* --- */}
             <div className="flex items-center">
               {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
