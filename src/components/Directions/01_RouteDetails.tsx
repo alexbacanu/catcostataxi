@@ -11,13 +11,13 @@ export default function RouteDetails({ route }: Props) {
         <div className="space-y-2 text-lg">
           <h1>de la</h1>
           <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
-            {route.fromAddress}
+            {route.selectedFrom.structured_formatting.main_text}
           </div>
         </div>
         <div className="space-y-2 text-lg">
           <h1>până la</h1>
           <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
-            {route.toAddress}
+            {route.selectedTo.structured_formatting.main_text}
           </div>
         </div>
       </div>

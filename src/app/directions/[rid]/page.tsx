@@ -23,7 +23,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const route = await fetchSingleRoute(params.rid)
 
-  return { title: `Cât costă taxi de la ${route?.fromAddress} până la ${route?.toAddress}` }
+  return {
+    title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
+  }
 }
 
 export default async function DirectionsPage({ params }: Props) {
@@ -32,9 +34,9 @@ export default async function DirectionsPage({ params }: Props) {
 
   const availableCities = await fetchAvailableLocations()
 
-  let initialCompanies = await fetchCompaniesByLoc(route.fromAddress)
+  let initialCompanies = await fetchCompaniesByLoc(route.selectedFrom.structured_formatting.secondary_text)
   if (initialCompanies.length === 0) {
-    initialCompanies = await fetchCompaniesByLoc(route.toAddress)
+    initialCompanies = await fetchCompaniesByLoc(route.selectedTo.structured_formatting.secondary_text)
   }
 
   const initialCity = initialCompanies.length !== 0 ? initialCompanies[0].city : ""

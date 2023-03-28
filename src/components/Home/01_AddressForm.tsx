@@ -65,10 +65,8 @@ export default function AddressForm() {
 
     const data = {
       id: hashPair(selectedFrom.description, selectedTo.description),
-      tripData: {
-        fromAddress: selectedFrom.description,
-        toAddress: selectedTo.description,
-      },
+      selectedFrom,
+      selectedTo,
     }
 
     try {
@@ -202,7 +200,10 @@ export default function AddressForm() {
                       }`
                     }
                   >
-                    {location.description}
+                    <div className="flex items-center">
+                      <div className="font-bold">{location.structured_formatting.main_text}</div>
+                      <div className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</div>
+                    </div>
                   </Combobox.Option>
                 ))
               )}
