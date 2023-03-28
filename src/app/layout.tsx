@@ -5,8 +5,9 @@ import Link from "next/link"
 import "./globals.css"
 
 export const metadata = {
-  title: "Cat Costa Taxi",
-  description: "Aplicatie pentru verificarea pretului unui taxi",
+  title: "Cat Costa Taxi - Estimator de tarife taxi",
+  description:
+    "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
 }
 
 const inter = Inter({ subsets: ["latin"] })
