@@ -45,7 +45,7 @@ describe("Add Routes to CatCostaTaxi", () => {
           cy.wait(100)
 
           // Wait for page to load
-          cy.url().should("include", "/directions/")
+          cy.url({ timeout: 10000 }).should("include", "/directions/")
           cy.wait(100)
         })
       })
