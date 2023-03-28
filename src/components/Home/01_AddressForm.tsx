@@ -64,7 +64,7 @@ export default function AddressForm() {
     setIsLoading(true)
 
     const data = {
-      id: hashPair(selectedFrom.description, selectedTo.description),
+      hash: hashPair(selectedFrom.description, selectedTo.description),
       selectedFrom,
       selectedTo,
     }
@@ -85,7 +85,7 @@ export default function AddressForm() {
       }
 
       resetAddress()
-      router.push(`/directions/${data.id}`)
+      router.push(`/directions/${data.hash}`)
       setIsLoading(false)
     } catch (error) {
       toast.error("A apărut o eroare, vă rugăm încercați mai târziu.")

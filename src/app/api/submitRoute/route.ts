@@ -5,27 +5,27 @@ import { NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
   const {
-    id,
+    hash,
     selectedFrom,
     selectedTo,
   }: {
-    id: string
+    hash: string
     selectedFrom: google.maps.places.AutocompletePrediction
     selectedTo: google.maps.places.AutocompletePrediction
   } = await request.json()
 
-  if (!id || !selectedFrom.place_id || !selectedTo.place_id) {
+  if (!hash || !selectedFrom.place_id || !selectedTo.place_id) {
     return new NextResponse("ID or Trip Data cannot be empty", {
       status: 400,
       statusText: "ID or Trip Data cannot be empty",
     })
   }
 
-  if (id.length !== 8) {
+  if (hash.length !== 8) {
     return new NextResponse("Wrong ID", { status: 400, statusText: "Wrong ID" })
   }
 
-  if (hashPair(selectedFrom.description, selectedTo.description) !== id) {
+  if (hashPair(selectedFrom.description, selectedTo.description) !== hash) {
     return new NextResponse("ID does not match Trip Data", {
       status: 400,
       statusText: "ID does not match Trip Data",
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const response = await submitRoute(id, selectedFrom, selectedTo)
+    const response = await submitRoute(hash, selectedFrom, selectedTo)
     return NextResponse.json(response)
   } catch (error) {
     console.error(error)
