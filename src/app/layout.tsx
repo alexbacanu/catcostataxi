@@ -8,6 +8,8 @@ export const metadata = {
   title: "Cat Costa Taxi - Estimator de tarife taxi",
   description:
     "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
+  keywords:
+    "cat costa taxi, estimare tarif taxi, cat costa uber, cat costa bolt, estimare cost uber, estimare cost bolt, tarif taxi online, tarif uber online, tarif bolt online",
 }
 
 const inter = Inter({ subsets: ["latin"] })

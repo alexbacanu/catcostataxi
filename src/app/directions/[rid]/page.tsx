@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
+    description: `Obțineți o estimare a tarifului pentru taxi de la de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`,
+    keywords: `tarif taxi, estimat taxi, de la ${route?.selectedFrom.structured_formatting.main_text}, pana la ${route?.selectedTo.structured_formatting.main_text}`,
   }
 }
 
