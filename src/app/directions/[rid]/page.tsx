@@ -22,11 +22,27 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const route = await fetchSingleRoute(params.rid)
+  const imageUrl = `${process.env.SITE_URL}/api/og?from=${route?.selectedFrom.structured_formatting.main_text}&to=${route?.selectedTo.structured_formatting.main_text}`
 
   return {
     title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
     description: `Obțineți o estimare a tarifului pentru taxi de la de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`,
     keywords: `tarif taxi, estimat taxi, de la ${route?.selectedFrom.structured_formatting.main_text}, pana la ${route?.selectedTo.structured_formatting.main_text}`,
+    openGraph: {
+      title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
+      description: `Obțineți o estimare a tarifului pentru taxi de la de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`,
+      url: `${process.env.SITE_URL}/directions/${params.rid}`,
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 400,
+        },
+      ],
+      siteName: "CatCostaTaxi",
+      locale: "ro-RO",
+      type: "website",
+    },
   }
 }
 
