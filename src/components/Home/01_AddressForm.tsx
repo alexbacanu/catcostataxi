@@ -201,8 +201,8 @@ export default function AddressForm() {
                     }
                   >
                     <div className="flex items-center">
-                      <div className="font-bold">{location.structured_formatting.main_text}</div>
-                      <div className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</div>
+                      <span className="font-bold">{location.structured_formatting.main_text}</span>
+                      <span className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</span>
                     </div>
                   </Combobox.Option>
                 ))
@@ -241,7 +241,7 @@ export default function AddressForm() {
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
               return data.description
             }}
-            className={`${toError ? "border border-red-500" : ""} input-base`}
+            className={`${toError ? "border border-red-500" : "border-0"} input-base`}
           />
 
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -266,7 +266,10 @@ export default function AddressForm() {
                       }`
                     }
                   >
-                    {location.description}
+                    <div className="flex items-center">
+                      <span className="font-bold">{location.structured_formatting.main_text}</span>
+                      <span className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</span>
+                    </div>
                   </Combobox.Option>
                 ))
               )}
