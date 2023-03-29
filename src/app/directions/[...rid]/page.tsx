@@ -15,13 +15,16 @@ type Props = {
 export async function generateStaticParams() {
   console.log(process.env.CUSTOM_ENV)
   console.log(process.env.CUSTOM_ENV !== "production")
-  if (process.env.CUSTOM_ENV !== "production") return []
 
-  const routes = await fetchAllRoutesIds()
+  if (process.env.CUSTOM_ENV !== "production") {
+    return []
+  } else {
+    const routes = await fetchAllRoutesIds()
 
-  return routes.map((route: string) => ({
-    rid: route,
-  }))
+    return routes.map((route: string) => ({
+      rid: route,
+    }))
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
