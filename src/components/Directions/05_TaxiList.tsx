@@ -15,7 +15,7 @@ export default function TaxiList({ initialCompanies }: Props) {
 
   return (
     <section className="layout-mx flex flex-col">
-      <div className="card-base flex w-full flex-col justify-between gap-y-2 py-4 px-6">
+      <div className="card-base flex w-full flex-col justify-between gap-y-2 px-6 py-4">
         {/* Title */}
         <div className="flex items-center">
           <IconList />

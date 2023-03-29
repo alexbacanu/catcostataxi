@@ -142,7 +142,7 @@ export default function AddressForm() {
   function fromInput() {
     return (
       <div className="relative">
-        <div className="pointer-events-none absolute top-2 left-2">
+        <div className="pointer-events-none absolute left-2 top-2">
           <span className="text-xs text-neutral-600">
             <IconMapPin />
           </span>
@@ -171,7 +171,7 @@ export default function AddressForm() {
             />
 
             <div
-              className="input-base flex w-10 items-center justify-center py-0 px-2 hover:cursor-pointer"
+              className="input-base flex w-10 items-center justify-center px-2 py-0 hover:cursor-pointer"
               onClick={switchAddress}
             >
               <IconSwitchVertical />
@@ -181,11 +181,11 @@ export default function AddressForm() {
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Niciun rezultat</div>
+                <div className="relative cursor-default select-none px-4 py-2">Niciun rezultat</div>
               ) : loading ? (
-                <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
+                <div className="relative cursor-default select-none px-4 py-2">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">
+                <div className="relative cursor-default select-none px-4 py-2">
                   Introduceți o locație (folosiți 4 sau mai multe caractere)
                 </div>
               ) : (
@@ -200,10 +200,12 @@ export default function AddressForm() {
                       }`
                     }
                   >
-                    <div className="flex items-center">
-                      <span className="font-bold">{location.structured_formatting.main_text}</span>
-                      <span className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</span>
-                    </div>
+                    <span className="font-bold">
+                      {location.structured_formatting.main_text}
+                      <span className="pl-1 text-sm font-light italic">
+                        {location.structured_formatting.secondary_text}
+                      </span>
+                    </span>
                   </Combobox.Option>
                 ))
               )}
@@ -217,7 +219,7 @@ export default function AddressForm() {
   function toInput() {
     return (
       <div className="relative">
-        <div className="pointer-events-none absolute top-2 left-2">
+        <div className="pointer-events-none absolute left-2 top-2">
           <span className="text-xs text-neutral-600">
             <IconMapPin />
           </span>
@@ -247,11 +249,11 @@ export default function AddressForm() {
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">Niciun rezultat</div>
+                <div className="relative cursor-default select-none px-4 py-2">Niciun rezultat</div>
               ) : loading ? (
-                <div className="relative cursor-default select-none py-2 px-4">Se încarcă...</div>
+                <div className="relative cursor-default select-none px-4 py-2">Se încarcă...</div>
               ) : value === "" ? (
-                <div className="relative cursor-default select-none py-2 px-4">
+                <div className="relative cursor-default select-none px-4 py-2">
                   Introduceți o locație (folosiți 4 sau mai multe caractere)
                 </div>
               ) : (
@@ -266,10 +268,12 @@ export default function AddressForm() {
                       }`
                     }
                   >
-                    <div className="flex items-center">
-                      <span className="font-bold">{location.structured_formatting.main_text}</span>
-                      <span className="pl-1 text-sm italic">{location.structured_formatting.secondary_text}</span>
-                    </div>
+                    <span className="font-bold">
+                      {location.structured_formatting.main_text}
+                      <span className="pl-1 text-sm font-light italic">
+                        {location.structured_formatting.secondary_text}
+                      </span>
+                    </span>
                   </Combobox.Option>
                 ))
               )}

@@ -125,8 +125,16 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
     return tripPrice
   }
 
-  function capitalize(location: string) {
-    return location.replace(/\b\w/g, (match) => match.toUpperCase())
+  function capitalize(location: string | string[]): string {
+    let locationString: string
+
+    if (Array.isArray(location)) {
+      locationString = location[0]
+    } else {
+      locationString = location
+    }
+
+    return locationString.replace(/\b\w/g, (match) => match.toUpperCase())
   }
 
   return (
@@ -305,8 +313,8 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
           {/* Disclaimer */}
           <p className="pt-2 text-xs italic">
             Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și alte
-            condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site sunt estimative și nu
-            sunt neapărat actualizate.
+            condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site au doar scop orientativ
+            și nu garantăm corectitudinea lor.
           </p>
         </div>
         <div className="flex min-w-[28%] flex-row gap-8 lg:flex-col">

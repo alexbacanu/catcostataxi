@@ -21,7 +21,7 @@ export default function AddTaxiPrompt() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1024 1024"
-          className="absolute top-1/2 left-1/2 -z-10 mt-10 ml-28 h-[64rem] w-[64rem] -translate-y-1/2 sm:left-full sm:-ml-60 md:left-1/2 md:ml-0 md:translate-y-0 md:-translate-x-1/2"
+          className="absolute left-1/2 top-1/2 -z-10 ml-28 mt-10 h-[64rem] w-[64rem] -translate-y-1/2 sm:left-full sm:-ml-60 md:left-1/2 md:ml-0 md:-translate-x-1/2 md:translate-y-0"
           aria-hidden="true"
         >
           <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.9" />

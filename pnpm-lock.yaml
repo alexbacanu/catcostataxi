@@ -66,9 +66,6 @@ devDependencies:
   '@hcaptcha/types':
     specifier: ^1.0.3
     version: 1.0.3
-  '@tailwindcss/line-clamp':
-    specifier: ^0.4.2
-    version: 0.4.2(tailwindcss@3.3.0)
   '@types/google.maps':
     specifier: ^3.52.4
     version: 3.52.4
@@ -519,14 +516,6 @@ packages:
   /@tabler/icons@2.12.0:
     resolution: {integrity: sha512-PiYD2zUOewNAtfJKU9tBZfyv3NeFlTlUe5LSGTTplvBcM0iuHrNVnd30+HIcUGJQhi3Uf0Ng9FRi/kPqm/q6ZA==}
     dev: false
-
-  /@tailwindcss/line-clamp@0.4.2(tailwindcss@3.3.0):
-    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
-    peerDependencies:
-      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
-    dependencies:
-      tailwindcss: 3.3.0(postcss@8.4.21)
-    dev: true
 
   /@types/google.maps@3.50.5:
     resolution: {integrity: sha512-RuZf1MJtctGlpW+Gd4a/eGtAufUDjMf+eyN1l+B3fbe2YLScJbg8KEljJfb+6vnSPFAeM1/48geVIEg3vqOkxw==}

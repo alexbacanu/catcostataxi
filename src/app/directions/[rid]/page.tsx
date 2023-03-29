@@ -57,7 +57,7 @@ export default async function DirectionsPage({ params }: Props) {
     initialCompanies = await fetchCompaniesByLoc(route.selectedTo.structured_formatting.secondary_text)
   }
 
-  const initialCity = initialCompanies.length !== 0 ? initialCompanies[0].city : ""
+  const initialCity = initialCompanies.length !== 0 ? initialCompanies[0]?.city : ""
 
   return (
     <>
