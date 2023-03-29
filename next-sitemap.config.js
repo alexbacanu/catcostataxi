@@ -4,3 +4,4 @@ module.exports = {
   generateRobotsTxt: true, // (optional)
   // ...other options
 }
+
