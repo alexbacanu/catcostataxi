@@ -85,7 +85,9 @@ export default function AddressForm() {
       }
 
       resetAddress()
-      router.push(`/directions/${data.hash}`)
+      router.push(
+        `/directions/${data.hash}/${selectedFrom.structured_formatting.main_text}/${selectedTo.structured_formatting.main_text}`
+      )
       setIsLoading(false)
     } catch (error) {
       toast.error("A apărut o eroare, vă rugăm încercați mai târziu.")
@@ -107,7 +109,7 @@ export default function AddressForm() {
         onReady={initRef.current}
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 shadow-md transition">
-        <form className="layout-mx mb-6 justify-center md:gap-x-12 lg:gap-x-24" onSubmit={onSubmit}>
+        <form className="layout-mx mb-6 justify-center pt-0 md:gap-x-12 lg:gap-x-24" onSubmit={onSubmit}>
           <div className="mx-auto space-y-6 md:mx-0">
             <h1>Estimează costul unei curse de taxi</h1>
 

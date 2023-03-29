@@ -139,7 +139,7 @@ export default function TaxiPrices({ initialCompanies, initialCity, availableCit
 
   return (
     <section className="layout-mx">
-      <div className="flex w-full flex-col justify-between gap-8 lg:flex-row">
+      <div className="flex w-full flex-col justify-between gap-x-8 gap-y-12 lg:flex-row">
         <div className="card-base grow">
           {/* Top */}
           <div className="flex flex-col justify-between gap-x-4 sm:flex-row">

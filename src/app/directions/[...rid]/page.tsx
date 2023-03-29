@@ -8,11 +8,13 @@ import Image from "next/image"
 
 type Props = {
   params: {
-    rid: string
+    rid: string[]
   }
 }
 
 export async function generateStaticParams() {
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "production") return []
+
   const routes = await fetchAllRoutesIds()
 
   return routes.map((route: string) => ({
@@ -21,17 +23,24 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const route = await fetchSingleRoute(params.rid)
-  const imageUrl = `${process.env.SITE_URL}/api/og?from=${route?.selectedFrom.structured_formatting.main_text}&to=${route?.selectedTo.structured_formatting.main_text}`
+  const hash = params.rid[0]
+  const route = await fetchSingleRoute(hash)
+
+  const routeFrom = route?.selectedFrom.structured_formatting.main_text
+  const routeTo = route?.selectedTo.structured_formatting.main_text
+
+  const title = `Cât costă taxi de la ${routeFrom} până la ${routeTo}`
+  const description = `Obțineți o estimare a tarifului pentru taxi de la de la ${routeFrom} până la ${routeTo}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`
+  const imageUrl = `${process.env.SITE_URL}/api/og?from=${routeFrom}&to=${routeTo}`
 
   return {
-    title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
-    description: `Obțineți o estimare a tarifului pentru taxi de la de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`,
-    keywords: `tarif taxi, estimat taxi, de la ${route?.selectedFrom.structured_formatting.main_text}, pana la ${route?.selectedTo.structured_formatting.main_text}`,
+    title,
+    description,
+    keywords: ["tarif taxi", "estimat taxi", `de la ${routeFrom}`, `pana la ${routeTo}`],
     openGraph: {
-      title: `Cât costă taxi de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}`,
-      description: `Obțineți o estimare a tarifului pentru taxi de la de la ${route?.selectedFrom.structured_formatting.main_text} până la ${route?.selectedTo.structured_formatting.main_text}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`,
-      url: `${process.env.SITE_URL}/directions/${params.rid}`,
+      title,
+      description,
+      url: `${process.env.SITE_URL}/directions/${hash}/${routeFrom}/${routeTo}}`,
       images: [
         {
           url: imageUrl,
@@ -43,11 +52,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: "ro-RO",
       type: "website",
     },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
   }
 }
 
 export default async function DirectionsPage({ params }: Props) {
-  const route = await fetchSingleRoute(params.rid)
+  if (params.rid[0].length !== 8 && typeof params.rid[0] !== "string") return <NoRouteFound />
+
+  const route = await fetchSingleRoute(params.rid[0])
   if (!route) return <NoRouteFound />
 
   const availableCities = await fetchAvailableLocations()
