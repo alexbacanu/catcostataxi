@@ -74,12 +74,14 @@ export const fetchAllRoutesIds = cache(async () => {
   const db = client.db(process.env.MONGO_DB ?? "")
   const routes = db.collection("routes")
 
-  const allRoutes = await routes.find({}).sort("createdAt", -1).project<Route>({ _id: 0, hash: 1 }).toArray()
+  const allRoutes = await routes
+    .find({})
+    .sort("createdAt", -1)
+    .project<Route>({ _id: 0, hash: 1, selectedFrom: 1, selectedTo: 1 })
+    .toArray()
   if (allRoutes.length == 0) console.warn("😱 Warning: No routes found")
 
-  const allRoutesIds = allRoutes.map((object) => object.hash)
-
-  return allRoutesIds
+  return allRoutes
 })
 
 export const fetchSingleRoute = cache(async (hash: string) => {
