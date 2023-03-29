@@ -1,5 +1,23 @@
 export const popularTrainStations = [
   {
+    city: "Alba Iulia",
+    destination: "Alba Iulia",
+    routeData: {
+      description: "Gara CFR, Alba Iulia",
+      matched_substrings: [],
+      place_id: "ChIJRQuP9iWnTkcR1x5yn2NW2qg",
+      reference: "ChIJRQuP9iWnTkcR1x5yn2NW2qg",
+      structured_formatting: {
+        main_text: "Gara CFR",
+        main_text_matched_substrings: [],
+        secondary_text: "Alba Iulia",
+        secondary_text_matched_substrings: [],
+      },
+      terms: [],
+      types: ["point_of_interest", "establishment"],
+    },
+  },
+  {
     city: "Arad",
     destination: "Arad",
     routeData: {
@@ -206,6 +224,23 @@ export const popularTrainStations = [
     },
   },
   {
+    city: "Hunedoara",
+    destination: "Hunedoara",
+    routeData: {
+      description: "Gara CFR Hunedoara, Piața Gării, Hunedoara",
+      matched_substrings: [],
+      place_id: "ChIJD5uZMfGKTkcRKWXyQ3ScQrY",
+      reference: "ChIJD5uZMfGKTkcRKWXyQ3ScQrY",
+      structured_formatting: {
+        main_text: "Gara CFR Hunedoara",
+        main_text_matched_substrings: [],
+        secondary_text: "Piața Gării, Hunedoara",
+      },
+      terms: [],
+      types: ["train_station", "transit_station", "point_of_interest", "establishment"],
+    },
+  },
+  {
     city: "Iași",
     destination: "Iași",
     routeData: {
@@ -371,6 +406,23 @@ export const popularTrainStations = [
         main_text: "Gara Suceava",
         main_text_matched_substrings: [],
         secondary_text: "Strada Nicolae Iorga, Suceava, Romania",
+      },
+      terms: [],
+      types: ["train_station", "transit_station", "point_of_interest", "establishment"],
+    },
+  },
+  {
+    city: "Târgoviște",
+    destination: "Târgoviște",
+    routeData: {
+      description: "Gară Târgoviște, Târgoviște",
+      matched_substrings: [],
+      place_id: "ChIJ2xLGOCT0skAR85Rx7ti4k94",
+      reference: "ChIJ2xLGOCT0skAR85Rx7ti4k94",
+      structured_formatting: {
+        main_text: "Gară Târgoviște",
+        main_text_matched_substrings: [],
+        secondary_text: "Târgoviște",
       },
       terms: [],
       types: ["train_station", "transit_station", "point_of_interest", "establishment"],

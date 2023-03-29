@@ -75,7 +75,7 @@ export default function ContactForm() {
 
   return (
     <form className="w-full space-y-6" onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         <div>
           <div className="flex items-center gap-x-4">
             <label

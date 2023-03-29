@@ -5,10 +5,8 @@ import { cache } from "react"
 export type Route = {
   _id?: Condition<ObjectId>
   hash: string
-  fromAddress: string
-  fromLoc: string
-  toAddress: string
-  toLoc: string
+  selectedFrom: google.maps.places.AutocompletePrediction
+  selectedTo: google.maps.places.AutocompletePrediction
   createdAt?: Date
 }
 
@@ -40,6 +38,19 @@ export const fetchCompaniesByLoc = cache(async (city: string) => {
   if (allCompanies.length == 0) console.warn(`😱 Warning: No taxi companies found in this city: ${city}`)
 
   return allCompanies
+})
+
+export const fetchAvailableLocations = cache(async () => {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGO_DB ?? "")
+  const companies = db.collection("companies")
+
+  const allLocations = await companies.find({}).project<Company>({ _id: 0, city: 1 }).toArray()
+  if (allLocations.length == 0) console.warn(`😱 Warning: No locations found`)
+
+  const uniqueLocations = allLocations.map((loc) => loc.city)
+
+  return uniqueLocations
 })
 
 export const fetchRecentRoutes = cache(async () => {
@@ -85,12 +96,8 @@ export const fetchSingleRoute = cache(async (hash: string) => {
 export const submitRoute = cache(
   async (
     hash: string,
-    tripData: {
-      fromAddress: string
-      fromLoc?: string
-      toAddress: string
-      toLoc?: string
-    }
+    selectedFrom: google.maps.places.AutocompletePrediction,
+    selectedTo: google.maps.places.AutocompletePrediction
   ) => {
     const client = await clientPromise
     const db = client.db(process.env.MONGO_DB ?? "")
@@ -99,7 +106,7 @@ export const submitRoute = cache(
     const requestedRoute = await routes.findOne<Route>({ hash }, { projection: { _id: 0, createdAt: 0 } })
 
     if (!requestedRoute) {
-      await routes.insertOne({ hash, ...tripData, createdAt: new Date() })
+      await routes.insertOne({ hash, selectedFrom, selectedTo, createdAt: new Date() })
     }
 
     return requestedRoute

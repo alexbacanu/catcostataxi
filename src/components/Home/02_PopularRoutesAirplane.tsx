@@ -5,6 +5,14 @@ import useAddressStore from "@/stores/addressStore"
 import Image from "next/image"
 
 export default function PopularRoutesAirplane() {
+  const addressFrom = useAddressStore((state) => state.addressFrom)
+
+  function handleClick(routeData: (typeof popularAirports)[number]["routeData"]) {
+    addressFrom.description === ""
+      ? useAddressStore.setState({ addressFrom: routeData })
+      : useAddressStore.setState({ addressTo: routeData })
+  }
+
   return (
     <section className="layout-mx gap-x-12">
       <Image
@@ -13,7 +21,6 @@ export default function PopularRoutesAirplane() {
         className="hidden lg:flex"
         width={495 * 0.5}
         height={488 * 0.5}
-        priority
       />
 
       <div className="card-base flex">
@@ -24,7 +31,7 @@ export default function PopularRoutesAirplane() {
               <button
                 key={obj.city}
                 className="button-neutral m-1.5 cursor-pointer rounded-lg p-2 text-sm font-medium"
-                onClick={() => useAddressStore.setState({ addressFrom: obj.routeData })}
+                onClick={() => handleClick(obj.routeData)}
               >
                 {obj.destination}
               </button>

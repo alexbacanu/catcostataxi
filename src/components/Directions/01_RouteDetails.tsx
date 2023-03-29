@@ -10,14 +10,14 @@ export default function RouteDetails({ route }: Props) {
       <div className="layout-mx mb-6 flex-col items-start gap-x-6 md:flex-row">
         <div className="space-y-2 text-lg">
           <h1>de la</h1>
-          <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
-            {route.fromAddress}
+          <div className="line-clamp-2 border border-dashed border-neutral-800/80 px-2 py-1 shadow-md">
+            {route.selectedFrom.structured_formatting.main_text}
           </div>
         </div>
         <div className="space-y-2 text-lg">
           <h1>până la</h1>
-          <div className="border border-dashed border-neutral-800/80 px-2 py-1 shadow-md line-clamp-2">
-            {route.toAddress}
+          <div className="line-clamp-2 border border-dashed border-neutral-800/80 px-2 py-1 shadow-md">
+            {route.selectedTo.structured_formatting.main_text}
           </div>
         </div>
       </div>

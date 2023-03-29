@@ -5,8 +5,11 @@ import Link from "next/link"
 import "./globals.css"
 
 export const metadata = {
-  title: "Cat Costa Taxi",
-  description: "Aplicatie pentru verificarea pretului unui taxi",
+  title: "Cat Costa Taxi - Estimator de tarife taxi",
+  description:
+    "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
+  keywords:
+    "cat costa taxi, estimare tarif taxi, cat costa uber, cat costa bolt, estimare cost uber, estimare cost bolt, tarif taxi online, tarif uber online, tarif bolt online",
 }
 
 const inter = Inter({ subsets: ["latin"] })
@@ -35,7 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               className="h-16 w-auto"
               width={211 * 0.6}
               height={110 * 0.6}
-              priority
             />
           </Link>
           {/*

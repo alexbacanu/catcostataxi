@@ -33,9 +33,9 @@ export default function RouteMap({ route }: Props) {
   }
 
   useEffect(() => {
-    if (!route.fromAddress || !route.toAddress) return
-    ready && calculateRoute(route.fromAddress, route.toAddress)
-  }, [route.fromAddress, route.toAddress, ready])
+    if (!route.selectedFrom.description || !route.selectedTo.description) return
+    ready && calculateRoute(route.selectedFrom.description, route.selectedTo.description)
+  }, [route.selectedFrom.description, route.selectedTo.description, ready])
 
   const initRef = useRef(init)
 
