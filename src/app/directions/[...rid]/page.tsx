@@ -13,6 +13,8 @@ type Props = {
 }
 
 export async function generateStaticParams() {
+  console.log(process.env.CUSTOM_ENV)
+  console.log(process.env.CUSTOM_ENV !== "production")
   if (process.env.CUSTOM_ENV !== "production") return []
 
   const routes = await fetchAllRoutesIds()
