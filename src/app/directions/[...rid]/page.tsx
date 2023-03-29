@@ -13,10 +13,7 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-  console.log(process.env.NEXT_PUBLIC_VERCEL_ENV)
-  console.log(process.env.VERCEL_ENV)
-  console.log(process.env.CUSTOM_ENV)
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "production") return []
+  if (process.env.CUSTOM_ENV !== "production") return []
 
   const routes = await fetchAllRoutesIds()
 
