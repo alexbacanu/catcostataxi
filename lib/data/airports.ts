@@ -55,7 +55,8 @@ export const popularAirports = [
     city: "București",
     destination: "Henri Coandă București (OTP)",
     routeData: {
-      description: "Aeroportul Internațional Henri Coandă (OTP), Calea Bucureştilor, Otopeni, Romania",
+      description:
+        "Aeroportul Internațional Henri Coandă (OTP), Calea Bucureştilor, Otopeni, Romania",
       matched_substrings: [],
       place_id: "ChIJd49YtoEcskARfodtna1dThE",
       reference: "ChIJd49YtoEcskARfodtna1dThE",
@@ -72,7 +73,8 @@ export const popularAirports = [
     city: "Cluj-Napoca",
     destination: "Avram Iancu Cluj (CLJ)",
     routeData: {
-      description: "Aeroportul Internațional Avram Iancu Cluj-Napoca (CLJ), Strada Traian Vuia, Cluj-Napoca, Romania",
+      description:
+        "Aeroportul Internațional Avram Iancu Cluj-Napoca (CLJ), Strada Traian Vuia, Cluj-Napoca, Romania",
       matched_substrings: [],
       place_id: "ChIJJXml-WQLSUcRLtn-GiTYiyQ",
       reference: "ChIJJXml-WQLSUcRLtn-GiTYiyQ",
@@ -123,7 +125,8 @@ export const popularAirports = [
     city: "Iași",
     destination: "Iași (IAS)",
     routeData: {
-      description: "Aeroportul Internațional Iași, Iași Airport Heliport, Drumul Aeroportului, Iași, Romania",
+      description:
+        "Aeroportul Internațional Iași, Iași Airport Heliport, Drumul Aeroportului, Iași, Romania",
       matched_substrings: [],
       place_id: "ChIJ-WOHOGT8ykARFqPgceQbDuk",
       reference: "ChIJ-WOHOGT8ykARFqPgceQbDuk",

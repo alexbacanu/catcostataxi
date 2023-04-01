@@ -1,16 +1,13 @@
 "use client"
 
 import Image from "next/image"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import useAddressStore from "@/lib/stores/address-store"
 import type { popularAirports } from "@/lib/data/airports"
 import type { popularStations } from "@/lib/data/stations"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   type: "airports" | "stations"
   data: typeof popularAirports | typeof popularStations
 }
@@ -38,7 +35,11 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
 
       <div className="card-base flex">
         <div className="flex flex-col items-center">
-          <h2 className="pb-4">Selectează rapid un aeroport</h2>
+          <h2 className="pb-4">
+            {type === "airports"
+              ? dictionary.home.popular_routes.title_airport
+              : dictionary.home.popular_routes.title_station}
+          </h2>
           <div className="flex flex-wrap justify-center">
             {data.map((obj) => (
               <button

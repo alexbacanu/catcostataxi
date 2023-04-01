@@ -8,18 +8,16 @@ import { useState, useRef } from "react"
 import { useForm } from "react-hook-form"
 import toast, { Toaster } from "react-hot-toast"
 import { z } from "zod"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import LoadingAnimation from "@/ui/loading-animation"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   lang: string
 }
 
 export default function ContactForm({ dictionary, lang }: Props) {
+  console.log(dictionary)
   // Zod
   const zodSchema = z.object({
     firstName: z.string().min(1, { message: "Câmp obligatoriu" }),
@@ -93,10 +91,18 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               Prenume
             </label>
-            {errors.firstName && <p className="text-xs italic text-red-500">{errors.firstName.message}</p>}
+            {errors.firstName && (
+              <p className="text-xs italic text-red-500">{errors.firstName.message}</p>
+            )}
           </div>
           <div className="mt-1">
-            <input type="text" id="name" autoComplete="name" className="input-base pl-2" {...register("firstName")} />
+            <input
+              type="text"
+              id="name"
+              autoComplete="name"
+              className="input-base pl-2"
+              {...register("firstName")}
+            />
           </div>
         </div>
         <div>
@@ -107,10 +113,18 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               Nume
             </label>
-            {errors.lastName && <p className="text-xs italic text-red-500">{errors.lastName.message}</p>}
+            {errors.lastName && (
+              <p className="text-xs italic text-red-500">{errors.lastName.message}</p>
+            )}
           </div>
           <div className="mt-1">
-            <input type="text" id="name" autoComplete="name" className="input-base pl-2" {...register("lastName")} />
+            <input
+              type="text"
+              id="name"
+              autoComplete="name"
+              className="input-base pl-2"
+              {...register("lastName")}
+            />
           </div>
         </div>
         <div className="sm:col-span-2">
@@ -124,7 +138,13 @@ export default function ContactForm({ dictionary, lang }: Props) {
             {errors.email && <p className="text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
           <div className="mt-1">
-            <input type="email" id="email" autoComplete="email" className="input-base pl-2" {...register("email")} />
+            <input
+              type="email"
+              id="email"
+              autoComplete="email"
+              className="input-base pl-2"
+              {...register("email")}
+            />
           </div>
         </div>
         <div className="sm:col-span-2">
@@ -135,7 +155,9 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               Mesaj
             </label>
-            {errors.message && <p className="text-xs italic text-red-500">{errors.message.message}</p>}
+            {errors.message && (
+              <p className="text-xs italic text-red-500">{errors.message.message}</p>
+            )}
           </div>
           <div className="mt-1">
             <textarea
@@ -163,7 +185,9 @@ export default function ContactForm({ dictionary, lang }: Props) {
                   Termeni și condiții
                 </Link>
               </span>
-              {errors.terms && <span className="text-xs italic text-red-500">{errors.terms.message}</span>}
+              {errors.terms && (
+                <span className="text-xs italic text-red-500">{errors.terms.message}</span>
+              )}
             </div>
           </div>
           <div className="flex flex-col">
@@ -176,7 +200,9 @@ export default function ContactForm({ dictionary, lang }: Props) {
               ref={captchaRef}
               theme="light"
             />
-            {errors.hcaptcha && <p className="text-xs italic text-red-500">{errors.hcaptcha.message}</p>}
+            {errors.hcaptcha && (
+              <p className="text-xs italic text-red-500">{errors.hcaptcha.message}</p>
+            )}
           </div>
         </div>
       </div>

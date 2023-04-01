@@ -1,5 +1,90 @@
 {
+  "directions": {
+    "errors": {
+      "not_found": "Ne pare rău, nu am găsit nicio rută",
+      "not_valid": "Ne pare rău, ruta nu este validă"
+    },
+    "meta": {
+      "description": "Obțineți o estimare a tarifului pentru taxi de la {routeFrom} până la {routeTo}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.",
+      "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
+      "keywords": [
+        "cost taxi",
+        "tarif taxi",
+        "estimat taxi",
+        "de la {routeFrom}",
+        "pana la {routeTo}"
+      ],
+      "title": "Cât costă taxi de la {routeFrom} până la {routeTo}",
+      "url": "{siteUrl}/directions/{hash}/{params.rid[1]}/{params.rid[2]}"
+    },
+    "route_details": {
+      "from": "de la",
+      "to": "până la"
+    },
+    "route_map": {
+      "loading": "Se încarcă harta..."
+    },
+    "taxi_prices": {
+      "change_price": "Schimbă prețul",
+      "disclaimer": "Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și alte condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site au doar scop orientativ și nu garantăm corectitudinea lor.",
+      "distance": "Distanță",
+      "duration": "Durată",
+      "loading": "Se încarcă...",
+      "modify": "Modifică",
+      "not_enough_info": "Ne pare rău, nu avem destule informații pentru această zonă",
+      "ride": "Cursă",
+      "save": "Salvează",
+      "select_city": "Alegeți un oraș",
+      "toast_error": "A apărut o eroare, vă rugăm încercați mai târziu",
+      "tooltip_change_price": "Schimbă între tariful de zi și noapte",
+      "tooltip_modify": "Introdu manual tariful per km, în lei",
+      "tooltip_select_city": "Selectează o localitate pentru a folosi tariful per km corespondent"
+    },
+    "taxi_table": {
+      "no_taxi_found": "Niciun taxi găsit în această zonă",
+      "taxi_list": "Listă taxiuri"
+    }
+  },
   "home": {
-    "address_form": "Estimează costul unei curse de taxi"
+    "address_form": {
+      "from": "De la",
+      "from_error": "Câmpul 'De la' este obligatoriu",
+      "loading": "Se încarcă...",
+      "no_chars": "Introduceți o locație (folosiți 4 sau mai multe caractere)",
+      "no_results": "Niciun rezultat",
+      "title": "Estimează costul unei curse de taxi",
+      "button": "Calculează estimat",
+      "to": "Până la",
+      "to_error": "Câmpul 'Până la' este obligatoriu",
+      "toast_error": "A apărut o eroare, vă rugăm încercați mai târziu"
+    },
+    "popular_routes": {
+      "title_airport": "Selectează rapid un aeroport",
+      "title_station": "Selectează rapid o gară"
+    },
+    "taxi_add": {
+      "button": "Disponibil în curând",
+      "description": "Primește reclamă gratuită pentru firma ta",
+      "title": "Adaugă compania ta de taxi"
+    }
+  },
+  "og": {
+    "title": "Verifică tariful unei curse de taxi!"
+  },
+  "root": {
+    "footer": {
+      "about": "Despre noi",
+      "contact": "Contact",
+      "privacy": "Politica de confidențialitate",
+      "terms": "Termeni și condiții"
+    },
+    "header": {
+      "transfer": "Transfer Aeroport"
+    },
+    "meta": {
+      "description": "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
+      "keywords": ["cat costa taxi", "estimare tarif taxi", "tarif taxi online"],
+      "title_default": "Estimează costul unei curse de taxi"
+    }
   }
 }

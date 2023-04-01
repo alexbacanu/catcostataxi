@@ -17,7 +17,6 @@ export default function LoadingAnimation() {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Se încarcă...</span>
     </div>
   )
 }

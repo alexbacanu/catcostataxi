@@ -4,15 +4,12 @@ import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api"
 import Script from "next/script"
 import { useState, useEffect, useRef } from "react"
 import usePlacesAutocomplete from "use-places-autocomplete"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import useRoutesStore from "@/lib/stores/route-store"
 import type { Route } from "@/lib/helpers/mongo"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   route: Route
 }
 
@@ -77,7 +74,9 @@ export default function RouteMap({ dictionary, route }: Props) {
             {mapDirections && <DirectionsRenderer directions={mapDirections} />}
           </GoogleMap>
         ) : (
-          <div className="card-base flex h-[50vh] w-full items-center justify-center">Se încarcă harta...</div>
+          <div className="card-base flex h-[50vh] w-full items-center justify-center">
+            {dictionary.directions.route_map.loading}
+          </div>
         )}
       </section>
     </>

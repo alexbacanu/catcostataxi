@@ -10,15 +10,12 @@ import { Toaster, toast } from "react-hot-toast"
 import usePlacesAutocomplete from "use-places-autocomplete"
 import hashPair from "@/lib/helpers/hasher"
 import { normalizeString } from "@/lib/helpers/normalize-string"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import useAddressStore from "@/lib/stores/address-store"
 import LoadingAnimation from "@/ui/loading-animation"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   lang: string
 }
 
@@ -58,14 +55,14 @@ export default function AddressForm({ dictionary, lang }: Props) {
     event.preventDefault()
 
     if (!selectedFrom.description) {
-      setFromError("Câmpul 'De la' este obligatoriu")
+      setFromError(dictionary.home.address_form.from_error)
       return
     } else {
       setFromError("")
     }
 
     if (!selectedTo.description) {
-      setToError("Câmpul 'Până la' este obligatoriu")
+      setToError(dictionary.home.address_form.to_error)
       return
     } else {
       setToError("")
@@ -102,7 +99,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
       )
       setIsLoading(false)
     } catch (error) {
-      toast.error("A apărut o eroare, vă rugăm încercați mai târziu.")
+      toast.error(dictionary.home.address_form.toast_error)
       console.error("Error:", error)
     }
   }
@@ -121,9 +118,12 @@ export default function AddressForm({ dictionary, lang }: Props) {
         onReady={initRef.current}
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 shadow-md transition">
-        <form className="layout-mx mb-6 justify-center pt-0 md:gap-x-12 lg:gap-x-24" onSubmit={onSubmit}>
+        <form
+          className="layout-mx mb-6 justify-center pt-0 md:gap-x-12 lg:gap-x-24"
+          onSubmit={onSubmit}
+        >
           <div className="mx-auto space-y-6 md:mx-0">
-            <h1>{dictionary.home.address_form}</h1>
+            <h1>{dictionary.home.address_form.title}</h1>
 
             {fromInput()}
             {toInput()}
@@ -134,7 +134,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
                 className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                {isLoading ? <LoadingAnimation /> : "Calculează estimat"}
+                {isLoading ? <LoadingAnimation /> : dictionary.home.address_form.button}
               </button>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
         >
           <div className="flex gap-x-4">
             <Combobox.Input
-              placeholder="De la"
+              placeholder={dictionary.home.address_form.from}
               onChange={(event) => {
                 const inputValue = event.target.value
                 if (inputValue.length >= 4) {
@@ -192,15 +192,24 @@ export default function AddressForm({ dictionary, lang }: Props) {
             </div>
           </div>
 
-          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none px-4 py-2">Niciun rezultat</div>
+                <div className="relative cursor-default select-none px-4 py-2">
+                  {dictionary.home.address_form.no_results}
+                </div>
               ) : loading ? (
-                <div className="relative cursor-default select-none px-4 py-2">Se încarcă...</div>
+                <div className="relative cursor-default select-none px-4 py-2">
+                  {dictionary.home.address_form.loading}
+                </div>
               ) : value === "" ? (
                 <div className="relative cursor-default select-none px-4 py-2">
-                  Introduceți o locație (folosiți 4 sau mai multe caractere)
+                  {dictionary.home.address_form.no_chars}
                 </div>
               ) : (
                 status === "OK" &&
@@ -247,7 +256,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
           disabled={!ready}
         >
           <Combobox.Input
-            placeholder="Până la"
+            placeholder={dictionary.home.address_form.to}
             onChange={(event) => {
               const inputValue = event.target.value
               if (inputValue.length >= 4) {
@@ -260,15 +269,24 @@ export default function AddressForm({ dictionary, lang }: Props) {
             className={`${toError ? "border border-red-500" : "border-0"} input-base`}
           />
 
-          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
-                <div className="relative cursor-default select-none px-4 py-2">Niciun rezultat</div>
+                <div className="relative cursor-default select-none px-4 py-2">
+                  {dictionary.home.address_form.no_results}
+                </div>
               ) : loading ? (
-                <div className="relative cursor-default select-none px-4 py-2">Se încarcă...</div>
+                <div className="relative cursor-default select-none px-4 py-2">
+                  {dictionary.home.address_form.loading}
+                </div>
               ) : value === "" ? (
                 <div className="relative cursor-default select-none px-4 py-2">
-                  Introduceți o locație (folosiți 4 sau mai multe caractere)
+                  {dictionary.home.address_form.no_chars}
                 </div>
               ) : (
                 status === "OK" &&
