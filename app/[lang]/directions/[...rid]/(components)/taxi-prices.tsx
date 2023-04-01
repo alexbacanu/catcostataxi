@@ -13,22 +13,24 @@ import {
 import Image from "next/image"
 import { useState, Fragment } from "react"
 import toast from "react-hot-toast"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import useLocationStore from "@/lib/stores/location-store"
 import useRoutesStore from "@/lib/stores/route-store"
 import type { Company } from "@/lib/helpers/mongo"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   initialCompanies?: Company[]
   initialCity?: string
   availableCities?: string[]
 }
 
-export default function TaxiPrices({ dictionary, initialCompanies, initialCity, availableCities }: Props) {
+export default function TaxiPrices({
+  dictionary,
+  initialCompanies,
+  initialCity,
+  availableCities,
+}: Props) {
   const [nightToggle, setNightToggle] = useState(false)
   const [modifyToggle, setModifyToggle] = useState(false)
 
@@ -42,12 +44,20 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
 
   const mapRoutes = useRoutesStore((state) => state.mapDirections.routes)
   if (!mapRoutes[0]) {
-    return <section className="layout-mx flex flex-col">Se incarca...</section>
+    return (
+      <section className="layout-mx flex flex-col">
+        {dictionary.directions.taxi_prices.loading}
+      </section>
+    )
   }
 
   const { distance, duration, duration_in_traffic } = mapRoutes[0]?.legs[0] || {}
   if (!distance || !duration || !duration_in_traffic) {
-    return <section className="layout-mx flex flex-col">Se incarca...</section>
+    return (
+      <section className="layout-mx flex flex-col">
+        {dictionary.directions.taxi_prices.loading}
+      </section>
+    )
   }
 
   function handleChange(priceType: keyof typeof priceData) {
@@ -93,8 +103,10 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
       return {
         dayPrice: Math.round((prev.dayPrice + curr.dayPrice / companies.length) * 100) / 100,
         nightPrice: Math.round((prev.nightPrice + curr.nightPrice / companies.length) * 100) / 100,
-        dayPricePlus: Math.round((prev.dayPricePlus + curr.dayPricePlus / companies.length) * 100) / 100,
-        nightPricePlus: Math.round((prev.nightPricePlus + curr.nightPricePlus / companies.length) * 100) / 100,
+        dayPricePlus:
+          Math.round((prev.dayPricePlus + curr.dayPricePlus / companies.length) * 100) / 100,
+        nightPricePlus:
+          Math.round((prev.nightPricePlus + curr.nightPricePlus / companies.length) * 100) / 100,
       }
     }, initialValue)
   }
@@ -119,7 +131,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
       useLocationStore.setState({ companies })
       setPriceData(calculatePriceData(companies))
     } catch (error) {
-      toast.error("A apărut o eroare, vă rugăm încercați mai târziu.")
+      toast.error(dictionary.directions.taxi_prices.toast_error)
       console.error("Error:", error)
     }
   }
@@ -128,8 +140,10 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
     if (!distance || !duration || !duration_in_traffic) return 0
 
     const basePrice = priceData[priceType]
-    const extraTime = duration_in_traffic.value < duration.value ? 0 : duration_in_traffic.value - duration.value
-    const tripPrice = basePrice + basePrice * (distance.value / 1000) + (extraTime / 3600) * basePrice * 10
+    const extraTime =
+      duration_in_traffic.value < duration.value ? 0 : duration_in_traffic.value - duration.value
+    const tripPrice =
+      basePrice + basePrice * (distance.value / 1000) + (extraTime / 3600) * basePrice * 10
 
     return tripPrice
   }
@@ -157,7 +171,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
               {/* Title */}
               <div className="flex items-center">
                 <IconCurrencyDollar />
-                <span className="pl-2">Cursă</span>
+                <span className="pl-2">{dictionary.directions.taxi_prices.ride}</span>
               </div>
 
               {/* Select city */}
@@ -166,7 +180,9 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                   <div className="relative z-30 grow items-center">
                     <Listbox.Button className="peer relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
                       <span className="block truncate text-neutral-800">
-                        {selectedCity ? capitalize(selectedCity) : "Alegeți un oraș"}
+                        {selectedCity
+                          ? capitalize(selectedCity)
+                          : dictionary.directions.taxi_prices.select_city}
                       </span>
                       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                         <IconSelector className="h-5 w-5 text-neutral-500" aria-hidden="true" />
@@ -177,7 +193,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                       className="invisible absolute top-full z-40 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
                     >
                       <div className="cursor-default select-none p-1 text-neutral-800">
-                        Selectează o localitate pentru a folosi tariful per km corespondent
+                        {dictionary.directions.taxi_prices.tooltip_select_city}
                       </div>
                     </div>
                     <Transition
@@ -199,7 +215,11 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                           >
                             {({ selected }) => (
                               <>
-                                <span className={`block truncate ${selected ? "font-bold" : "font-normal"}`}>
+                                <span
+                                  className={`block truncate ${
+                                    selected ? "font-bold" : "font-normal"
+                                  }`}
+                                >
                                   {capitalize(loc)}
                                 </span>
                               </>
@@ -224,14 +244,16 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                   onClick={() => setModifyToggle(!modifyToggle)}
                   className="peer rounded-md bg-black/10 px-2 py-1 text-xs ring-1 ring-neutral-800/20 hover:bg-black/5 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                 >
-                  {modifyToggle ? "Salvează" : "Modifică"}
+                  {modifyToggle
+                    ? dictionary.directions.taxi_prices.save
+                    : dictionary.directions.taxi_prices.modify}
                 </button>
                 <div
                   role="tooltip"
                   className="invisible absolute -inset-x-full top-full z-10 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
                 >
                   <div className="cursor-default select-none p-1 text-neutral-800">
-                    Introdu manual tariful per km, în lei
+                    {dictionary.directions.taxi_prices.tooltip_modify}
                   </div>
                 </div>
               </div>
@@ -251,7 +273,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                       : "bg-black/10 hover:bg-black/5 dark:bg-white/10 dark:hover:bg-white/5"
                   } peer relative mx-1 inline-flex h-6 w-11 items-center rounded-full ring-1 ring-neutral-800/20 dark:ring-neutral-200/20`}
                 >
-                  <span className="sr-only">Schimbă prețul</span>
+                  <span className="sr-only">{dictionary.directions.taxi_prices.change_price}</span>
                   <span
                     className={`${
                       nightToggle ? "translate-x-6" : "translate-x-1"
@@ -264,7 +286,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                   className="invisible absolute -inset-x-full top-full z-10 my-2 overflow-auto rounded-md bg-white/80 p-1 text-sm opacity-0 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition-all focus:outline-none peer-hover:visible peer-hover:opacity-100"
                 >
                   <div className="cursor-default select-none p-1 text-neutral-800">
-                    Schimbă între tariful de zi și noapte
+                    {dictionary.directions.taxi_prices.tooltip_change_price}
                   </div>
                 </div>
               </div>
@@ -276,7 +298,12 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
             {/* Image */}
             <div className="shrink-0">
               <div className="relative">
-                <Image src="/taxi-yellow.png" alt="Standard taxi" width={569 * 0.2} height={361 * 0.2} />
+                <Image
+                  src="/taxi-yellow.png"
+                  alt="Standard taxi"
+                  width={569 * 0.2}
+                  height={361 * 0.2}
+                />
                 <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Taxi
                 </div>
@@ -285,7 +312,7 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
 
             {fetchedCompanies?.length === 0 ? (
               <div className="flex items-center gap-x-2 py-1 italic">
-                Ne pare rău, nu avem destule informații pentru această zonă
+                {dictionary.directions.taxi_prices.not_enough_info}
               </div>
             ) : (
               <div className="grid grid-cols-2 items-center gap-2">
@@ -304,7 +331,9 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
                       className="w-full rounded-lg bg-black/5 px-2 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                     />
                   ) : (
-                    <div className="px-2">{nightToggle ? priceData.nightPrice : priceData.dayPrice}</div>
+                    <div className="px-2">
+                      {nightToggle ? priceData.nightPrice : priceData.dayPrice}
+                    </div>
                   )}
                 </div>
                 <div className="whitespace-nowrap">Total (lei):</div>
@@ -320,18 +349,14 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
           </div>
 
           {/* Disclaimer */}
-          <p className="pt-2 text-xs italic">
-            Rețineți că acestea sunt doar tarife estimative. Tarifele reale variază în funcție de trafic, vreme și alte
-            condiții neprevazute. Taxele nu sunt afișate. Informațiile furnizate pe acest site au doar scop orientativ
-            și nu garantăm corectitudinea lor.
-          </p>
+          <p className="pt-2 text-xs italic">{dictionary.directions.taxi_prices.disclaimer}</p>
         </div>
         <div className="flex min-w-[28%] flex-row gap-8 lg:flex-col">
           <div className="card-base flex grow flex-col items-center justify-center gap-x-2 sm:flex-row sm:justify-between">
             {/* --- */}
             <div className="flex items-center">
               <IconRoute2 />
-              <span className="pl-2">Distanță</span>
+              <span className="pl-2">{dictionary.directions.taxi_prices.distance}</span>
             </div>
             <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
               {distance.text}
@@ -341,11 +366,17 @@ export default function TaxiPrices({ dictionary, initialCompanies, initialCity, 
           <div className="card-base flex grow flex-col items-center justify-center gap-x-2 sm:flex-row sm:justify-between">
             {/* --- */}
             <div className="flex items-center">
-              {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
-              <span className="pl-2">Durată</span>
+              {duration.value > duration_in_traffic.value ? (
+                <IconTrafficCone />
+              ) : (
+                <IconClockHour4 />
+              )}
+              <span className="pl-2">{dictionary.directions.taxi_prices.duration}</span>
             </div>
             <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
-              {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
+              {duration.value > duration_in_traffic.value
+                ? duration_in_traffic.text
+                : duration.text}
             </p>
             {/* --- */}
           </div>

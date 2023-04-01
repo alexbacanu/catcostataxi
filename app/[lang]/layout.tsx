@@ -3,18 +3,22 @@ import { Analytics } from "@vercel/analytics/react"
 import { Inter } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
+import { getDictionary } from "@/lib/locale/get-dictionary"
 import { i18n } from "@/lib/locale/i18n-config"
 import LocaleSwitcher from "@/ui/locale-switcher"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: {
-    default: "Estimator de tarife taxi",
-    template: "%s | Cat Costa Taxi",
-  },
-  description:
-    "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
-  keywords:
-    "cat costa taxi, estimare tarif taxi, cat costa uber, cat costa bolt, estimare cost uber, estimare cost bolt, tarif taxi online, tarif uber online, tarif bolt online",
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const dictionary = await getDictionary(params.lang)
+
+  return {
+    title: {
+      default: dictionary.root.meta.title_default,
+      template: "%s | CatCostaTaxi.ro",
+    },
+    description: dictionary.root.meta.description,
+    keywords: dictionary.root.meta.keywords,
+  }
 }
 
 export async function generateStaticParams() {
@@ -28,7 +32,9 @@ type Props = {
   params: { lang: string }
 }
 
-export default function RootLayout({ children, params }: Props) {
+export default async function RootLayout({ children, params }: Props) {
+  const dictionary = await getDictionary(params.lang)
+
   return (
     <html lang={params.lang} className={inter.className}>
       <body className="bg-white text-neutral-800 antialiased transition dark:bg-neutral-800 dark:text-neutral-200 [&>*]:mx-auto">
@@ -45,7 +51,7 @@ export default function RootLayout({ children, params }: Props) {
             </Link>
 
             {/* <Link href="/" className="button-base button-secondary">
-              Transfer Aeroport
+              {dictionary.root.header.transfer}
             </Link> */}
 
             <LocaleSwitcher lang={params.lang} />
@@ -58,16 +64,16 @@ export default function RootLayout({ children, params }: Props) {
           <div className="layout-mx flex-col gap-4 py-4 lg:flex-row">
             <div className="flex flex-col gap-x-4 gap-y-2 text-center text-lg font-light tracking-tight md:flex-row md:self-center">
               <Link className="hover:text-amber-500" href={`/${params.lang}/about`}>
-                Despre noi
+                {dictionary.root.footer.about}
               </Link>
               <Link className="hover:text-amber-500" href={`/${params.lang}/privacy`}>
-                Politica de confidențialitate
+                {dictionary.root.footer.privacy}
               </Link>
               <Link className="hover:text-amber-500" href={`/${params.lang}/terms`}>
-                Termeni și condiții
+                {dictionary.root.footer.terms}
               </Link>
               <Link className="hover:text-amber-500" href={`/${params.lang}/contact`}>
-                Contact
+                {dictionary.root.footer.contact}
               </Link>
             </div>
             <div className="space-y-2">

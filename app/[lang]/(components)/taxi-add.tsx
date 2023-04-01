@@ -1,11 +1,8 @@
 import Image from "next/image"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
 }
 
 export default function TaxiAdd({ dictionary }: Props) {
@@ -13,10 +10,10 @@ export default function TaxiAdd({ dictionary }: Props) {
     <section className="layout-mx">
       <div className="card-base relative isolate flex w-full flex-col items-center gap-4 overflow-hidden bg-amber-400 p-10 md:flex-row md:p-12">
         <div className="mx-auto space-y-2 text-neutral-800">
-          <h2 className="text-4xl font-extrabold md:text-5xl">Adaugă compania ta de taxi</h2>
-          <p className="text-lg md:text-xl">Primește reclamă gratuită pentru firma ta</p>
+          <h2 className="text-4xl font-extrabold md:text-5xl">{dictionary.home.taxi_add.title}</h2>
+          <p className="text-lg md:text-xl">{dictionary.home.taxi_add.description}</p>
           <div className="flex flex-col items-center gap-6 pt-6 sm:flex-row">
-            <p className="button-base button-secondary">Disponibil în curând</p>
+            <p className="button-base button-secondary">{dictionary.home.taxi_add.button}</p>
             {/* <Link href="/" className="button-base button-primary">
               Adauga companie
             </Link>
@@ -32,7 +29,13 @@ export default function TaxiAdd({ dictionary }: Props) {
           className="absolute left-1/2 top-1/2 -z-10 ml-28 mt-10 h-[64rem] w-[64rem] -translate-y-1/2 sm:left-full sm:-ml-60 md:left-1/2 md:ml-0 md:-translate-x-1/2 md:translate-y-0"
           aria-hidden="true"
         >
-          <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.9" />
+          <circle
+            cx={512}
+            cy={512}
+            r={512}
+            fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
+            fillOpacity="0.9"
+          />
           <defs>
             <radialGradient
               id="759c1415-0410-454c-8f7c-9a820de03641"

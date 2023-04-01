@@ -1,5 +1,10 @@
 import Image from "next/image"
-import { fetchAllRoutesIds, fetchAvailableLocations, fetchCompaniesByLoc, fetchSingleRoute } from "@/lib/helpers/mongo"
+import {
+  fetchAllRoutesIds,
+  fetchAvailableLocations,
+  fetchCompaniesByLoc,
+  fetchSingleRoute,
+} from "@/lib/helpers/mongo"
 import { normalizeString } from "@/lib/helpers/normalize-string"
 import { getDictionary } from "@/lib/locale/get-dictionary"
 import RouteDetails from "./(components)/route-details"
@@ -26,24 +31,46 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const dictionary = await getDictionary(params.lang)
+
   const hash = params.rid[0]
-  const route = await fetchSingleRoute(hash)
+  const siteUrl = process.env.SITE_URL || ""
 
-  const routeFrom = route?.selectedFrom.structured_formatting.main_text || ""
-  const routeTo = route?.selectedTo.structured_formatting.main_text || ""
+  const { selectedFrom, selectedTo } = (await fetchSingleRoute(hash)) || {}
+  const routeFrom = selectedFrom?.structured_formatting.main_text || ""
+  const routeTo = selectedTo?.structured_formatting.main_text || ""
 
-  const title = `Cât costă taxi de la ${routeFrom} până la ${routeTo}`
-  const description = `Obțineți o estimare a tarifului pentru taxi de la de la ${routeFrom} până la ${routeTo}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.`
-  const imageUrl = `${process.env.SITE_URL}/api/og?from=${routeFrom}&to=${routeTo}`
+  const title = dictionary.directions.meta.title
+    .replace("{routeFrom}", routeFrom)
+    .replace("{routeTo}", routeTo)
+  const description = dictionary.directions.meta.description
+    .replace("{routeFrom}", routeFrom)
+    .replace("{routeTo}", routeTo)
+  const imageUrl = dictionary.directions.meta.imageUrl
+    .replace("{siteUrl}", siteUrl)
+    .replace("{routeFrom}", routeFrom)
+    .replace("{routeTo}", routeTo)
+  const keywords = dictionary.directions.meta.keywords.map((keyword) =>
+    keyword.includes("{routeFrom}")
+      ? keyword.replace("{routeFrom}", routeFrom)
+      : keyword.includes("{routeTo}")
+      ? keyword.replace("{routeTo}", routeTo)
+      : keyword
+  )
+  const url = dictionary.directions.meta.url
+    .replace("{siteUrl}", siteUrl)
+    .replace("{hash}", hash)
+    .replace("{params.rid[1]}", params.rid[1])
+    .replace("{params.rid[2]}", params.rid[2])
 
   return {
     title,
     description,
-    keywords: ["tarif taxi", "estimat taxi", `de la ${routeFrom}`, `pana la ${routeTo}`],
+    keywords,
     openGraph: {
       title,
       description,
-      url: `${process.env.SITE_URL}/directions/${hash}/${params.rid[1]}/${params.rid[2]}}`,
+      url,
       images: [
         {
           url: imageUrl,
@@ -52,7 +79,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
       siteName: "CatCostaTaxi",
-      locale: "ro-RO",
+      locale: params.lang === "ro" ? "ro_RO" : "en_GB",
       type: "website",
     },
     twitter: {
@@ -72,10 +99,12 @@ type Props = {
 }
 
 export default async function DirectionsPage({ params }: Props) {
+  const dictionary = await getDictionary(params.lang)
+
   if (params.rid[0].length !== 8 && typeof params.rid[0] !== "string") {
     return (
       <section className="layout-mx flex h-screen flex-col justify-start">
-        <h1 className="mb-6 py-6">Ne pare rău, ruta nu este validă</h1>
+        <h1 className="mb-6 py-6">{dictionary.directions.errors.not_valid}</h1>
         <div className="relative h-[36rem] w-[36rem]">
           <Image src="/undraw_exploring.svg" alt="No route found" fill />
         </div>
@@ -87,7 +116,7 @@ export default async function DirectionsPage({ params }: Props) {
   if (!route) {
     return (
       <section className="layout-mx flex h-screen flex-col justify-start">
-        <h1 className="mb-6 py-6">Ne pare rău, nu am găsit nicio rută</h1>
+        <h1 className="mb-6 py-6">{dictionary.directions.errors.not_found}</h1>
         <div className="relative h-[36rem] w-[36rem]">
           <Image src="/undraw_exploring.svg" alt="No route found" fill />
         </div>
@@ -97,14 +126,16 @@ export default async function DirectionsPage({ params }: Props) {
 
   const availableCities = await fetchAvailableLocations()
 
-  let initialCompanies = await fetchCompaniesByLoc(route.selectedFrom.structured_formatting.secondary_text)
+  let initialCompanies = await fetchCompaniesByLoc(
+    route.selectedFrom.structured_formatting.secondary_text
+  )
   if (initialCompanies.length === 0 && route.selectedTo.structured_formatting.secondary_text) {
-    initialCompanies = await fetchCompaniesByLoc(route.selectedTo.structured_formatting.secondary_text)
+    initialCompanies = await fetchCompaniesByLoc(
+      route.selectedTo.structured_formatting.secondary_text
+    )
   }
 
   const initialCity = initialCompanies.length !== 0 ? initialCompanies[0]?.city : ""
-
-  const dictionary = await getDictionary(params.lang)
 
   return (
     <>

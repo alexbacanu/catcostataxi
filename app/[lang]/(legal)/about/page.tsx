@@ -1,9 +1,15 @@
+import { Metadata } from "next"
 import ContentEN from "@/app/[lang]/(legal)/about/about-en.mdx"
 import ContentRO from "@/app/[lang]/(legal)/about/about-ro.mdx"
+import { getDictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
 
-export const metadata = {
-  title: "Despre noi",
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const dictionary = await getDictionary(params.lang)
+
+  return {
+    title: dictionary.root.footer.about,
+  }
 }
 
 type Props = {

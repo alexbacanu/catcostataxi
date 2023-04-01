@@ -35,7 +35,8 @@ export const fetchCompaniesByLoc = cache(async (city: string) => {
     .find({ $text: { $search: city } })
     .project<Company>({ _id: 0, dateAdded: 0, dateUpdated: 0 })
     .toArray()
-  if (allCompanies.length == 0) console.warn(`😱 Warning: No taxi companies found in this city: ${city}`)
+  if (allCompanies.length == 0)
+    console.warn(`😱 Warning: No taxi companies found in this city: ${city}`)
 
   return allCompanies
 })
@@ -89,7 +90,10 @@ export const fetchSingleRoute = cache(async (hash: string) => {
   const db = client.db(process.env.MONGO_DB ?? "")
   const routes = db.collection("routes")
 
-  const singleRoute = await routes.findOne<Route>({ hash }, { projection: { _id: 0, createdAt: 0 } })
+  const singleRoute = await routes.findOne<Route>(
+    { hash },
+    { projection: { _id: 0, createdAt: 0 } }
+  )
   if (!singleRoute) console.warn(`😱 Warning: No route found with hash: ${hash}`)
 
   return singleRoute
@@ -105,7 +109,10 @@ export const submitRoute = cache(
     const db = client.db(process.env.MONGO_DB ?? "")
     const routes = db.collection("routes")
 
-    const requestedRoute = await routes.findOne<Route>({ hash }, { projection: { _id: 0, createdAt: 0 } })
+    const requestedRoute = await routes.findOne<Route>(
+      { hash },
+      { projection: { _id: 0, createdAt: 0 } }
+    )
 
     if (!requestedRoute) {
       await routes.insertOne({ hash, selectedFrom, selectedTo, createdAt: new Date() })

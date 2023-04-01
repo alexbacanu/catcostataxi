@@ -40,7 +40,7 @@
     // "source.organizeImports": true,
     "source.fixAll.eslint": true
   },
-  "prettier.printWidth": 120,
+  "prettier.printWidth": 100,
   "eslint.enable": true,
   "eslint.format.enable": true,
   "eslint.useESLintClass": true,

@@ -2,15 +2,12 @@
 
 import { IconList, IconPhone } from "@tabler/icons-react"
 import Image from "next/image"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import useLocationStore from "@/lib/stores/location-store"
 import type { Company } from "@/lib/helpers/mongo"
 
 type Props = {
-  dictionary: {
-    [key: string]: {
-      [key: string]: string
-    }
-  }
+  dictionary: Dictionary
   initialCompanies?: Company[]
 }
 
@@ -23,7 +20,7 @@ export default function TaxiTable({ dictionary, initialCompanies }: Props) {
         {/* Title */}
         <div className="flex items-center">
           <IconList />
-          <span className="pl-2">Listă taxiuri</span>
+          <span className="pl-2">{dictionary.directions.taxi_table.taxi_list}</span>
         </div>
 
         {/* List */}
@@ -34,10 +31,17 @@ export default function TaxiTable({ dictionary, initialCompanies }: Props) {
               .map((company, index) => (
                 <div key={index} className="flex items-center gap-x-2 py-1">
                   <div className="hidden md:block">
-                    <Image src="/taxi_driver_two_color.svg" alt="Taxi driver" width={406 * 0.2} height={306 * 0.2} />
+                    <Image
+                      src="/taxi_driver_two_color.svg"
+                      alt="Taxi driver"
+                      width={406 * 0.2}
+                      height={306 * 0.2}
+                    />
                   </div>
                   <div className="flex-auto">
-                    <div className="whitespace-nowrap capitalize tracking-tighter">{company.name}</div>
+                    <div className="whitespace-nowrap capitalize tracking-tighter">
+                      {company.name}
+                    </div>
                     <div className="text-sm italic">
                       @<span className="pl-1">{company.city}</span>
                     </div>
@@ -49,7 +53,9 @@ export default function TaxiTable({ dictionary, initialCompanies }: Props) {
                 </div>
               ))
           ) : (
-            <div className="flex items-center gap-x-2 py-1 italic">Niciun taxi găsit în această zonă</div>
+            <div className="flex items-center gap-x-2 py-1 italic">
+              {dictionary.directions.taxi_table.no_taxi_found}
+            </div>
           )}
         </div>
       </div>

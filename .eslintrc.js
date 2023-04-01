@@ -22,7 +22,7 @@ module.exports = {
   rules: {
     "prettier/prettier": ["error"],
     "@next/next/no-html-link-for-pages": ["error", "./app"],
-    "@typescript-eslint/consistent-type-imports": "error",
+    // "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": "error",

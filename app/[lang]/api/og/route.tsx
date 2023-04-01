@@ -11,10 +11,13 @@ export async function GET(request: Request) {
   const to = searchParams.get("to")
 
   if (!from || !to) {
-    return new ImageResponse(<>Provide a &quot;from&quot; location and &quot;to&quot; location as a parameter</>, {
-      width: 800,
-      height: 400,
-    })
+    return new ImageResponse(
+      <>Provide a &quot;from&quot; location and &quot;to&quot; location as a parameter</>,
+      {
+        width: 800,
+        height: 400,
+      }
+    )
   }
 
   return new ImageResponse(
@@ -27,7 +30,12 @@ export async function GET(request: Request) {
       >
         <div tw="flex w-full flex-col justify-between text-xl p-8">
           <div tw="flex flex-row items-center justify-between">
-            <svg width={211.314 * 0.8} height={110.315 * 0.8} xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width={211.314 * 0.8}
+              height={110.315 * 0.8}
+              xmlSpace="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <g
                 transform="translate(-6.232 34.438)"
                 style={{
