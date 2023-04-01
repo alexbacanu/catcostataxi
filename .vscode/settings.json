@@ -1,43 +1,61 @@
 {
   // NextJS
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules\\.pnpm\\typescript@5.0.2\\node_modules\\typescript\\lib",
-  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Telemetry
+  "mdb.sendTelemetry": false,
+  "redhat.telemetry.enabled": false,
+  "snyk.yesTelemetry": false,
+  "telemetry.telemetryLevel": "off",
+
+  // Visual
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.iconTheme": "ayu",
+  "oneDarkPro.bold": true,
 
   // Extensions
-  "eslint.format.enable": true,
-  "eslint.useESLintClass": true,
-  "importCost.fontStyle": "italic",
+  "git.enableSmartCommit": true,
   "npm.packageManager": "pnpm",
-  "prettier.printWidth": 120,
-  "reactSnippets.settings.importReactOnTop": false,
-  "isort.args": ["--profile", "black"],
+
+  // Javascript / Typescript
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Python
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.blackArgs": ["--line-length", "120"],
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
 
   // Formatting
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[svg]": {
-    "editor.defaultFormatter": "jock.svg"
-  },
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.python"
-  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": true
+    // "source.organizeImports": true,
+    "source.fixAll.eslint": true
   },
+  "prettier.printWidth": 120,
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.useESLintClass": true,
 
   // Editor
   "editor.bracketPairColorization.enabled": true,
+  "editor.fontFamily": "FiraCode NF",
   "editor.fontLigatures": true,
-  "editor.guides.bracketPairs": true,
-  "editor.inlayHints.fontSize": 10,
-  "editor.inlineSuggest.enabled": true,
+  "editor.guides.bracketPairs": false,
   "editor.linkedEditing": true,
   "editor.minimap.renderCharacters": false,
   "editor.stickyScroll.enabled": true,
 
   // Explorer
+  "explorer.confirmDragAndDrop": false,
   "explorer.fileNesting.enabled": true,
   "explorer.sortOrder": "type",
 
@@ -46,7 +64,7 @@
   "terminal.integrated.enableMultiLinePasteWarning": false,
 
   // Files
-  "files.eol": "\n",
+  "files.eol": "auto",
   "files.trimTrailingWhitespace": true,
 
   // Hide files fron explorer
@@ -77,7 +95,8 @@
     "**/.git/subtree-cache/**": true,
     "**/.venv/**": true,
     "**/node_modules/**": true
-  }
+  },
+  "terminal.integrated.env.windows": {}
 
   // Others
 }
