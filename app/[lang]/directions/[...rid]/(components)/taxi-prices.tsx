@@ -294,16 +294,11 @@ export default function TaxiPrices({
           </div>
 
           {/* Content */}
-          <div className="flex w-full items-center gap-x-4 py-2">
+          <div className="flex w-full items-center gap-x-4 py-4">
             {/* Image */}
             <div className="shrink-0">
               <div className="relative">
-                <Image
-                  src="/taxi-yellow.png"
-                  alt="Standard taxi"
-                  width={569 * 0.2}
-                  height={361 * 0.2}
-                />
+                <Image src="/taxi-yellow.png" alt="Standard taxi" width={113} height={72} />
                 <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Taxi
                 </div>

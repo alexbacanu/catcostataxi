@@ -143,9 +143,8 @@ export default function AddressForm({ dictionary, lang }: Props) {
             src="/undraw_right_direction.svg"
             alt="Estimate taxi cost"
             className="hidden md:flex"
-            width={630 * 0.5}
-            height={532 * 0.5}
-            priority
+            width={315}
+            height={304}
           />
           <Toaster />
         </form>

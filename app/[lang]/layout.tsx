@@ -45,8 +45,8 @@ export default async function RootLayout({ children, params }: Props) {
                 src="/logo.svg"
                 alt="CatCostaTaxi Logo"
                 className="h-16 w-auto"
-                width={211 * 0.6}
-                height={110 * 0.6}
+                width={122}
+                height={64}
               />
             </Link>
 

@@ -24,13 +24,9 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
   return (
     <section className="layout-mx gap-x-12">
       {type === "airports" && (
-        <Image
-          src="/undraw_airport.svg"
-          alt="Rute aeroport"
-          className="hidden lg:flex"
-          width={495 * 0.5}
-          height={488 * 0.5}
-        />
+        <div className="hidden min-w-[260px] lg:flex">
+          <Image src="/undraw_airport.svg" alt="Rute aeroport" width={260} height={256} />
+        </div>
       )}
 
       <div className="card-base flex">
@@ -55,13 +51,9 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
       </div>
 
       {type === "stations" && (
-        <Image
-          src="/undraw_subway.svg"
-          alt="Rute trenuri"
-          className="hidden lg:flex"
-          width={728 * 0.5}
-          height={469 * 0.5}
-        />
+        <div className="hidden min-w-[370px] lg:flex">
+          <Image src="/undraw_subway.svg" alt="Rute trenuri" width={370} height={244} />
+        </div>
       )}
     </section>
   )
