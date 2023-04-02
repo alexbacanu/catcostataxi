@@ -27,7 +27,7 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
         <Image
           src="/undraw_airport.svg"
           alt="Rute aeroport"
-          className="hidden pr-12 lg:flex"
+          className="hidden lg:flex"
           width={495 * 0.5}
           height={488 * 0.5}
         />
@@ -58,7 +58,7 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
         <Image
           src="/undraw_subway.svg"
           alt="Rute trenuri"
-          className="hidden pl-10 lg:flex"
+          className="hidden lg:flex"
           width={728 * 0.5}
           height={469 * 0.5}
         />
