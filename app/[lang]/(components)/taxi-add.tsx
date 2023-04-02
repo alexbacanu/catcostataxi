@@ -55,8 +55,8 @@ export default function TaxiAdd({ dictionary }: Props) {
           src="/undraw_duplicate.svg"
           alt="Add your taxi"
           className="h-60 w-auto md:h-60 lg:h-80"
-          width={721 * 0.6}
-          height={600 * 0.6}
+          width={385}
+          height={320}
         />
       </div>
     </section>

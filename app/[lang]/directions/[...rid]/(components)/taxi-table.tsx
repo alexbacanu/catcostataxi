@@ -34,8 +34,8 @@ export default function TaxiTable({ dictionary, initialCompanies }: Props) {
                     <Image
                       src="/taxi_driver_two_color.svg"
                       alt="Taxi driver"
-                      width={406 * 0.2}
-                      height={306 * 0.2}
+                      width={80}
+                      height={60}
                     />
                   </div>
                   <div className="flex-auto">
