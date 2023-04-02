@@ -65,6 +65,20 @@
   "og": {
     "title": "Check the fare of a taxi ride!"
   },
+  "contact": {
+    "zod_required": "Required field",
+    "zod_valid": "Please enter a valid email",
+    "zod_agree": "Your consent is required to send the message",
+    "success": "Email sent successfully!",
+    "error": "The email was not sent, please try again later.",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "message": "Message",
+    "agree_1": "I agree with ",
+    "agree_2": " and ",
+    "send": "Send"
+  },
   "root": {
     "footer": {
       "about": "About us",

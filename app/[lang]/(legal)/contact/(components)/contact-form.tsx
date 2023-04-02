@@ -17,19 +17,18 @@ type Props = {
 }
 
 export default function ContactForm({ dictionary, lang }: Props) {
-  console.log(dictionary)
   // Zod
   const zodSchema = z.object({
-    firstName: z.string().min(1, { message: "Câmp obligatoriu" }),
-    lastName: z.string().min(1, { message: "Câmp obligatoriu" }),
-    email: z.string().min(1, { message: "Câmp obligatoriu" }).email({
-      message: "Vă rog introduceți un e-mail valid",
+    firstName: z.string().min(1, { message: dictionary.contact.zod_required }),
+    lastName: z.string().min(1, { message: dictionary.contact.zod_required }),
+    email: z.string().min(1, { message: dictionary.contact.zod_required }).email({
+      message: dictionary.contact.zod_valid,
     }),
-    message: z.string().min(1, { message: "Câmp obligatoriu" }),
+    message: z.string().min(1, { message: dictionary.contact.zod_required }),
     terms: z.boolean().refine((val) => val === true, {
-      message: "Acordul dvs. este necesar pentru a trimite mesajul",
+      message: dictionary.contact.zod_agree,
     }),
-    hcaptcha: z.string().min(1, { message: "Câmp obligatoriu" }),
+    hcaptcha: z.string().min(1, { message: dictionary.contact.zod_required }),
   })
 
   type ValidationSchema = z.infer<typeof zodSchema>
@@ -74,9 +73,9 @@ export default function ContactForm({ dictionary, lang }: Props) {
 
       // Reset form
       reset()
-      toast.success("E-mail trimis cu succes!", { duration: 5000 })
+      toast.success(dictionary.contact.success, { duration: 7000 })
     } catch (error) {
-      toast.error("E-mailul nu a fost trimis, vă rugăm încercați mai târziu.")
+      toast.error(dictionary.contact.error, { duration: 7000 })
     }
   }
 
@@ -89,7 +88,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
               htmlFor="firstName"
               className="block text-sm font-semibold leading-6 text-neutral-800 dark:text-neutral-200"
             >
-              Prenume
+              {dictionary.contact.first_name}
             </label>
             {errors.firstName && (
               <p className="text-xs italic text-red-500">{errors.firstName.message}</p>
@@ -111,7 +110,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
               htmlFor="lastName"
               className="block text-sm font-semibold leading-6 text-neutral-800 dark:text-neutral-200"
             >
-              Nume
+              {dictionary.contact.last_name}
             </label>
             {errors.lastName && (
               <p className="text-xs italic text-red-500">{errors.lastName.message}</p>
@@ -133,7 +132,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
               htmlFor="email"
               className="block text-sm font-semibold leading-6 text-neutral-800 dark:text-neutral-200"
             >
-              Email
+              {dictionary.contact.email}
             </label>
             {errors.email && <p className="text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
@@ -153,7 +152,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
               htmlFor="message"
               className="block text-sm font-semibold leading-6 text-neutral-800 dark:text-neutral-200"
             >
-              Mesaj
+              {dictionary.contact.message}
             </label>
             {errors.message && (
               <p className="text-xs italic text-red-500">{errors.message.message}</p>
@@ -176,13 +175,13 @@ export default function ContactForm({ dictionary, lang }: Props) {
             <div>
               <input id="terms" className="h-4 w-4" type="checkbox" {...register("terms")} />
               <span className="w-auto px-2">
-                Sunt de acord cu{" "}
+                {dictionary.contact.agree_1}
                 <Link className="text-amber-500" href="/privacy">
-                  Politica de confidențialitate
-                </Link>{" "}
-                si{" "}
+                  {dictionary.root.footer.privacy}
+                </Link>
+                {dictionary.contact.agree_2}
                 <Link className="text-amber-500" href="/terms">
-                  Termeni și condiții
+                  {dictionary.root.footer.terms}
                 </Link>
               </span>
               {errors.terms && (
@@ -197,6 +196,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
                 onCaptchaChange(token)
                 setValue("hcaptcha", token, { shouldValidate: true })
               }}
+              languageOverride={lang}
               ref={captchaRef}
               theme="light"
             />
@@ -219,7 +219,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
           ) : (
             <>
               <IconSend />
-              <span>Trimite</span>
+              <span>{dictionary.contact.send}</span>
             </>
           )}
         </button>
