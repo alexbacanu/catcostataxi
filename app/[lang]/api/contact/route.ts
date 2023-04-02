@@ -1,5 +1,5 @@
+import sendgrid from "@sendgrid/mail"
 import { NextResponse } from "next/server"
-import nodemailer from "nodemailer"
 import type { NextRequest } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -24,28 +24,16 @@ export async function POST(request: NextRequest) {
   }
 
   if (!terms) {
-    return new NextResponse("Please accept the terms and conditions", { status: 400 })
+    return new NextResponse("Please accept the terms and conditions and privacy policy", {
+      status: 400,
+    })
   }
 
   if (!firstName || !lastName || !email || !message) {
     return new NextResponse("Please provide any required fields", { status: 400 })
   }
 
-  const transporter = nodemailer.createTransport({
-    service: "Outlook365",
-    auth: {
-      user: "hey@catcostataxi.ro",
-      pass: "***REMOVED***",
-    },
-  })
-
-  const options = {
-    sender: email,
-    replyTo: email,
-    to: `CatCostaTaxi <${process.env.EMAIL_USERNAME}>`,
-    subject: `Contact Form: ${firstName} ${lastName} (${email})`,
-    text: message,
-  }
+  sendgrid.setApiKey(process.env.SENDGRID_API_KEY || "")
 
   try {
     // Ping the hcaptcha verify API to verify the captcha code you received
@@ -59,10 +47,19 @@ export async function POST(request: NextRequest) {
     const captchaValidation = await response.json()
 
     if (captchaValidation.success) {
-      transporter.sendMail(options, (error, info) => {
-        if (error) console.log(error)
-        else console.log(info)
-      })
+      const mail = {
+        to: "hey@catcostataxi.ro", // Change to your recipient
+        from: "hey@catcostataxi.ro", // Change to your verified sender
+        subject: `Contact Form: ${email}`,
+        text: `Name: ${firstName} ${lastName}
+Email: ${email}
+Captcha validation: ${captchaValidation.success ? "Success" : "Fail"}
+Privacy policy, Terms and conditions: ${terms ? "Agreed" : "Not agreed"}
+
+Message: ${message}`,
+      }
+
+      await sendgrid.send(mail)
       // Return 200 if everything is successful
       return NextResponse.json(response)
     }

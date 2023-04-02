@@ -71,6 +71,20 @@
   "og": {
     "title": "Verifică tariful unei curse de taxi!"
   },
+  "contact": {
+    "zod_required": "Câmp obligatoriu",
+    "zod_valid": "Vă rog introduceți un email valid",
+    "zod_agree": "Acordul dvs. este necesar pentru a trimite mesajul",
+    "success": "Email trimis cu succes!",
+    "error": "Emailul nu a fost trimis, vă rugăm încercați mai târziu.",
+    "first_name": "Prenume",
+    "last_name": "Nume",
+    "email": "Email",
+    "message": "Mesaj",
+    "agree_1": "Sunt de acord cu ",
+    "agree_2": " si ",
+    "send": "Trimite"
+  },
   "root": {
     "footer": {
       "about": "Despre noi",
