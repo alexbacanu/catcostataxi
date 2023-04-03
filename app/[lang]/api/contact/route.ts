@@ -1,5 +1,6 @@
 import sendgrid from "@sendgrid/mail"
 import { NextResponse } from "next/server"
+import { fetchLegal } from "@/lib/helpers/mongo"
 import type { NextRequest } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -47,6 +48,9 @@ export async function POST(request: NextRequest) {
     const captchaValidation = await response.json()
 
     if (captchaValidation.success) {
+      const privacyVersion = await fetchLegal("privacy", "ro")
+      const termsVersion = await fetchLegal("terms", "ro")
+
       const mail = {
         to: "hey@catcostataxi.ro", // Change to your recipient
         from: "hey@catcostataxi.ro", // Change to your verified sender
@@ -54,7 +58,8 @@ export async function POST(request: NextRequest) {
         text: `Name: ${firstName} ${lastName}
 Email: ${email}
 Captcha validation: ${captchaValidation.success ? "Success" : "Fail"}
-Privacy policy, Terms and conditions: ${terms ? "Agreed" : "Not agreed"}
+Privacy policy: ${terms ? "Agreed" : "Not agreed"}, Version: ${privacyVersion[0].version}
+Terms and conditions: ${terms ? "Agreed" : "Not agreed"}, Version: ${termsVersion[0].version}
 
 Message: ${message}`,
       }
