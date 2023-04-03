@@ -119,7 +119,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 shadow-md transition">
         <form
-          className="layout-mx mb-6 justify-center pt-0 md:gap-x-12 lg:gap-x-24"
+          className="layout-mx mb-6 justify-between pt-0 md:gap-x-12 lg:gap-x-24"
           onSubmit={onSubmit}
         >
           <div className="mx-auto space-y-6 md:mx-0">

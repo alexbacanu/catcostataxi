@@ -310,35 +310,45 @@ export default function TaxiPrices({
                 {dictionary.directions.taxi_prices.not_enough_info}
               </div>
             ) : (
-              <div className="grid grid-cols-2 items-center gap-2">
-                <div className="whitespace-nowrap">Per km (lei):</div>
-                <div
-                  className={`${
-                    nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                  } text-lg font-bold dark:font-semibold`}
-                >
-                  {modifyToggle ? (
-                    <input
-                      value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                      type="number"
-                      step={0.01}
-                      onChange={nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")}
-                      className="w-full rounded-lg bg-black/5 px-2 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
-                    />
-                  ) : (
-                    <div className="px-2">
-                      {nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                    </div>
-                  )}
-                </div>
-                <div className="whitespace-nowrap">Total (lei):</div>
-                <div
-                  className={`${
-                    nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                  } px-2 text-lg font-bold dark:font-semibold`}
-                >
-                  {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
-                </div>
+              <div className="w-full overflow-hidden">
+                <dl>
+                  <div className="items-center px-1 sm:grid sm:grid-cols-4">
+                    <dt className="p-2">Per km (lei):</dt>
+                    <dd
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      } font-bold dark:font-semibold sm:col-span-3`}
+                    >
+                      {modifyToggle ? (
+                        <input
+                          value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
+                          type="number"
+                          step={0.01}
+                          onChange={
+                            nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")
+                          }
+                          className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
+                        />
+                      ) : (
+                        <div className="px-2 py-1">
+                          {nightToggle ? priceData.nightPrice : priceData.dayPrice}
+                        </div>
+                      )}
+                    </dd>
+                  </div>
+                  <div className="items-center px-1 sm:grid sm:grid-cols-4">
+                    <dt className="p-2">Total (lei):</dt>
+                    <dd
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      } font-bold dark:font-semibold sm:col-span-3`}
+                    >
+                      <span className="px-2 py-1">
+                        {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
+                      </span>
+                    </dd>
+                  </div>
+                </dl>
               </div>
             )}
           </div>
