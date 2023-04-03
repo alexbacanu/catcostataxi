@@ -1,8 +1,13 @@
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { fetchSingleLegal } from "@/lib/helpers/mongo"
+import { fetchLegal, fetchSingleLegal } from "@/lib/helpers/mongo"
 import { getDictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
+
+export async function generateStaticParams({ params }: Props) {
+  const legal = await fetchLegal("terms", params.lang)
+  return legal.map((document) => ({ version: document.version }))
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dictionary = await getDictionary(params.lang)
