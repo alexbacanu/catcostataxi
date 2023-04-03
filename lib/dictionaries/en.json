@@ -1,0 +1,104 @@
+{
+  "directions": {
+    "errors": {
+      "not_found": "Sorry, no route found",
+      "not_valid": "Sorry, the route is not valid"
+    },
+    "meta": {
+      "description": "Get a taxi fare estimate from {routeFrom} to {routeTo}. Check for free, how much the ride costs in a convenient and easy way.",
+      "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
+      "keywords": ["taxi fare", "taxi cost", "taxi estimate", "from {routeFrom}", "to {routeTo}"],
+      "title": "How much is a taxi from {routeFrom} to {routeTo}",
+      "url": "{siteUrl}/directions/{hash}/{params.rid[1]}/{params.rid[2]}"
+    },
+    "route_details": {
+      "from": "from",
+      "to": "to"
+    },
+    "route_map": {
+      "loading": "Loading map..."
+    },
+    "taxi_prices": {
+      "change_price": "Change the price",
+      "disclaimer": "Remember that these are only estimated fares. Actual fares vary based on traffic, weather and other unforeseen conditions. Tolls are not shown. The information provided on this site is intended for guidance purposes only and their correctness is not guaranteed.",
+      "distance": "Distance",
+      "duration": "Duration",
+      "loading": "Loading...",
+      "modify": "Modify",
+      "not_enough_info": "Sorry, we don't have enough information for this area",
+      "ride": "Trip",
+      "save": "Change",
+      "select_city": "Choose a city",
+      "toast_error": "An error occurred, please try again later",
+      "tooltip_change_price": "Switch between day and night rates",
+      "tooltip_modify": "Manually enter the rate per km, in lei",
+      "tooltip_select_city": "Select a city to use the corresponding rate per km"
+    },
+    "taxi_table": {
+      "no_taxi_found": "No taxi found in this area",
+      "taxi_list": "List of taxis"
+    }
+  },
+  "home": {
+    "address_form": {
+      "from": "From",
+      "from_error": "'From' field is required",
+      "loading": "Loading...",
+      "no_chars": "Enter a location (use 4 or more characters)",
+      "no_results": "No result",
+      "title": "Estimate the cost of a taxi ride",
+      "button": "Calculate estimate",
+      "to": "To",
+      "to_error": "'To' field is mandatory",
+      "toast_error": "An error occurred, please try again later"
+    },
+    "popular_routes": {
+      "title_airport": "Select an airport",
+      "title_station": "Select a train station"
+    },
+    "taxi_add": {
+      "button": "Available soon",
+      "description": "Get free advertising for your business",
+      "title": "Add your taxi company"
+    }
+  },
+  "og": {
+    "title": "Check the fare of a taxi ride!"
+  },
+  "contact": {
+    "zod_required": "Required field",
+    "zod_valid": "Please enter a valid email",
+    "zod_agree": "Your consent is required to send the message",
+    "success": "Email sent successfully!",
+    "error": "The email was not sent, please try again later.",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "message": "Message",
+    "agree_1": "I agree with ",
+    "agree_2": " and ",
+    "send": "Send"
+  },
+  "legal": {
+    "version": "Version",
+    "modified": "Modified",
+    "history": "See history",
+    "not_found": "Sorry, no document found with this version"
+  },
+  "root": {
+    "footer": {
+      "about": "About us",
+      "contact": "Contact",
+      "privacy": "Privacy policy",
+      "terms": "Terms and conditions"
+    },
+    "header": {
+      "transfer": "Airport transfer"
+    },
+    "meta": {
+      "description": "Taxi fare check app. CatCostaTaxi.ro estimates the costs of your next trip quickly, easily and for free!",
+      "keywords": ["how much taxi", "taxi fare estimate", "taxi fare online"],
+      "title_default": "Estimate the cost of a taxi ride"
+    }
+  }
+}
