@@ -2,6 +2,15 @@ import { cache } from "react"
 import clientPromise from "./mongo-client"
 import type { Condition, ObjectId } from "mongodb"
 
+export type Legal = {
+  _id?: Condition<ObjectId>
+  type: string
+  lang: string
+  modified: Date
+  version: string
+  markdown: string
+}
+
 export type Route = {
   _id?: Condition<ObjectId>
   hash: string
@@ -26,6 +35,46 @@ export type Company = {
   dateAdded?: Date
   dateUpdated?: Date
 }
+
+export const fetchLegal = cache(async (type: string, lang: string) => {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGO_DB ?? "")
+  const legal = db.collection("legal")
+
+  const allLegal = await legal
+    .find({ type, lang })
+    .project<Legal>({ _id: 0 })
+    .sort({ version: -1 })
+    .toArray()
+
+  if (allLegal.length == 0)
+    console.warn(`😱 Warning: No legal documents found with this type: ${type}`)
+
+  const newArray = allLegal.map((legalDoc) => {
+    return {
+      ...legalDoc,
+      modified: legalDoc.modified.toISOString(),
+    }
+  })
+
+  return newArray
+})
+
+export const fetchSingleLegal = cache(async (type: string, lang: string, version?: string) => {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGO_DB ?? "")
+  const legal = db.collection("legal")
+
+  const singleLegal = await legal.findOne({ type, lang, version }, { projection: { _id: 0 } })
+
+  if (!singleLegal)
+    console.warn(
+      `😱 Warning: No legal documents found with this type: ${type} and version: ${version}`
+    )
+
+  return singleLegal
+})
+
 export const fetchCompaniesByLoc = cache(async (city: string) => {
   const client = await clientPromise
   const db = client.db(process.env.MONGO_DB ?? "")

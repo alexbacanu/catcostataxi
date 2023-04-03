@@ -79,6 +79,12 @@
     "agree_2": " and ",
     "send": "Send"
   },
+  "legal": {
+    "version": "Version",
+    "modified": "Modified",
+    "history": "See history",
+    "not_found": "Sorry, no document found with this version"
+  },
   "root": {
     "footer": {
       "about": "About us",

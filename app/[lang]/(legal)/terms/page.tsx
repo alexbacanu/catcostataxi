@@ -1,6 +1,6 @@
 import { Metadata } from "next"
-import ContentEN from "@/app/[lang]/(legal)/privacy/privacy-en.mdx"
-import ContentRO from "@/app/[lang]/(legal)/privacy/privacy-ro.mdx"
+import { MDXRemote } from "next-mdx-remote/rsc"
+import { fetchLegal } from "@/lib/helpers/mongo"
 import { getDictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
 
@@ -18,10 +18,27 @@ type Props = {
   }
 }
 
-export default function TermsPage({ params }: Props) {
+export default async function TermsPage({ params }: Props) {
+  const dictionary = await getDictionary(params.lang)
+  const legal = await fetchLegal("terms", params.lang)
+
+  const currentDocument = legal[0]
+
   return (
     <section className="layout-mx flex-col items-start gap-y-4">
-      {params.lang === "ro" ? <ContentRO /> : <ContentEN />}
+      <ul className="flex space-x-1 text-xs font-normal leading-4 text-gray-500">
+        <li>{dictionary.legal.version}</li>
+        <li>{currentDocument.version}</li>
+        <li>&middot;</li>
+        <li>{dictionary.legal.modified}</li>
+        <li>{new Date(currentDocument.modified).toLocaleDateString()}</li>
+        <li>&middot;</li>
+        <li>
+          <a href="/terms/history">{dictionary.legal.history}</a>
+        </li>
+      </ul>
+      {/* @ts-expect-error Server Error */}
+      <MDXRemote source={currentDocument.markdown} />
     </section>
   )
 }
