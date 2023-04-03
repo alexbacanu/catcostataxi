@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import { fetchLegal } from "@/lib/helpers/mongo"
+import { fetchSingleLegal } from "@/lib/helpers/mongo"
 import { getDictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
 
@@ -8,37 +8,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dictionary = await getDictionary(params.lang)
 
   return {
-    title: dictionary.root.footer.privacy,
+    title: dictionary.root.footer.terms,
   }
 }
 
 type Props = {
   params: {
     lang: Locale
+    version: string
   }
 }
 
-export default async function PrivacyPage({ params }: Props) {
+export default async function TermsHistoryVersionPage({ params }: Props) {
   const dictionary = await getDictionary(params.lang)
-  const legal = await fetchLegal("privacy", params.lang)
-
-  const currentDocument = legal[0]
+  const legal = await fetchSingleLegal("terms", params.lang, params.version)
+  if (!legal)
+    return (
+      <section className="layout-mx flex-col items-start gap-y-4">
+        {dictionary.legal.not_found}
+      </section>
+    )
 
   return (
     <section className="layout-mx flex-col items-start gap-y-4">
       <ul className="flex space-x-1 text-xs font-normal leading-4 text-gray-500">
         <li>{dictionary.legal.version}</li>
-        <li>{currentDocument.version}</li>
+        <li>{legal.version}</li>
         <li>&middot;</li>
         <li>{dictionary.legal.modified}</li>
-        <li>{new Date(currentDocument.modified).toLocaleDateString()}</li>
-        <li>&middot;</li>
-        <li>
-          <a href="/privacy/history">{dictionary.legal.history}</a>
-        </li>
+        <li>{new Date(legal.modified).toLocaleDateString()}</li>
       </ul>
       {/* @ts-expect-error Server Error */}
-      <MDXRemote source={currentDocument.markdown} />
+      <MDXRemote source={legal.markdown} />
     </section>
   )
 }

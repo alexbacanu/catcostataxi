@@ -85,6 +85,12 @@
     "agree_2": " si ",
     "send": "Trimite"
   },
+  "legal": {
+    "version": "Versiune",
+    "modified": "Modificat",
+    "history": "Vezi istoric",
+    "not_found": "Ne pare rău, nu am găsit nici un document cu această versiune"
+  },
   "root": {
     "footer": {
       "about": "Despre noi",
