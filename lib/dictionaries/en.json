@@ -93,7 +93,8 @@
       "terms": "Terms and conditions"
     },
     "header": {
-      "transfer": "Airport transfer"
+      "transfer": "Airport transfer",
+      "language": "Change display language"
     },
     "meta": {
       "description": "Taxi fare check app. CatCostaTaxi.ro estimates the costs of your next trip quickly, easily and for free!",

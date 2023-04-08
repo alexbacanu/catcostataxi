@@ -99,7 +99,8 @@
       "terms": "Termeni și condiții"
     },
     "header": {
-      "transfer": "Transfer Aeroport"
+      "transfer": "Transfer Aeroport",
+      "language": "Schimbă limba afișată"
     },
     "meta": {
       "description": "Aplicație pentru verificarea tarifului de taxi. CatCostaTaxi.ro estimează costurile călătoriei tale următoare rapid, simplu și gratuit!",
