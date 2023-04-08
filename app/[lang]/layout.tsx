@@ -44,7 +44,7 @@ export default async function RootLayout({ children, params }: Props) {
               <Image
                 src="/logo.svg"
                 alt="CatCostaTaxi Logo"
-                className="h-16 w-auto"
+                className="h-16"
                 width={122}
                 height={64}
               />
@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params }: Props) {
               {dictionary.root.header.transfer}
             </Link> */}
 
-            <LocaleSwitcher lang={params.lang} />
+            <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
           </div>
         </header>
 
