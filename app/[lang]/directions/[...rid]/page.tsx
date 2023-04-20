@@ -140,7 +140,7 @@ export default async function DirectionsPage({ params }: Props) {
   return (
     <>
       <RouteDetails dictionary={dictionary} route={route} />
-      <RouteMap dictionary={dictionary} route={route} />
+      <RouteMap dictionary={dictionary} route={route} lang={params.lang} />
       <TaxiPrices
         dictionary={dictionary}
         initialCompanies={initialCompanies}

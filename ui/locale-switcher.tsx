@@ -23,7 +23,7 @@ export default function LocaleSwitcher({ lang, dictionary }: Props) {
   }
 
   return (
-    <div className="flex gap-x-2 text-xl text-neutral-800">
+    <div className="flex items-center gap-x-2 text-xl text-neutral-800">
       <Link href={{ pathname: redirectedPathName() }} aria-label={dictionary.root.header.language}>
         <FlagIcon className="h-8 rounded-md shadow-md" locale={lang} />
       </Link>

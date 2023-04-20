@@ -50,39 +50,41 @@ export default async function RootLayout({ children, params }: Props) {
               />
             </Link>
 
-            {/* <Link href="/" className="button-base button-secondary">
-              {dictionary.root.header.transfer}
-            </Link> */}
-
-            <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
+            <div className="flex gap-x-4">
+              <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
+            </div>
           </div>
         </header>
 
         <main className="min-h-[80.5vh]">{children}</main>
 
         <footer className="light:bg-neutral-200/50 mt-6 border-t border-neutral-800/10 transition dark:border-white/10">
-          <div className="layout-mx flex-col gap-4 py-4 lg:flex-row">
-            <div className="flex flex-col gap-x-4 gap-y-2 text-center text-lg font-light tracking-tight md:flex-row md:self-center">
-              <Link className="hover:text-amber-500" href={`/${params.lang}/about`}>
-                {dictionary.root.footer.about}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/privacy`}>
-                {dictionary.root.footer.privacy}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/terms`}>
-                {dictionary.root.footer.terms}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/contact`}>
-                {dictionary.root.footer.contact}
-              </Link>
+          <div className="layout-mx flex flex-col justify-between gap-y-4 lg:flex-row">
+            <div>
+              <div className="flex flex-col gap-x-4 text-center sm:flex-row">
+                <Link className="hover:text-amber-500" href={`/${params.lang}/about`}>
+                  {dictionary.root.footer.about}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/privacy`}>
+                  {dictionary.root.footer.privacy}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/terms`}>
+                  {dictionary.root.footer.terms}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/contact`}>
+                  {dictionary.root.footer.contact}
+                </Link>
+              </div>
             </div>
             <div className="space-y-2">
-              {/* <div className="flex w-full justify-evenly">
-                <IconBrandGithub />
-                <IconBrandTwitter />
-                <IconBrandFacebook />
-              </div> */}
-              <div>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</div>
+              <p>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</p>
+              <div className="group relative flex justify-center lg:justify-end">
+                <p className="inline-flex text-xs">{dictionary.root.footer.disclaimer}</p>
+                <div className="absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-sm -translate-x-1/2 rounded border border-white/80 bg-white px-4 py-[6px] text-sm font-semibold text-black opacity-0 transition duration-100 ease-out group-hover:opacity-100">
+                  <span className="absolute -bottom-2 left-1/2 -z-10 h-4 w-4 -translate-x-1/2 rotate-45 rounded-l-sm border-b border-r border-white/80 bg-white"></span>
+                  {dictionary.root.footer.disclaimer_tooltip}
+                </div>
+              </div>
             </div>
           </div>
         </footer>
