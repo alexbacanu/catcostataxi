@@ -96,10 +96,12 @@
       "about": "Despre noi",
       "contact": "Contact",
       "privacy": "Politica de confidențialitate",
-      "terms": "Termeni și condiții"
+      "terms": "Termeni și condiții",
+      "disclaimer": "Această pagină conține link-uri afiliate",
+      "disclaimer_tooltip": "Această pagină conține linkuri afiliate, ceea ce înseamnă că, dacă dați clic pe unul dintre linkurile de produse și faceți o achiziție, este posibil să primim un mic comision. Acest lucru ajută la susținerea site-ului. Vă mulțumim pentru sprijinul acordat!"
     },
     "header": {
-      "transfer": "Transfer Aeroport",
+      "transfer": "sau închiriază o mașină",
       "language": "Schimbă limba afișată"
     },
     "meta": {

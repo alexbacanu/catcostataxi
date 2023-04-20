@@ -1,7 +1,7 @@
 "use client"
 
 import { Combobox, Transition } from "@headlessui/react"
-import { IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
+import { IconExternalLink, IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
@@ -128,7 +128,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
             {fromInput()}
             {toInput()}
 
-            <div className="flex justify-center">
+            <div className="flex items-center justify-center gap-x-6">
               <button
                 type="submit"
                 className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
@@ -136,6 +136,19 @@ export default function AddressForm({ dictionary, lang }: Props) {
               >
                 {isLoading ? <LoadingAnimation /> : dictionary.home.address_form.button}
               </button>
+              <div>
+                <a
+                  href="https://www.tkqlhce.com/click-100816067-13255402"
+                  className="group relative inline-flex items-center overflow-hidden rounded-full px-2 py-1 pr-12 font-medium"
+                >
+                  <span className="absolute right-0 flex h-10 w-10 translate-y-full items-center justify-start opacity-0 duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+                    <IconExternalLink className="h-5 w-5" />
+                  </span>
+                  <span className="relative underline-offset-4 transition duration-300 hover:underline">
+                    {dictionary.root.header.transfer}
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
