@@ -80,8 +80,7 @@ export default async function RootLayout({ children, params }: Props) {
               <p>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</p>
               <div className="group relative flex justify-center lg:justify-end">
                 <p className="inline-flex text-xs">{dictionary.root.footer.disclaimer}</p>
-                <div className="absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-sm -translate-x-1/2 rounded border border-white/80 bg-white px-4 py-[6px] text-sm font-semibold text-black opacity-0 transition duration-100 ease-out group-hover:opacity-100">
-                  <span className="absolute -bottom-2 left-1/2 -z-10 h-4 w-4 -translate-x-1/2 rotate-45 rounded-l-sm border-b border-r border-white/80 bg-white"></span>
+                <div className="card-base absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-sm -translate-x-1/2 px-4 py-[6px] text-sm opacity-0 transition duration-100 ease-out group-hover:opacity-100">
                   {dictionary.root.footer.disclaimer_tooltip}
                 </div>
               </div>
