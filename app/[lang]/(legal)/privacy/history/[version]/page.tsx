@@ -27,6 +27,8 @@ type Props = {
 export default async function PrivacyHistoryVersionPage({ params }: Props) {
   const dictionary = await getDictionary(params.lang)
   const legal = await fetchSingleLegal("privacy", params.lang, params.version)
+  const lang = params.lang === "ro" ? "ro-RO" : "en-GB"
+
   if (!legal)
     return (
       <section className="layout-mx flex-col items-start gap-y-4">
@@ -41,7 +43,7 @@ export default async function PrivacyHistoryVersionPage({ params }: Props) {
         <li>{legal.version}</li>
         <li>&middot;</li>
         <li>{dictionary.legal.modified}</li>
-        <li>{new Date(legal.modified).toLocaleDateString()}</li>
+        <li>{new Date(legal.modified).toLocaleDateString(lang)}</li>
       </ul>
       {/* @ts-expect-error Server Error */}
       <MDXRemote source={legal.markdown} />

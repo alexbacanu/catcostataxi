@@ -21,6 +21,7 @@ type Props = {
 export default async function TermsPage({ params }: Props) {
   const dictionary = await getDictionary(params.lang)
   const legal = await fetchLegal("terms", params.lang)
+  const lang = params.lang === "ro" ? "ro-RO" : "en-GB"
 
   const currentDocument = legal[0]
 
@@ -31,7 +32,7 @@ export default async function TermsPage({ params }: Props) {
         <li>{currentDocument.version}</li>
         <li>&middot;</li>
         <li>{dictionary.legal.modified}</li>
-        <li>{new Date(currentDocument.modified).toLocaleDateString()}</li>
+        <li>{new Date(currentDocument.modified).toLocaleDateString(lang)}</li>
         <li>&middot;</li>
         <li>
           <a href="/terms/history">{dictionary.legal.history}</a>
