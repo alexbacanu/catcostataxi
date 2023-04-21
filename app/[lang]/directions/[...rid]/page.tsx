@@ -125,11 +125,15 @@ export default async function DirectionsPage({ params }: Props) {
     )
   }
 
-  const initialLocation =
-    route.selectedFrom?.structured_formatting.secondary_text ||
-    route.selectedTo?.structured_formatting.secondary_text
+  let initialCompanies = await fetchCompaniesByLoc(
+    route.selectedFrom.structured_formatting.secondary_text
+  )
+  if (initialCompanies.length === 0 && route.selectedTo.structured_formatting.secondary_text) {
+    initialCompanies = await fetchCompaniesByLoc(
+      route.selectedTo.structured_formatting.secondary_text
+    )
+  }
 
-  const initialCompanies = await fetchCompaniesByLoc(initialLocation)
   const initialCity = initialCompanies?.[0]?.city ?? ""
 
   return (
