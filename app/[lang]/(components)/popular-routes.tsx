@@ -52,7 +52,13 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
 
       {type === "stations" && (
         <div className="hidden min-w-[370px] lg:flex">
-          <Image src="/undraw_subway.svg" alt="Rute trenuri" width={370} height={244} />
+          <Image
+            src="/undraw_subway.svg"
+            alt="Rute trenuri"
+            className="h-[244px]"
+            width={370}
+            height={244}
+          />
         </div>
       )}
     </section>

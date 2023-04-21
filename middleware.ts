@@ -11,8 +11,8 @@ function getLocale(request: NextRequest): string | undefined {
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
   // Use negotiator and intl-localematcher to get best locale
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
   const locales: string[] = i18n.locales
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages(locales)
   return matchLocale(languages, locales, i18n.defaultLocale)
 }
 
@@ -57,5 +57,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|_vercel).*)"],
 }

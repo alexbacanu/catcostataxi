@@ -14,6 +14,7 @@ type Props = {
 export default function TaxiTable({ dictionary, initialCompanies }: Props) {
   const companiesArray = useLocationStore((state) => state.companies)
   const fetchedCompanies = companiesArray.length !== 0 ? companiesArray : initialCompanies
+
   return (
     <section className="layout-mx flex flex-col">
       <div className="card-base flex w-full flex-col justify-between gap-y-2 px-6 py-4">

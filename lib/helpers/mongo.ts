@@ -98,7 +98,7 @@ export const fetchAvailableLocations = cache(async () => {
   const allLocations = await companies.find({}).project<Company>({ _id: 0, city: 1 }).toArray()
   if (allLocations.length == 0) console.warn(`😱 Warning: No locations found`)
 
-  const uniqueLocations = allLocations.map((loc) => loc.city)
+  const uniqueLocations = await companies.distinct("city")
 
   return uniqueLocations
 })
