@@ -30,7 +30,7 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
   function initializeMap() {
     return (
       <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=\${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
         strategy="lazyOnload"
         onReady={initRef.current}
       />
