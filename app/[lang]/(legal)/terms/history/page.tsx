@@ -23,6 +23,7 @@ export default async function TermsHistoryPage({ params }: Props) {
 
   return (
     <section className="layout-mx flex-col items-start gap-y-4">
+      <h1>{dictionary.root.footer.terms}</h1>
       {legal.map((document) => (
         <a key={document.version} href={`/terms/history/${document.version}`}>
           <ul className="flex gap-x-2 text-lg font-normal leading-4">

@@ -26,7 +26,12 @@ export async function generateStaticParams() {
     : []
 }
 
-function replacePlaceholders(text: string, routeFrom: string, routeTo: string) {
+function replacePlaceholders(text: string, routeFrom: string, routeTo: string, shorten: boolean) {
+  if (shorten) {
+    routeFrom = routeFrom.slice(0, 18) + ".."
+    routeTo = routeTo.slice(0, 18) + ".."
+  }
+
   return text.replace("{routeFrom}", routeFrom).replace("{routeTo}", routeTo)
 }
 
@@ -40,19 +45,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const routeFrom = selectedFrom?.structured_formatting.main_text || ""
   const routeTo = selectedTo?.structured_formatting.main_text || ""
 
-  const title = replacePlaceholders(dictionary.directions.meta.title, routeFrom, routeTo)
+  const title = replacePlaceholders(dictionary.directions.meta.title, routeFrom, routeTo, true)
   const description = replacePlaceholders(
     dictionary.directions.meta.description,
     routeFrom,
-    routeTo
+    routeTo,
+    true
   )
   const imageUrl = replacePlaceholders(
     dictionary.directions.meta.imageUrl.replace("{siteUrl}", siteUrl),
     routeFrom,
-    routeTo
+    routeTo,
+    false
   )
   const keywords = dictionary.directions.meta.keywords.map((keyword) =>
-    replacePlaceholders(keyword, routeFrom, routeTo)
+    replacePlaceholders(keyword, routeFrom, routeTo, false)
   )
   const url = dictionary.directions.meta.url
     .replace("{siteUrl}", siteUrl)
