@@ -15,19 +15,19 @@ import type { Locale } from "@/lib/locale/i18n-config"
 import type { Metadata } from "next"
 
 export async function generateStaticParams() {
-  if (process.env.CUSTOM_ENV === "production") {
-    const routes = await fetchAllRoutesIds()
+  return process.env.CUSTOM_ENV === "production"
+    ? (await fetchAllRoutesIds()).map(({ hash, selectedFrom, selectedTo }) => ({
+        rid: [
+          hash,
+          normalizeString(selectedFrom.structured_formatting.main_text),
+          normalizeString(selectedTo.structured_formatting.main_text),
+        ],
+      }))
+    : []
+}
 
-    return routes.map(({ hash, selectedFrom, selectedTo }) => ({
-      rid: [
-        hash,
-        normalizeString(selectedFrom.structured_formatting.main_text),
-        normalizeString(selectedTo.structured_formatting.main_text),
-      ],
-    }))
-  } else {
-    return []
-  }
+function replacePlaceholders(text: string, routeFrom: string, routeTo: string) {
+  return text.replace("{routeFrom}", routeFrom).replace("{routeTo}", routeTo)
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -40,22 +40,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const routeFrom = selectedFrom?.structured_formatting.main_text || ""
   const routeTo = selectedTo?.structured_formatting.main_text || ""
 
-  const title = dictionary.directions.meta.title
-    .replace("{routeFrom}", routeFrom)
-    .replace("{routeTo}", routeTo)
-  const description = dictionary.directions.meta.description
-    .replace("{routeFrom}", routeFrom)
-    .replace("{routeTo}", routeTo)
-  const imageUrl = dictionary.directions.meta.imageUrl
-    .replace("{siteUrl}", siteUrl)
-    .replace("{routeFrom}", routeFrom)
-    .replace("{routeTo}", routeTo)
+  const title = replacePlaceholders(dictionary.directions.meta.title, routeFrom, routeTo)
+  const description = replacePlaceholders(
+    dictionary.directions.meta.description,
+    routeFrom,
+    routeTo
+  )
+  const imageUrl = replacePlaceholders(
+    dictionary.directions.meta.imageUrl.replace("{siteUrl}", siteUrl),
+    routeFrom,
+    routeTo
+  )
   const keywords = dictionary.directions.meta.keywords.map((keyword) =>
-    keyword.includes("{routeFrom}")
-      ? keyword.replace("{routeFrom}", routeFrom)
-      : keyword.includes("{routeTo}")
-      ? keyword.replace("{routeTo}", routeTo)
-      : keyword
+    replacePlaceholders(keyword, routeFrom, routeTo)
   )
   const url = dictionary.directions.meta.url
     .replace("{siteUrl}", siteUrl)
@@ -112,7 +109,11 @@ export default async function DirectionsPage({ params }: Props) {
     )
   }
 
-  const route = await fetchSingleRoute(params.rid[0])
+  const [route, availableCities] = await Promise.all([
+    fetchSingleRoute(params.rid[0]),
+    fetchAvailableLocations(),
+  ])
+
   if (!route) {
     return (
       <section className="layout-mx flex h-screen flex-col justify-start">
@@ -124,18 +125,12 @@ export default async function DirectionsPage({ params }: Props) {
     )
   }
 
-  const availableCities = await fetchAvailableLocations()
+  const initialLocation =
+    route.selectedFrom?.structured_formatting.secondary_text ||
+    route.selectedTo?.structured_formatting.secondary_text
 
-  let initialCompanies = await fetchCompaniesByLoc(
-    route.selectedFrom.structured_formatting.secondary_text
-  )
-  if (initialCompanies.length === 0 && route.selectedTo.structured_formatting.secondary_text) {
-    initialCompanies = await fetchCompaniesByLoc(
-      route.selectedTo.structured_formatting.secondary_text
-    )
-  }
-
-  const initialCity = initialCompanies.length !== 0 ? initialCompanies[0]?.city : ""
+  const initialCompanies = await fetchCompaniesByLoc(initialLocation)
+  const initialCity = initialCompanies?.[0]?.city ?? ""
 
   return (
     <>
