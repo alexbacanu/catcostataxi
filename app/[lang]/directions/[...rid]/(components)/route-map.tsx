@@ -89,41 +89,39 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
     <>
       {initializeMap()}
       <section className="layout-mx">
+        <a href="https://www.jdoqocy.com/click-100816067-13255402">
+          <Image
+            src={`https://www.rentalcars.com/partners/integrations/banners/300--600/car-winding-road/${lang}.jpg`}
+            alt="Rent a car"
+            className="mr-8 hidden h-[50vh] w-auto rounded-lg object-contain sm:block"
+            width={300}
+            height={600}
+            priority
+          />
+          <Image
+            src={`https://www.rentalcars.com/partners/integrations/banners/160--600/car-winding-road/${lang}.jpg`}
+            alt="Rent a car"
+            className="mr-8 block h-[50vh] w-auto rounded-lg object-contain sm:hidden"
+            width={161}
+            height={600}
+            priority
+          />
+        </a>
         {ready ? (
-          <>
-            <a href="https://www.jdoqocy.com/click-100816067-13255402">
-              <Image
-                src={`https://www.rentalcars.com/partners/integrations/banners/300--600/car-winding-road/${lang}.jpg`}
-                alt="Rent a car"
-                className="mr-8 hidden h-[50vh] w-auto rounded-lg object-contain sm:block"
-                width={300}
-                height={600}
-                priority
-              />
-              <Image
-                src={`https://www.rentalcars.com/partners/integrations/banners/160--600/car-winding-road/${lang}.jpg`}
-                alt="Rent a car"
-                className="mr-8 block h-[50vh] w-auto rounded-lg object-contain sm:hidden"
-                width={161}
-                height={600}
-                priority
-              />
-            </a>
-            <GoogleMap
-              zoom={10}
-              mapContainerClassName="card-base grow h-[50vh]"
-              options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-              }}
-            >
-              {mapDirections && <DirectionsRenderer directions={mapDirections} />}
-            </GoogleMap>
-          </>
+          <GoogleMap
+            zoom={10}
+            mapContainerClassName="card-base grow h-[50vh]"
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+            }}
+          >
+            {mapDirections && <DirectionsRenderer directions={mapDirections} />}
+          </GoogleMap>
         ) : (
-          <div className="card-base flex h-[50vh] w-full items-center justify-center">
+          <div className="card-base flex h-[50vh] grow items-center justify-center">
             {dictionary.directions.route_map.loading}
           </div>
         )}
