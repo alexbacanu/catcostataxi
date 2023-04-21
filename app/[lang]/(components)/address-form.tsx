@@ -141,11 +141,9 @@ export default function AddressForm({ dictionary, lang }: Props) {
                   href="https://www.tkqlhce.com/click-100816067-13255402"
                   className="group relative inline-flex items-center overflow-hidden rounded-full px-2 py-1 pr-12 font-medium"
                 >
-                  <span className="absolute right-0 flex h-10 w-10 translate-y-full items-center justify-start opacity-0 duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-                    <IconExternalLink className="h-5 w-5" />
-                  </span>
-                  <span className="relative underline-offset-4 transition duration-300 hover:underline">
+                  <span className="flex items-center gap-x-1 underline underline-offset-4">
                     {dictionary.root.header.transfer}
+                    <IconExternalLink className="h-5 w-5" />
                   </span>
                 </a>
               </div>

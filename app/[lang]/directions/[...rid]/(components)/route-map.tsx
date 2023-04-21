@@ -1,21 +1,52 @@
 "use client"
 
-import { DirectionsRenderer, GoogleMap } from "@react-google-maps/api"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import Script from "next/script"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import usePlacesAutocomplete from "use-places-autocomplete"
 import { Dictionary } from "@/lib/locale/get-dictionary"
 import useRoutesStore from "@/lib/stores/route-store"
 import type { Route } from "@/lib/helpers/mongo"
 
-type Props = {
+type RouteMapProps = {
   lang: string
   dictionary: Dictionary
   route: Route
 }
 
-export default function RouteMap({ lang, dictionary, route }: Props) {
+const GoogleMap = dynamic(() => import("@react-google-maps/api").then((m) => m.GoogleMap), {
+  ssr: false,
+})
+
+const DirectionsRenderer = dynamic(
+  () => import("@react-google-maps/api").then((m) => m.DirectionsRenderer),
+  {
+    ssr: false,
+  }
+)
+
+export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
+  function initializeMap() {
+    return (
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=\${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
+        strategy="lazyOnload"
+        onReady={initRef.current}
+      />
+    )
+  }
+
+  function isValidRoute() {
+    return route.selectedFrom.description && route.selectedTo.description
+  }
+
+  function updateRoute() {
+    if (ready && isValidRoute()) {
+      calculateRoute(route.selectedFrom.description, route.selectedTo.description)
+    }
+  }
+
   const [mapDirections, setMapDirections] = useState<google.maps.DirectionsResult>()
 
   const { init, ready } = usePlacesAutocomplete({
@@ -23,7 +54,7 @@ export default function RouteMap({ lang, dictionary, route }: Props) {
     initOnMount: false,
   })
 
-  async function calculateRoute(origin: string, destination: string) {
+  const calculateRoute = useCallback(async (origin: string, destination: string) => {
     const directionsService = new google.maps.DirectionsService()
     const route = await directionsService.route({
       origin,
@@ -34,11 +65,11 @@ export default function RouteMap({ lang, dictionary, route }: Props) {
       },
     })
     setMapDirections(route)
-  }
+  }, [])
 
   useEffect(() => {
-    if (!route.selectedFrom.description || !route.selectedTo.description) return
-    ready && calculateRoute(route.selectedFrom.description, route.selectedTo.description)
+    updateRoute()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route.selectedFrom.description, route.selectedTo.description, ready])
 
   const initRef = useRef(init)
@@ -56,11 +87,7 @@ export default function RouteMap({ lang, dictionary, route }: Props) {
 
   return (
     <>
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
-        strategy="lazyOnload"
-        onReady={initRef.current}
-      />
+      {initializeMap()}
       <section className="layout-mx">
         {ready ? (
           <>
@@ -99,26 +126,6 @@ export default function RouteMap({ lang, dictionary, route }: Props) {
           </div>
         )}
       </section>
-      {/* <section className="layout-mx"> */}
-      {/* <div className="relative flex w-full items-center justify-center rounded-lg">
-          <Image
-            src="https://www.rentalcars.com/partners/integrations/banners/970--90/car-winding-road/ro.jpg"
-            alt="Rent a car"
-            className="h-[120px] w-auto rounded-lg object-contain"
-            width={970}
-            height={120}
-          />
-        </div> */}
-      {/* <div className="relative flex w-full items-center justify-center rounded-lg">
-          <Image
-            src="https://www.rentalcars.com/partners/integrations/banners/468--60/birds-eye-road/ro.jpg"
-            alt="Rent a car"
-            className="h-[90px] w-auto rounded-lg object-contain"
-            width={468}
-            height={60}
-          />
-        </div> */}
-      {/* </section> */}
     </>
   )
 }
