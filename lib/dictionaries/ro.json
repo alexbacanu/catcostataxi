@@ -5,7 +5,7 @@
       "not_valid": "Ne pare rău, ruta nu este validă"
     },
     "meta": {
-      "description": "Obțineți o estimare a tarifului pentru taxi de la {routeFrom} până la {routeTo}. Verifică gratuit, cât costă cursa într-un mod convenabil și ușor.",
+      "description": "Obțineți o estimare a tarifului pentru taxi de la {routeFrom} până la {routeTo}. Verifică gratuit cât costă cursa într-un mod rapid și ușor",
       "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
       "keywords": [
         "cost taxi",

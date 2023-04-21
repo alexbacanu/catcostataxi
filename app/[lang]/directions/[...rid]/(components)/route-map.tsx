@@ -15,22 +15,22 @@ type RouteMapProps = {
   route: Route
 }
 
-const GoogleMap = dynamic(() => import("@react-google-maps/api").then((m) => m.GoogleMap), {
-  ssr: false,
-})
-
-const DirectionsRenderer = dynamic(
-  () => import("@react-google-maps/api").then((m) => m.DirectionsRenderer),
-  {
-    ssr: false,
-  }
-)
-
 export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
+  const GoogleMap = dynamic(() => import("@react-google-maps/api").then((m) => m.GoogleMap), {
+    ssr: true,
+  })
+
+  const DirectionsRenderer = dynamic(
+    () => import("@react-google-maps/api").then((m) => m.DirectionsRenderer),
+    {
+      ssr: true,
+    }
+  )
+
   function initializeMap() {
     return (
       <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
+        src={`https://maps.googleapis.com/maps/api/js?v=beta&key=${process.env.NEXT_PUBLIC_GMAPS_API_KEY}&libraries=places`}
         strategy="lazyOnload"
         onReady={initRef.current}
       />
@@ -89,39 +89,39 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
     <>
       {initializeMap()}
       <section className="layout-mx">
+        <a href="https://www.jdoqocy.com/click-100816067-13255402">
+          <Image
+            src={`https://www.rentalcars.com/partners/integrations/banners/300--600/car-winding-road/${lang}.jpg`}
+            alt="Rent a car"
+            className="mr-8 hidden h-[50vh] w-auto rounded-lg object-contain sm:block"
+            width={300}
+            height={600}
+            priority
+          />
+          <Image
+            src={`https://www.rentalcars.com/partners/integrations/banners/160--600/car-winding-road/${lang}.jpg`}
+            alt="Rent a car"
+            className="mr-8 block h-[50vh] w-auto rounded-lg object-contain sm:hidden"
+            width={161}
+            height={600}
+            priority
+          />
+        </a>
         {ready ? (
-          <>
-            <a href="https://www.jdoqocy.com/click-100816067-13255402">
-              <Image
-                src={`https://www.rentalcars.com/partners/integrations/banners/300--600/car-winding-road/${lang}.jpg`}
-                alt="Rent a car"
-                className="mr-8 hidden h-[50vh] w-auto rounded-lg object-contain sm:block"
-                width={300}
-                height={600}
-              />
-              <Image
-                src={`https://www.rentalcars.com/partners/integrations/banners/160--600/car-winding-road/${lang}.jpg`}
-                alt="Rent a car"
-                className="mr-8 block h-[50vh] w-auto rounded-lg object-contain sm:hidden"
-                width={161}
-                height={600}
-              />
-            </a>
-            <GoogleMap
-              zoom={10}
-              mapContainerClassName="card-base grow h-[50vh]"
-              options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-              }}
-            >
-              {mapDirections && <DirectionsRenderer directions={mapDirections} />}
-            </GoogleMap>
-          </>
+          <GoogleMap
+            zoom={10}
+            mapContainerClassName="card-base grow h-[50vh]"
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              mapTypeControl: false,
+              fullscreenControl: false,
+            }}
+          >
+            {mapDirections && <DirectionsRenderer directions={mapDirections} />}
+          </GoogleMap>
         ) : (
-          <div className="card-base flex h-[50vh] w-full items-center justify-center">
+          <div className="card-base flex h-[50vh] grow items-center justify-center">
             {dictionary.directions.route_map.loading}
           </div>
         )}
