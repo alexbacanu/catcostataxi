@@ -1,11 +1,11 @@
 "use client"
 
 import { Combobox, Transition } from "@headlessui/react"
-import { IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
+import { IconExternalLink, IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Script from "next/script"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useCallback, useEffect, useRef, useState } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import usePlacesAutocomplete from "use-places-autocomplete"
 import hashPair from "@/lib/helpers/hasher"
@@ -20,16 +20,14 @@ type Props = {
 }
 
 export default function AddressForm({ dictionary, lang }: Props) {
+  const [fromError, setFromError] = useState("")
+  const [toError, setToError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const selectedFrom = useAddressStore((state) => state.addressFrom)
   const selectedTo = useAddressStore((state) => state.addressTo)
-
   const resetAddress = useAddressStore((state) => state.reset)
   const switchAddress = useAddressStore((state) => state.switch)
-
-  const [fromError, setFromError] = useState("")
-  const [toError, setToError] = useState("")
 
   const {
     init,
@@ -51,58 +49,85 @@ export default function AddressForm({ dictionary, lang }: Props) {
   const initRef = useRef(init)
   const router = useRouter()
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
+  const validateSelectedFrom = () => {
     if (!selectedFrom.description) {
       setFromError(dictionary.home.address_form.from_error)
-      return
+      return false
     } else {
       setFromError("")
-    }
-
-    if (!selectedTo.description) {
-      setToError(dictionary.home.address_form.to_error)
-      return
-    } else {
-      setToError("")
-    }
-
-    setIsLoading(true)
-
-    const data = {
-      hash: hashPair(selectedFrom.description, selectedTo.description),
-      selectedFrom,
-      selectedTo,
-    }
-
-    try {
-      const response = await fetch(`/${lang}/api/directions`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        console.error(response.status, response.statusText)
-        setIsLoading(false)
-        throw new Error("Network response was not ok.")
-      }
-
-      resetAddress()
-      router.push(
-        `/${lang}/directions/${data.hash}/${normalizeString(
-          selectedFrom.structured_formatting.main_text
-        )}/${normalizeString(selectedTo.structured_formatting.main_text)}`
-      )
-      setIsLoading(false)
-    } catch (error) {
-      toast.error(dictionary.home.address_form.toast_error)
-      console.error("Error:", error)
+      return true
     }
   }
+
+  const validateSelectedTo = () => {
+    if (!selectedTo.description) {
+      setToError(dictionary.home.address_form.to_error)
+      return false
+    } else {
+      setToError("")
+      return true
+    }
+  }
+
+  const fetchDirections = async (data: {
+    hash: string
+    selectedFrom: google.maps.places.AutocompletePrediction
+    selectedTo: google.maps.places.AutocompletePrediction
+  }) => {
+    const response = await fetch(`/${lang}/api/directions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+
+    if (!response.ok) {
+      console.error(response.status, response.statusText)
+      throw new Error("Network response was not ok.")
+    }
+
+    return response
+  }
+
+  const onSubmit = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+
+      if (!validateSelectedFrom() || !validateSelectedTo()) {
+        return
+      }
+
+      setIsLoading(true)
+
+      const data = {
+        hash: hashPair(selectedFrom.description, selectedTo.description),
+        selectedFrom,
+        selectedTo,
+      }
+
+      router.prefetch(
+        `/${lang}/directions/${data.hash}/${data.selectedFrom.description}/${data.selectedTo.description}`
+      )
+
+      try {
+        await fetchDirections(data)
+
+        resetAddress()
+
+        const from = normalizeString(selectedFrom.structured_formatting.main_text)
+        const to = normalizeString(selectedTo.structured_formatting.main_text)
+        router.push(`/${lang}/directions/${data.hash}/${from}/${to}`)
+
+        setIsLoading(false)
+      } catch (error) {
+        toast.error(dictionary.home.address_form.toast_error)
+        console.error("Error:", error)
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedFrom, selectedTo, resetAddress, router, lang]
+  )
 
   useEffect(() => {
     if (!initRef.current) {
@@ -128,7 +153,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
             {fromInput()}
             {toInput()}
 
-            <div className="flex justify-center">
+            <div className="flex items-center justify-center gap-x-6">
               <button
                 type="submit"
                 className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
@@ -136,6 +161,17 @@ export default function AddressForm({ dictionary, lang }: Props) {
               >
                 {isLoading ? <LoadingAnimation /> : dictionary.home.address_form.button}
               </button>
+              <div>
+                <a
+                  href="https://www.tkqlhce.com/click-100816067-13255402"
+                  className="group relative inline-flex items-center overflow-hidden rounded-full px-2 py-1 pr-12 font-medium"
+                >
+                  <span className="flex items-center gap-x-1 underline underline-offset-4">
+                    {dictionary.root.header.transfer}
+                    <IconExternalLink className="h-5 w-5" />
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 

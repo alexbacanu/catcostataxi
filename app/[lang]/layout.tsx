@@ -40,49 +40,50 @@ export default async function RootLayout({ children, params }: Props) {
       <body className="bg-white text-neutral-800 antialiased transition dark:bg-neutral-800 dark:text-neutral-200 [&>*]:mx-auto">
         <header className="z-30 bg-amber-400 shadow-md transition">
           <div className="layout-mx justify-between py-4">
-            <Link href={{ pathname: "/" }}>
+            <Link href={{ pathname: `/${params.lang}` }}>
               <Image
                 src="/logo.svg"
                 alt="CatCostaTaxi Logo"
-                className="h-16 w-auto"
+                className="h-16"
                 width={122}
                 height={64}
               />
             </Link>
 
-            {/* <Link href="/" className="button-base button-secondary">
-              {dictionary.root.header.transfer}
-            </Link> */}
-
-            <LocaleSwitcher lang={params.lang} />
+            <div className="flex gap-x-4">
+              <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
+            </div>
           </div>
         </header>
 
         <main className="min-h-[80.5vh]">{children}</main>
 
         <footer className="light:bg-neutral-200/50 mt-6 border-t border-neutral-800/10 transition dark:border-white/10">
-          <div className="layout-mx flex-col gap-4 py-4 lg:flex-row">
-            <div className="flex flex-col gap-x-4 gap-y-2 text-center text-lg font-light tracking-tight md:flex-row md:self-center">
-              <Link className="hover:text-amber-500" href={`/${params.lang}/about`}>
-                {dictionary.root.footer.about}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/privacy`}>
-                {dictionary.root.footer.privacy}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/terms`}>
-                {dictionary.root.footer.terms}
-              </Link>
-              <Link className="hover:text-amber-500" href={`/${params.lang}/contact`}>
-                {dictionary.root.footer.contact}
-              </Link>
+          <div className="layout-mx flex flex-col justify-between gap-y-4 lg:flex-row">
+            <div>
+              <div className="flex flex-col gap-x-4 text-center sm:flex-row">
+                <Link className="hover:text-amber-500" href={`/${params.lang}/about`}>
+                  {dictionary.root.footer.about}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/privacy`}>
+                  {dictionary.root.footer.privacy}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/terms`}>
+                  {dictionary.root.footer.terms}
+                </Link>
+                <Link className="hover:text-amber-500" href={`/${params.lang}/contact`}>
+                  {dictionary.root.footer.contact}
+                </Link>
+              </div>
             </div>
             <div className="space-y-2">
-              {/* <div className="flex w-full justify-evenly">
-                <IconBrandGithub />
-                <IconBrandTwitter />
-                <IconBrandFacebook />
-              </div> */}
-              <div>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</div>
+              <p>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</p>
+              <div className="group relative flex justify-center lg:justify-end">
+                <p className="inline-flex text-xs">{dictionary.root.footer.disclaimer}</p>
+                <div className="card-base absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-sm -translate-x-1/2 px-4 py-[6px] text-sm opacity-0 transition duration-100 ease-out group-hover:opacity-100">
+                  {dictionary.root.footer.disclaimer_tooltip}
+                </div>
+              </div>
             </div>
           </div>
         </footer>

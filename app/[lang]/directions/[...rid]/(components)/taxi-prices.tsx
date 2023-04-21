@@ -11,11 +11,12 @@ import {
   IconClockHour4,
 } from "@tabler/icons-react"
 import Image from "next/image"
-import { useState, Fragment } from "react"
+import { useState, Fragment, useMemo } from "react"
 import toast from "react-hot-toast"
 import { Dictionary } from "@/lib/locale/get-dictionary"
 import useLocationStore from "@/lib/stores/location-store"
 import useRoutesStore from "@/lib/stores/route-store"
+import { LoadingComponent } from "./loading-component"
 import type { Company } from "@/lib/helpers/mongo"
 
 type Props = {
@@ -40,24 +41,13 @@ export default function TaxiPrices({
   const selectedCity = locationArray.length !== 0 ? locationArray : initialCity
   const fetchedCompanies = companiesArray.length !== 0 ? companiesArray : initialCompanies
 
-  const [priceData, setPriceData] = useState(calculatePriceData(fetchedCompanies))
+  const memoPriceData = useMemo(() => calculatePriceData(fetchedCompanies), [fetchedCompanies])
+  const [priceData, setPriceData] = useState(memoPriceData)
 
   const mapRoutes = useRoutesStore((state) => state.mapDirections.routes)
-  if (!mapRoutes[0]) {
-    return (
-      <section className="layout-mx flex flex-col">
-        {dictionary.directions.taxi_prices.loading}
-      </section>
-    )
-  }
-
   const { distance, duration, duration_in_traffic } = mapRoutes[0]?.legs[0] || {}
-  if (!distance || !duration || !duration_in_traffic) {
-    return (
-      <section className="layout-mx flex flex-col">
-        {dictionary.directions.taxi_prices.loading}
-      </section>
-    )
+  if (!mapRoutes[0] || !distance || !duration || !duration_in_traffic) {
+    return <LoadingComponent message={dictionary.directions.taxi_prices.loading} />
   }
 
   function handleChange(priceType: keyof typeof priceData) {
@@ -67,16 +57,10 @@ export default function TaxiPrices({
 
       if (!pattern.test(value)) return
 
-      if (value === "") {
-        setPriceData({
-          ...priceData,
-          [priceType]: 0,
-        })
-      }
-
+      const newValue = Number(value)
       setPriceData({
         ...priceData,
-        [priceType]: Math.min(Math.max(0, parseFloat(value)), 99),
+        [priceType]: Math.min(Math.max(0, newValue), 99.99),
       })
     }
   }
@@ -231,9 +215,6 @@ export default function TaxiPrices({
                   </div>
                 </Listbox>
               )}
-
-              {/* Empty div */}
-              {/* <div className="hidden sm:block sm:grow"></div> */}
             </div>
 
             {/* Right */}
@@ -298,7 +279,13 @@ export default function TaxiPrices({
             {/* Image */}
             <div className="shrink-0">
               <div className="relative">
-                <Image src="/taxi-yellow.png" alt="Standard taxi" width={113} height={72} />
+                <Image
+                  src="/taxi-yellow.png"
+                  alt="Standard taxi"
+                  className=""
+                  width={113}
+                  height={72}
+                />
                 <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Taxi
                 </div>
@@ -310,14 +297,28 @@ export default function TaxiPrices({
                 {dictionary.directions.taxi_prices.not_enough_info}
               </div>
             ) : (
-              <div className="w-full overflow-hidden">
-                <dl>
-                  <div className="items-center px-1 sm:grid sm:grid-cols-4">
-                    <dt className="p-2">Per km (lei):</dt>
+              <div className="flex w-full flex-col gap-x-6 py-1 italic sm:w-auto sm:flex-row">
+                <div>
+                  <div className="whitespace-nowrap">Total (lei)</div>
+                  <div>
                     <dd
                       className={`${
                         nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                      } font-bold dark:font-semibold sm:col-span-3`}
+                      } font-bold dark:font-semibold`}
+                    >
+                      <div className="py-1">
+                        {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
+                      </div>
+                    </dd>
+                  </div>
+                </div>
+                <div>
+                  <div className="whitespace-nowrap">Per km (lei)</div>
+                  <div>
+                    <dd
+                      className={`${
+                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                      } font-bold dark:font-semibold`}
                     >
                       {modifyToggle ? (
                         <input
@@ -327,28 +328,16 @@ export default function TaxiPrices({
                           onChange={
                             nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")
                           }
-                          className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
+                          className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5 sm:w-auto"
                         />
                       ) : (
-                        <div className="px-2 py-1">
+                        <div className="py-1">
                           {nightToggle ? priceData.nightPrice : priceData.dayPrice}
                         </div>
                       )}
                     </dd>
                   </div>
-                  <div className="items-center px-1 sm:grid sm:grid-cols-4">
-                    <dt className="p-2">Total (lei):</dt>
-                    <dd
-                      className={`${
-                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                      } font-bold dark:font-semibold sm:col-span-3`}
-                    >
-                      <span className="px-2 py-1">
-                        {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
-                      </span>
-                    </dd>
-                  </div>
-                </dl>
+                </div>
               </div>
             )}
           </div>
@@ -358,7 +347,6 @@ export default function TaxiPrices({
         </div>
         <div className="flex min-w-[28%] flex-row gap-8 lg:flex-col">
           <div className="card-base flex grow flex-col items-center justify-center gap-x-2 sm:flex-row sm:justify-between">
-            {/* --- */}
             <div className="flex items-center">
               <IconRoute2 />
               <span className="pl-2">{dictionary.directions.taxi_prices.distance}</span>
@@ -366,10 +354,8 @@ export default function TaxiPrices({
             <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
               {distance.text}
             </p>
-            {/* --- */}
           </div>
           <div className="card-base flex grow flex-col items-center justify-center gap-x-2 sm:flex-row sm:justify-between">
-            {/* --- */}
             <div className="flex items-center">
               {duration.value > duration_in_traffic.value ? (
                 <IconTrafficCone />
@@ -383,7 +369,6 @@ export default function TaxiPrices({
                 ? duration_in_traffic.text
                 : duration.text}
             </p>
-            {/* --- */}
           </div>
         </div>
       </div>

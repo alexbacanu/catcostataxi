@@ -27,7 +27,7 @@
       "modify": "Modify",
       "not_enough_info": "Sorry, we don't have enough information for this area",
       "ride": "Trip",
-      "save": "Change",
+      "save": "Save",
       "select_city": "Choose a city",
       "toast_error": "An error occurred, please try again later",
       "tooltip_change_price": "Switch between day and night rates",
@@ -90,10 +90,13 @@
       "about": "About us",
       "contact": "Contact",
       "privacy": "Privacy policy",
-      "terms": "Terms and conditions"
+      "terms": "Terms and conditions",
+      "disclaimer": "This page contains affiliate links",
+      "disclaimer_tooltip": "This page contains affiliate links, which means that if you click on one of the product links and make a purchase, we may receive a small commission. This helps support the website. Thank you for your support!"
     },
     "header": {
-      "transfer": "Airport transfer"
+      "transfer": "or rent a car",
+      "language": "Change display language"
     },
     "meta": {
       "description": "Taxi fare check app. CatCostaTaxi.ro estimates the costs of your next trip quickly, easily and for free!",

@@ -2,13 +2,15 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Dictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
 
 type Props = {
   lang: Locale
+  dictionary: Dictionary
 }
 
-export default function LocaleSwitcher({ lang }: Props) {
+export default function LocaleSwitcher({ lang, dictionary }: Props) {
   const pathName = usePathname()
   const switchLanguage = lang === "ro" ? "en" : "ro"
 
@@ -21,8 +23,8 @@ export default function LocaleSwitcher({ lang }: Props) {
   }
 
   return (
-    <div className="flex gap-x-2 text-xl text-neutral-800">
-      <Link href={{ pathname: redirectedPathName() }}>
+    <div className="flex items-center gap-x-2 text-xl text-neutral-800">
+      <Link href={{ pathname: redirectedPathName() }} aria-label={dictionary.root.header.language}>
         <FlagIcon className="h-8 rounded-md shadow-md" locale={lang} />
       </Link>
     </div>
