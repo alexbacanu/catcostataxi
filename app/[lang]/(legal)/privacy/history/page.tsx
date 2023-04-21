@@ -23,6 +23,7 @@ export default async function PrivacyHistoryPage({ params }: Props) {
 
   return (
     <section className="layout-mx flex-col items-start gap-y-4">
+      <h1>{dictionary.root.footer.privacy}</h1>
       {legal.map((document) => (
         <a key={document.version} href={`/privacy/history/${document.version}`}>
           <ul className="flex gap-x-2 text-lg font-normal leading-4">

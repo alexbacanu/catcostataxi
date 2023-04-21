@@ -300,42 +300,38 @@ export default function TaxiPrices({
               <div className="flex w-full flex-col gap-x-6 py-1 italic sm:w-auto sm:flex-row">
                 <div>
                   <div className="whitespace-nowrap">Total (lei)</div>
-                  <div>
-                    <dd
-                      className={`${
-                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                      } font-bold dark:font-semibold`}
-                    >
-                      <div className="py-1">
-                        {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
-                      </div>
-                    </dd>
+                  <div
+                    className={`${
+                      nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                    } font-bold dark:font-semibold`}
+                  >
+                    <div className="py-1">
+                      {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
+                    </div>
                   </div>
                 </div>
                 <div>
                   <div className="whitespace-nowrap">Per km (lei)</div>
-                  <div>
-                    <dd
-                      className={`${
-                        nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
-                      } font-bold dark:font-semibold`}
-                    >
-                      {modifyToggle ? (
-                        <input
-                          value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                          type="number"
-                          step={0.01}
-                          onChange={
-                            nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")
-                          }
-                          className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5 sm:w-auto"
-                        />
-                      ) : (
-                        <div className="py-1">
-                          {nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                        </div>
-                      )}
-                    </dd>
+                  <div
+                    className={`${
+                      nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
+                    } font-bold dark:font-semibold`}
+                  >
+                    {modifyToggle ? (
+                      <input
+                        value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
+                        type="number"
+                        step={0.01}
+                        onChange={
+                          nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")
+                        }
+                        className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5 sm:w-auto"
+                      />
+                    ) : (
+                      <div className="py-1">
+                        {nightToggle ? priceData.nightPrice : priceData.dayPrice}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
