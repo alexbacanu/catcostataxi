@@ -79,8 +79,8 @@ export default async function RootLayout({ children, params }: Props) {
             <div className="space-y-2">
               <p>Copyright &copy; {new Date().getFullYear()} catcostataxi.ro</p>
               <div className="group relative flex justify-center lg:justify-end">
-                <p className="inline-flex text-xs">{dictionary.root.footer.disclaimer}</p>
-                <div className="card-base absolute bottom-full left-1/2 z-10 mb-2 w-max max-w-sm -translate-x-1/2 px-4 py-[6px] text-sm opacity-0 transition duration-100 ease-out group-hover:opacity-100">
+                <p className="peer inline-flex text-xs">{dictionary.root.footer.disclaimer}</p>
+                <div className="card-base absolute bottom-full left-1/2 z-10 mb-2 hidden w-max max-w-sm -translate-x-1/2 px-4 py-[6px] text-sm opacity-0 transition duration-100 ease-out peer-hover:block peer-hover:opacity-100">
                   {dictionary.root.footer.disclaimer_tooltip}
                 </div>
               </div>
