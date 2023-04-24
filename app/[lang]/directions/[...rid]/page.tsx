@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { notFound } from "next/navigation"
 import {
   fetchAllRoutesIds,
   fetchAvailableLocations,
@@ -106,14 +106,7 @@ export default async function DirectionsPage({ params }: Props) {
   const dictionary = await getDictionary(params.lang)
 
   if (params.rid[0].length !== 8 && typeof params.rid[0] !== "string") {
-    return (
-      <section className="layout-mx flex h-screen flex-col justify-start">
-        <h1 className="mb-6 py-6">{dictionary.directions.errors.not_valid}</h1>
-        <div className="relative h-[36rem] w-[36rem]">
-          <Image src="/undraw_exploring.svg" alt="No route found" fill />
-        </div>
-      </section>
-    )
+    notFound()
   }
 
   const [route, availableCities] = await Promise.all([
@@ -122,14 +115,7 @@ export default async function DirectionsPage({ params }: Props) {
   ])
 
   if (!route) {
-    return (
-      <section className="layout-mx flex h-screen flex-col justify-start">
-        <h1 className="mb-6 py-6">{dictionary.directions.errors.not_found}</h1>
-        <div className="relative h-[36rem] w-[36rem]">
-          <Image src="/undraw_exploring.svg" alt="No route found" fill />
-        </div>
-      </section>
-    )
+    notFound()
   }
 
   let initialCompanies = await fetchCompaniesByLoc(

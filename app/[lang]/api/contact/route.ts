@@ -52,8 +52,8 @@ export async function POST(request: NextRequest) {
       const termsVersion = await fetchLegal("terms", "ro")
 
       const mail = {
-        to: "catcostataxi@gmail.com", // Change to your recipient
-        from: "catcostataxi@gmail.com", // Change to your verified sender
+        to: "hey@catcostataxi.ro", // Change to your recipient
+        from: "hey@catcostataxi.ro", // Change to your verified sender
         subject: `Contact Form: ${email}`,
         text: `Name: ${firstName} ${lastName}
 Email: ${email}

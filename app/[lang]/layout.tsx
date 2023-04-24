@@ -44,7 +44,7 @@ export default async function RootLayout({ children, params }: Props) {
               <Image
                 src="/logo.svg"
                 alt="CatCostaTaxi Logo"
-                className="h-16"
+                className="h-14 sm:h-16"
                 width={122}
                 height={64}
               />
@@ -52,6 +52,7 @@ export default async function RootLayout({ children, params }: Props) {
 
             <div className="flex gap-x-4">
               <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
+              <a className="button-base button-secondary">{dictionary.root.header.airport}</a>
             </div>
           </div>
         </header>
