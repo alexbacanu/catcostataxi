@@ -8,11 +8,13 @@ const nextConfig = {
       {
         hostname: "www.rentalcars.com",
       },
+      {
+        hostname: "static.tapfiliate.com",
+      },
     ],
   },
   experimental: {
     appDir: true,
-    typedRoutes: true,
     mdxRs: true,
   },
 }
