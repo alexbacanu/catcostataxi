@@ -11,7 +11,7 @@ export default function GoogleAds() {
         strategy="lazyOnload"
         crossOrigin="anonymous"
         data-category="advertising"
-        // type="text/plain"
+        type="text/plain"
       ></Script>
     </>
   )
