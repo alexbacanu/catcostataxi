@@ -5,7 +5,7 @@
       "not_valid": "Sorry, the route is not valid"
     },
     "meta": {
-      "description": "Get a taxi fare estimate from {routeFrom} to {routeTo}. Check for free, how much the ride costs in a convenient and easy way",
+      "description": "Get a taxi fare estimate from {routeFrom} to {routeTo}. Check now, how much the ride costs in a convenient and easy way",
       "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
       "keywords": ["taxi fare", "taxi cost", "taxi estimate", "from {routeFrom}", "to {routeTo}"],
       "title": "How much is a taxi from {routeFrom} to {routeTo}",
@@ -89,6 +89,7 @@
     "footer": {
       "about": "About us",
       "contact": "Contact",
+      "cookies": "🍪 Cookies preferences",
       "privacy": "Privacy policy",
       "terms": "Terms and conditions",
       "disclaimer": "This page contains affiliate links",
