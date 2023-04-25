@@ -45,6 +45,18 @@ const pluginConfig: CookieConsentConfig = {
         reloadPage: false,
       },
     },
+    advertising: {
+      readOnly: false,
+      enabled: true,
+      autoClear: {
+        cookies: [
+          {
+            name: /^(__gads|__gpi)/,
+          },
+        ],
+        reloadPage: false,
+      },
+    },
   },
 
   // disablePageInteraction: true,
@@ -122,6 +134,29 @@ const pluginConfig: CookieConsentConfig = {
                 ],
               },
             },
+            {
+              title: "Advertising cookies",
+              description:
+                "Our website uses advertising cookies to display personalized advertisements and promotional content based on your browsing behavior and preferences.",
+              linkedCategory: "advertising",
+              cookieTable: {
+                headers: {
+                  name: "Name",
+                  domain: "Service",
+                  description: "Description",
+                  expiration: "Expiration",
+                },
+                body: [
+                  {
+                    name: "__gads, __gpi",
+                    domain: "Google Adsense",
+                    description:
+                      'Cookie set by <a href="https://www.google.com/intl/adsense/policies/privacy/">Google Adsense</a>.',
+                    expiration: "Expires after 30 days",
+                  },
+                ],
+              },
+            },
           ],
         },
       },
@@ -174,7 +209,7 @@ const pluginConfig: CookieConsentConfig = {
             {
               title: "Cookie-uri de performanță și analiză",
               description:
-                "Cookie-urile de performanță și analiză sunt utilizate pentru a urmări vizitatorii site-ului web și comportamentul lor de utilizare. Aceste date sunt utilizate pentru a îmbunătăți modul de funcționare a site-ului web și, în consecință, pentru a îmbunătăți experiența utilizatorului",
+                "Cookie-urile de performanță și analiză sunt utilizate pentru a urmări vizitatorii site-ului web și comportamentul lor de utilizare. Aceste date sunt utilizate pentru a îmbunătăți modul de funcționare a site-ului web și, în consecință, pentru a îmbunătăți experiența utilizatorului.",
               linkedCategory: "analytics",
               cookieTable: {
                 headers: {
@@ -189,6 +224,29 @@ const pluginConfig: CookieConsentConfig = {
                     domain: "Google Analytics",
                     description:
                       'Cookie setat de <a href="https://www.google.com/intl/analytics/policies/privacy/">Google Analytics</a>.',
+                    expiration: "Expiră după 30 de zile",
+                  },
+                ],
+              },
+            },
+            {
+              title: "Cookie-uri de publicitate",
+              description:
+                "Site-ul nostru web folosește cookie-uri de publicitate pentru a afișa reclame personalizate și conținut promoțional bazat pe comportamentul și preferințele dumneavoastră de navigare.",
+              linkedCategory: "advertising",
+              cookieTable: {
+                headers: {
+                  name: "Nume",
+                  domain: "Serviciu",
+                  description: "Descriere",
+                  expiration: "Expirare",
+                },
+                body: [
+                  {
+                    name: "__gads, __gpi",
+                    domain: "Google Adsense",
+                    description:
+                      'Cookie setat de <a href="https://www.google.com/intl/adsense/policies/privacy/">Google Adsense</a>.',
                     expiration: "Expiră după 30 de zile",
                   },
                 ],

@@ -6,6 +6,7 @@ export default function GoogleAnalytics() {
   return (
     <>
       <Script
+        id="gtag-analytics"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         strategy="afterInteractive"
         data-category="analytics"
@@ -29,37 +30,6 @@ export default function GoogleAnalytics() {
             });
         `}
       </Script>
-      {/* <Script id="google-analytics-storage-enabled" type="text/plain" data-category="analytics">
-        {`
-        gtag('consent', 'update', {
-            'analytics_storage': 'granted'
-        });
-        `}
-      </Script>
-
-      <Script id="google-analytics-storage-disabled" type="text/plain" data-category="!analytics">
-        {`
-        gtag('consent', 'update', {
-            'analytics_storage': 'denied'
-        });
-        `}
-      </Script>
-
-      <Script id="google-analytics-ads-enabled" type="text/plain" data-category="ads">
-        {`
-        gtag('consent', 'update', {
-            'ad_storage': 'granted'
-        });
-        `}
-      </Script>
-
-      <Script id="google-analytics-ads-disabled" type="text/plain" data-category="!ads">
-        {`
-        gtag('consent', 'update', {
-            'ad_storage': 'denied'
-        });
-        `}
-      </Script> */}
     </>
   )
 }
