@@ -5,7 +5,7 @@
       "not_valid": "Ne pare rău, ruta nu este validă"
     },
     "meta": {
-      "description": "Obțineți o estimare a tarifului pentru taxi de la {routeFrom} până la {routeTo}. Verifică gratuit cât costă cursa într-un mod rapid și ușor",
+      "description": "Obțineți o estimare a tarifului unui taxi de la {routeFrom} până la {routeTo}. Verifică cât costă cursa, rapid și ușor",
       "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
       "keywords": [
         "cost taxi",
@@ -95,6 +95,7 @@
     "footer": {
       "about": "Despre noi",
       "contact": "Contact",
+      "cookies": "🍪 Setări cookies",
       "privacy": "Politica de confidențialitate",
       "terms": "Termeni și condiții",
       "disclaimer": "Această pagină conține link-uri afiliate",

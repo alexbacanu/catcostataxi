@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Dictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
@@ -24,9 +23,9 @@ export default function LocaleSwitcher({ lang, dictionary }: Props) {
 
   return (
     <div className="flex items-center gap-x-2 text-xl text-neutral-800">
-      <Link href={{ pathname: redirectedPathName() }} aria-label={dictionary.root.header.language}>
+      <a href={redirectedPathName()} aria-label={dictionary.root.header.language}>
         <FlagIcon className="h-8 rounded-md shadow-md" locale={lang} />
-      </Link>
+      </a>
     </div>
   )
 }
