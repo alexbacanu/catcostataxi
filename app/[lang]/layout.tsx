@@ -40,8 +40,9 @@ export default async function RootLayout({ children, params }: Props) {
   return (
     <html lang={params.lang} className={inter.className}>
       <GoogleAnalytics />
-      <CookieButton lang={params.lang} />
       <GoogleAds />
+      <CookieButton lang={params.lang} />
+
       <body className="bg-white text-neutral-800 antialiased transition dark:bg-neutral-800 dark:text-neutral-200 [&>*]:mx-auto">
         <header className="z-30 bg-amber-400 shadow-md transition">
           <div className="layout-mx justify-between py-4">
