@@ -6,6 +6,7 @@ import { getDictionary } from "@/lib/locale/get-dictionary"
 import { i18n } from "@/lib/locale/i18n-config"
 import LocaleSwitcher from "@/ui/locale-switcher"
 import CookieButton from "./(components)/(cookies)/cookie-button"
+import GoogleAds from "./(components)/google-ads"
 import GoogleAnalytics from "./(components)/google-analytics"
 import type { Metadata } from "next"
 
@@ -40,6 +41,7 @@ export default async function RootLayout({ children, params }: Props) {
     <html lang={params.lang} className={inter.className}>
       <GoogleAnalytics />
       <CookieButton lang={params.lang} />
+      <GoogleAds />
       <body className="bg-white text-neutral-800 antialiased transition dark:bg-neutral-800 dark:text-neutral-200 [&>*]:mx-auto">
         <header className="z-30 bg-amber-400 shadow-md transition">
           <div className="layout-mx justify-between py-4">
