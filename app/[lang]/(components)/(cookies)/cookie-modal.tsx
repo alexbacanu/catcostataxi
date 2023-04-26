@@ -12,16 +12,11 @@ interface Props {
 
 const CookieModal = (props: Props) => {
   const { run, setLanguage } = props.CookieConsentApi
-  // const pathname = usePathname()
 
   useEffect(() => {
-    // if (pathname === "/en/privacy" || pathname === "/ro/privacy") {
-    // return
-    // } else {
     run(pluginConfig)
     setLanguage(props.lang)
-    // }
-  }, [run, setLanguage, props.lang]) // pathname
+  }, [run, setLanguage, props.lang])
 
   return null
 }

@@ -153,25 +153,23 @@ export default function AddressForm({ dictionary, lang }: Props) {
             {fromInput()}
             {toInput()}
 
-            <div className="flex items-center justify-center gap-x-6">
+            <div className="flex flex-col items-center justify-center gap-x-6 gap-y-4 sm:flex-row">
               <button
                 type="submit"
-                className="button-base button-primary flex h-12 w-44 gap-x-2 disabled:cursor-not-allowed"
+                className="button-base button-primary flex h-12 w-auto gap-x-2 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
                 {isLoading ? <LoadingAnimation /> : dictionary.home.address_form.button}
               </button>
-              <div>
-                <a
-                  href="https://www.tkqlhce.com/click-100816067-13255402"
-                  className="group relative inline-flex items-center overflow-hidden px-2 py-1 font-medium"
-                >
-                  <span className="flex  items-center gap-x-1 underline underline-offset-4">
-                    {dictionary.root.header.transfer}
-                    <IconExternalLink className="h-5 w-5 shrink-0" />
-                  </span>
-                </a>
-              </div>
+              <a
+                href="https://www.tkqlhce.com/click-100816067-13255402"
+                className="group relative inline-flex items-center overflow-hidden px-2 py-1 font-medium"
+              >
+                <span className="flex items-center gap-x-1 underline underline-offset-4">
+                  {dictionary.root.header.transfer}
+                  <IconExternalLink className="h-5 w-5 shrink-0" />
+                </span>
+              </a>
             </div>
           </div>
 
