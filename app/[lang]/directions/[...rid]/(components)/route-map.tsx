@@ -89,7 +89,7 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
     <>
       {initializeMap()}
       <section className="layout-mx">
-        <a href="https://www.jdoqocy.com/click-100816067-13255402">
+        <a href="https://www.jdoqocy.com/click-100816067-13255402" target="_blank" rel="nofollow">
           <Image
             src={`https://www.rentalcars.com/partners/integrations/banners/300--600/car-winding-road/${lang}.jpg`}
             alt="Rent a car"
