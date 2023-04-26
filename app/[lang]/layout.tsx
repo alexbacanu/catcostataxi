@@ -58,7 +58,12 @@ export default async function RootLayout({ children, params }: Props) {
 
             <div className="flex gap-x-4">
               <LocaleSwitcher lang={params.lang} dictionary={dictionary} />
-              <a className="button-base button-secondary">{dictionary.root.header.airport}</a>
+              <a
+                className="button-base button-secondary"
+                href="https://www.welcomepickups.com/airport-transfer-book/?tap_a=26297-438366&tap_s=3501725-e7c260&ref=catcostataxi"
+              >
+                {dictionary.root.header.airport}
+              </a>
             </div>
           </div>
         </header>
