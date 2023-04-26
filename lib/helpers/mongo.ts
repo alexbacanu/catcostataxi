@@ -148,25 +148,35 @@ export const fetchSingleRoute = cache(async (hash: string) => {
   return singleRoute
 })
 
-export const submitRoute = cache(
-  async (
-    hash: string,
-    selectedFrom: google.maps.places.AutocompletePrediction,
-    selectedTo: google.maps.places.AutocompletePrediction
-  ) => {
-    const client = await clientPromise
-    const db = client.db(process.env.MONGO_DB ?? "")
-    const routes = db.collection("routes")
+async function findOrCreateRoute(
+  hash: string,
+  selectedFrom: google.maps.places.AutocompletePrediction,
+  selectedTo: google.maps.places.AutocompletePrediction
+) {
+  const client = await clientPromise
+  const db = client.db(process.env.MONGO_DB ?? "")
+  const routes = db.collection("routes")
 
-    const requestedRoute = await routes.findOne<Route>(
-      { hash },
-      { projection: { _id: 0, createdAt: 0 } }
-    )
+  const requestedRoute = await routes.findOne<Route>(
+    { hash },
+    { projection: { _id: 0, createdAt: 0 } }
+  )
 
-    if (!requestedRoute) {
-      await routes.insertOne({ hash, selectedFrom, selectedTo, createdAt: new Date() })
-    }
-
-    return requestedRoute
+  if (!requestedRoute) {
+    const newRoute = { hash, selectedFrom, selectedTo, createdAt: new Date() }
+    await routes.insertOne(newRoute)
+    return newRoute
   }
-)
+
+  return requestedRoute
+}
+
+export const submitRoute = cache(findOrCreateRoute)
+
+export const preload = (
+  hash: string,
+  selectedFrom: google.maps.places.AutocompletePrediction,
+  selectedTo: google.maps.places.AutocompletePrediction
+) => {
+  void findOrCreateRoute(hash, selectedFrom, selectedTo)
+}

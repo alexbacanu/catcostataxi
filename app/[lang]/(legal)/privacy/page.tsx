@@ -12,6 +12,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+export const revalidate = 43200 // 12 hours
+
 type Props = {
   params: {
     lang: Locale
