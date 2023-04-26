@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import { fetchLegal } from "@/lib/helpers/mongo"
 import { getDictionary } from "@/lib/locale/get-dictionary"
@@ -37,7 +38,7 @@ export default async function TermsPage({ params }: Props) {
         <li>{new Date(currentDocument.modified).toLocaleDateString(lang)}</li>
         <li>&middot;</li>
         <li>
-          <a href="/terms/history">{dictionary.legal.history}</a>
+          <Link href={`/${params.lang}/terms/history`}>{dictionary.legal.history}</Link>
         </li>
       </ul>
       {/* @ts-expect-error Server Error */}
