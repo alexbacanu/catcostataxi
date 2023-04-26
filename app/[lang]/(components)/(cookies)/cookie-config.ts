@@ -25,7 +25,7 @@ const pluginConfig: CookieConsentConfig = {
   // },
 
   cookie: {
-    expiresAfterDays: 30,
+    expiresAfterDays: 356,
   },
 
   categories: {
@@ -63,7 +63,6 @@ const pluginConfig: CookieConsentConfig = {
 
   language: {
     default: "en",
-    autoDetect: "browser",
 
     translations: {
       en: {
@@ -74,11 +73,11 @@ const pluginConfig: CookieConsentConfig = {
           acceptAllBtn: "Accept",
           // acceptNecessaryBtn: "Accept only necesary",
           showPreferencesBtn: "Cookie preferences",
-          footer: `<a href="/privacy">Privacy Policy</a>`,
+          footer: `<a href="/en/privacy">Privacy Policy</a>`,
         },
         preferencesModal: {
           title: "Cookie preferences",
-          acceptNecessaryBtn: "Accept necessary",
+          acceptNecessaryBtn: "Accept only necessary",
           acceptAllBtn: "Accept all",
           savePreferencesBtn: "Accept selected",
           closeIconLabel: "Close",
@@ -86,7 +85,7 @@ const pluginConfig: CookieConsentConfig = {
             {
               title: "Cookie Usage",
               description:
-                'We use cookies to ensure the basic functionalities of the website and to enhance your experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="/privacy">Privacy Policy</a>.',
+                'We use cookies to personalise content and ads and to analyse our traffic. We also share information about your use of the website with our advertising and analytics partners. You may read more about any purposes or vendors that we use by clicking <a href="#" data-cc="show-preferencesModal">Cookie preferences</a>. This preference center is accessible at any time through the <a href="#" data-cc="show-preferencesModal">Cookie settings</a> button located on every page.',
             },
             {
               title: "Strictly necessary cookies",
@@ -106,7 +105,7 @@ const pluginConfig: CookieConsentConfig = {
                     domain: "Cookie Consent",
                     description:
                       'Cookie set by <a href="https://cookieconsent.orestbida.com/">Cookie Consent v3</a>.',
-                    expiration: "Expires after 30 days",
+                    expiration: "Expires after 12 months",
                   },
                 ],
               },
@@ -125,11 +124,11 @@ const pluginConfig: CookieConsentConfig = {
                 },
                 body: [
                   {
-                    name: "_ga",
+                    name: "_ga, _ga_*",
                     domain: "Google Analytics",
                     description:
                       'Cookie set by <a href="https://www.google.com/intl/analytics/policies/privacy/">Google Analytics</a>.',
-                    expiration: "Expires after 30 days",
+                    expiration: "Expires after 12 months",
                   },
                 ],
               },
@@ -152,7 +151,7 @@ const pluginConfig: CookieConsentConfig = {
                     domain: "Google Adsense",
                     description:
                       'Cookie set by <a href="https://www.google.com/intl/adsense/policies/privacy/">Google Adsense</a>.',
-                    expiration: "Expires after 30 days",
+                    expiration: "Expires after 12 months",
                   },
                 ],
               },
@@ -169,19 +168,19 @@ const pluginConfig: CookieConsentConfig = {
           // acceptNecessaryBtn: "Acceptă doar necesare",
           acceptAllBtn: "Acceptă",
           showPreferencesBtn: "Preferințe cookie-uri",
-          footer: `<a href="/privacy">Politica de confidențialitate</a>`,
+          footer: `<a href="/ro/privacy">Politica de confidențialitate</a>`,
         },
         preferencesModal: {
           title: "Preferințe cookie-uri",
           acceptAllBtn: "Acceptă toate",
-          acceptNecessaryBtn: "Acceptă necesare",
+          acceptNecessaryBtn: "Acceptă doar necesare",
           savePreferencesBtn: "Acceptă selectate",
           closeIconLabel: "Închide",
           sections: [
             {
               title: "Utilizarea cookie-urilor",
               description:
-                'Utilizăm cookie-uri pentru a asigura funcționalitățile de bază ale site-ului și pentru a îmbunătăți experiența ta. Poți opta pentru fiecare categorie în orice moment. Pentru mai multe detalii referitoare la cookie-uri și alte date sensibile, te rugăm să citești <a href="/privacy">Politica de confidențialitate</a> completă.',
+                'Folosim cookie-uri pentru a personaliza conținutul site-ului, reclamele și pentru a ne analiza traficul. De asemenea, împărtășim informații despre utilizarea de către dvs. a site-ului web cu partenerii noștri de publicitate și analiză. Puteți citi mai multe despre orice scop sau furnizori pe care îi folosim făcând clic pe <a href="#" data-cc="show-preferencesModal">Preferințe cookie-uri</a>. Acest centru de preferințe este accesibil în orice moment prin intermediul butonului <a href="#" data-cc="show-preferencesModal">Setări cookies</a> situat pe fiecare pagină.',
             },
             {
               title: "Cookie-uri strict necesare",
@@ -201,7 +200,7 @@ const pluginConfig: CookieConsentConfig = {
                     domain: "Cookie Consent",
                     description:
                       'Cookie setat de <a href="https://cookieconsent.orestbida.com/">Cookie Consent v3</a>.',
-                    expiration: "Expiră după 30 de zile",
+                    expiration: "Expiră după 12 luni",
                   },
                 ],
               },
@@ -220,11 +219,11 @@ const pluginConfig: CookieConsentConfig = {
                 },
                 body: [
                   {
-                    name: "_ga",
+                    name: "_ga, _ga_*",
                     domain: "Google Analytics",
                     description:
                       'Cookie setat de <a href="https://www.google.com/intl/analytics/policies/privacy/">Google Analytics</a>.',
-                    expiration: "Expiră după 30 de zile",
+                    expiration: "Expiră după 12 luni",
                   },
                 ],
               },
@@ -247,7 +246,7 @@ const pluginConfig: CookieConsentConfig = {
                     domain: "Google Adsense",
                     description:
                       'Cookie setat de <a href="https://www.google.com/intl/adsense/policies/privacy/">Google Adsense</a>.',
-                    expiration: "Expiră după 30 de zile",
+                    expiration: "Expiră după 12 luni",
                   },
                 ],
               },
