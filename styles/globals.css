@@ -46,7 +46,7 @@
   }
 
   .button-secondary {
-    @apply bg-white/60 text-neutral-800 ring-1 ring-neutral-800/10 backdrop-blur-md  hover:bg-white/80 focus:ring-neutral-800;
+    @apply bg-white/60 text-neutral-800 ring-1 ring-neutral-800/10 backdrop-blur-md hover:bg-white/80 focus:ring-neutral-800;
   }
 
   .button-neutral {

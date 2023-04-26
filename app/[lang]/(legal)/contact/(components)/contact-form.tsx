@@ -176,11 +176,11 @@ export default function ContactForm({ dictionary, lang }: Props) {
               <input id="terms" className="h-4 w-4" type="checkbox" {...register("terms")} />
               <span className="w-auto px-2">
                 {dictionary.contact.agree_1}
-                <Link className="text-amber-500" href="/privacy">
+                <Link className="text-amber-500" href={`${lang}/privacy`}>
                   {dictionary.root.footer.privacy}
                 </Link>
                 {dictionary.contact.agree_2}
-                <Link className="text-amber-500" href="/terms">
+                <Link className="text-amber-500" href={`${lang}/terms`}>
                   {dictionary.root.footer.terms}
                 </Link>
               </span>

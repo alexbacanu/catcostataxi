@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import hashPair from "@/lib/helpers/hasher"
-import { submitRoute } from "@/lib/helpers/mongo"
+import { preload, submitRoute } from "@/lib/helpers/mongo"
 import type { NextRequest } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -24,6 +24,8 @@ export async function POST(request: NextRequest) {
   if (hash.length !== 8) {
     return new NextResponse("Wrong ID", { status: 400, statusText: "Wrong ID" })
   }
+
+  preload(hash, selectedFrom, selectedTo)
 
   if (hashPair(selectedFrom.description, selectedTo.description) !== hash) {
     return new NextResponse("ID does not match Trip Data", {

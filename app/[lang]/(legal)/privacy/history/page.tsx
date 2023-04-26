@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Link from "next/link"
 import { fetchLegal } from "@/lib/helpers/mongo"
 import { getDictionary } from "@/lib/locale/get-dictionary"
 import type { Locale } from "@/lib/locale/i18n-config"
@@ -26,7 +27,7 @@ export default async function PrivacyHistoryPage({ params }: Props) {
     <section className="layout-mx flex-col items-start gap-y-4">
       <h1>{dictionary.root.footer.privacy}</h1>
       {legal.map((document) => (
-        <a key={document.version} href={`/privacy/history/${document.version}`}>
+        <Link key={document.version} href={`${params.lang}/privacy/history/${document.version}`}>
           <ul className="flex gap-x-2 text-lg font-normal leading-4">
             <li>{dictionary.legal.modified}</li>
             <li>{new Date(document.modified).toLocaleDateString(lang)}</li>
@@ -34,7 +35,7 @@ export default async function PrivacyHistoryPage({ params }: Props) {
             <li>{dictionary.legal.version}</li>
             <li>{document.version}</li>
           </ul>
-        </a>
+        </Link>
       ))}
     </section>
   )
