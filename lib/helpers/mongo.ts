@@ -68,7 +68,9 @@ export const fetchSingleLegal = cache(async (type: string, lang: string, version
   return singleLegal;
 });
 
-export const fetchCompaniesByLoc = cache(async (city: string) => {
+export const fetchCompaniesByLoc = cache(async (city?: string) => {
+  if (!city) throw new Error("City is required");
+
   const client = await clientPromise;
   const db = client.db(process.env.MONGO_DB ?? "");
   const companies = db.collection("companies");
