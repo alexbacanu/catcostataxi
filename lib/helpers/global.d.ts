@@ -1,8 +1,8 @@
 /* eslint-disable */
-import type { MongoClient } from "mongodb"
+import type { MongoClient } from "mongodb";
 
 declare global {
   namespace globalThis {
-    var _mongoClientPromise: Promise<MongoClient>
+    var _mongoClientPromise: Promise<MongoClient>;
   }
 }

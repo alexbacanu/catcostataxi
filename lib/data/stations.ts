@@ -480,4 +480,4 @@ export const popularStations = [
       types: ["train_station", "transit_station", "point_of_interest", "establishment"],
     },
   },
-]
+];

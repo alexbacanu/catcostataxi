@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { Listbox, Transition, Switch } from "@headlessui/react"
+import { Listbox, Transition, Switch } from "@headlessui/react";
 import {
   IconCurrencyDollar,
   IconSelector,
@@ -9,60 +9,55 @@ import {
   IconRoute2,
   IconTrafficCone,
   IconClockHour4,
-} from "@tabler/icons-react"
-import Image from "next/image"
-import { useState, Fragment, useMemo } from "react"
-import toast from "react-hot-toast"
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import useLocationStore from "@/lib/stores/location-store"
-import useRoutesStore from "@/lib/stores/route-store"
-import { LoadingComponent } from "./loading-component"
-import type { Company } from "@/lib/helpers/mongo"
+} from "@tabler/icons-react";
+import Image from "next/image";
+import { useState, Fragment, useMemo } from "react";
+import toast from "react-hot-toast";
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import useLocationStore from "@/lib/stores/location-store";
+import useRoutesStore from "@/lib/stores/route-store";
+import { LoadingComponent } from "./loading-component";
+import type { Company } from "@/lib/helpers/mongo";
 
 type Props = {
-  dictionary: Dictionary
-  initialCompanies?: Company[]
-  initialCity?: string
-  availableCities?: string[]
-}
+  dictionary: Dictionary;
+  initialCompanies?: Company[];
+  initialCity?: string;
+  availableCities?: string[];
+};
 
-export default function TaxiPrices({
-  dictionary,
-  initialCompanies,
-  initialCity,
-  availableCities,
-}: Props) {
-  const [nightToggle, setNightToggle] = useState(false)
-  const [modifyToggle, setModifyToggle] = useState(false)
+export default function TaxiPrices({ dictionary, initialCompanies, initialCity, availableCities }: Props) {
+  const [nightToggle, setNightToggle] = useState(false);
+  const [modifyToggle, setModifyToggle] = useState(false);
 
-  const locationArray = useLocationStore((state) => state.location)
-  const companiesArray = useLocationStore((state) => state.companies)
+  const locationArray = useLocationStore((state) => state.location);
+  const companiesArray = useLocationStore((state) => state.companies);
 
-  const selectedCity = locationArray.length !== 0 ? locationArray : initialCity
-  const fetchedCompanies = companiesArray.length !== 0 ? companiesArray : initialCompanies
+  const selectedCity = locationArray.length !== 0 ? locationArray : initialCity;
+  const fetchedCompanies = companiesArray.length !== 0 ? companiesArray : initialCompanies;
 
-  const memoPriceData = useMemo(() => calculatePriceData(fetchedCompanies), [fetchedCompanies])
-  const [priceData, setPriceData] = useState(memoPriceData)
+  const memoPriceData = useMemo(() => calculatePriceData(fetchedCompanies), [fetchedCompanies]);
+  const [priceData, setPriceData] = useState(memoPriceData);
 
-  const mapRoutes = useRoutesStore((state) => state.mapDirections.routes)
-  const { distance, duration, duration_in_traffic } = mapRoutes[0]?.legs[0] || {}
+  const mapRoutes = useRoutesStore((state) => state.mapDirections.routes);
+  const { distance, duration, duration_in_traffic } = mapRoutes[0]?.legs[0] || {};
   if (!mapRoutes[0] || !distance || !duration || !duration_in_traffic) {
-    return <LoadingComponent message={dictionary.directions.taxi_prices.loading} />
+    return <LoadingComponent message={dictionary.directions.taxi_prices.loading} />;
   }
 
   function handleChange(priceType: keyof typeof priceData) {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value.trim()
-      const pattern = /^(0|[1-9]\d*)(\.\d{1,2})?$/
+      const value = e.target.value.trim();
+      const pattern = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
 
-      if (!pattern.test(value)) return
+      if (!pattern.test(value)) return;
 
-      const newValue = Number(value)
+      const newValue = Number(value);
       setPriceData({
         ...priceData,
         [priceType]: Math.min(Math.max(0, newValue), 99.99),
-      })
-    }
+      });
+    };
   }
 
   function calculatePriceData(companies?: Company[]) {
@@ -71,31 +66,29 @@ export default function TaxiPrices({
       nightPrice: 0,
       dayPricePlus: 0,
       nightPricePlus: 0,
-    }
+    };
 
     const defaultValue = {
       dayPrice: 0,
       nightPrice: 0,
       dayPricePlus: 0,
       nightPricePlus: 0,
-    }
+    };
 
-    if (!companies) return defaultValue
-    if (companies && companies.length === 0) return defaultValue
+    if (!companies) return defaultValue;
+    if (companies && companies.length === 0) return defaultValue;
 
     return companies.reduce((prev, curr) => {
       return {
         dayPrice: Math.round((prev.dayPrice + curr.dayPrice / companies.length) * 100) / 100,
         nightPrice: Math.round((prev.nightPrice + curr.nightPrice / companies.length) * 100) / 100,
-        dayPricePlus:
-          Math.round((prev.dayPricePlus + curr.dayPricePlus / companies.length) * 100) / 100,
-        nightPricePlus:
-          Math.round((prev.nightPricePlus + curr.nightPricePlus / companies.length) * 100) / 100,
-      }
-    }, initialValue)
+        dayPricePlus: Math.round((prev.dayPricePlus + curr.dayPricePlus / companies.length) * 100) / 100,
+        nightPricePlus: Math.round((prev.nightPricePlus + curr.nightPricePlus / companies.length) * 100) / 100,
+      };
+    }, initialValue);
   }
   async function onInputChange(location: string) {
-    useLocationStore.setState({ location })
+    useLocationStore.setState({ location });
 
     try {
       const response = await fetch("/api/getCompanies", {
@@ -104,44 +97,42 @@ export default function TaxiPrices({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ location }),
-      })
+      });
 
       if (!response.ok) {
-        console.error(response.status, response.statusText)
-        throw new Error("Network response was not ok.")
+        console.error(response.status, response.statusText);
+        throw new Error("Network response was not ok.");
       }
 
-      const companies = await response.json()
-      useLocationStore.setState({ companies })
-      setPriceData(calculatePriceData(companies))
+      const companies = await response.json();
+      useLocationStore.setState({ companies });
+      setPriceData(calculatePriceData(companies));
     } catch (error) {
-      toast.error(dictionary.directions.taxi_prices.toast_error)
-      console.error("Error:", error)
+      toast.error(dictionary.directions.taxi_prices.toast_error);
+      console.error("Error:", error);
     }
   }
 
   function totalPrice(priceType: keyof typeof priceData) {
-    if (!distance || !duration || !duration_in_traffic) return 0
+    if (!distance || !duration || !duration_in_traffic) return 0;
 
-    const basePrice = priceData[priceType]
-    const extraTime =
-      duration_in_traffic.value < duration.value ? 0 : duration_in_traffic.value - duration.value
-    const tripPrice =
-      basePrice + basePrice * (distance.value / 1000) + (extraTime / 3600) * basePrice * 10
+    const basePrice = priceData[priceType];
+    const extraTime = duration_in_traffic.value < duration.value ? 0 : duration_in_traffic.value - duration.value;
+    const tripPrice = basePrice + basePrice * (distance.value / 1000) + (extraTime / 3600) * basePrice * 10;
 
-    return tripPrice
+    return tripPrice;
   }
 
   function capitalize(location: string | string[]): string {
-    let locationString: string
+    let locationString: string;
 
     if (Array.isArray(location)) {
-      locationString = location[0]
+      locationString = location[0];
     } else {
-      locationString = location
+      locationString = location;
     }
 
-    return locationString.replace(/\b\w/g, (match) => match.toUpperCase())
+    return locationString.replace(/\b\w/g, (match) => match.toUpperCase());
   }
 
   return (
@@ -164,9 +155,7 @@ export default function TaxiPrices({
                   <div className="relative z-30 grow items-center">
                     <Listbox.Button className="peer relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300">
                       <span className="block truncate text-neutral-800">
-                        {selectedCity
-                          ? capitalize(selectedCity)
-                          : dictionary.directions.taxi_prices.select_city}
+                        {selectedCity ? capitalize(selectedCity) : dictionary.directions.taxi_prices.select_city}
                       </span>
                       <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                         <IconSelector className="h-5 w-5 text-neutral-500" aria-hidden="true" />
@@ -199,11 +188,7 @@ export default function TaxiPrices({
                           >
                             {({ selected }) => (
                               <>
-                                <span
-                                  className={`block truncate ${
-                                    selected ? "font-bold" : "font-normal"
-                                  }`}
-                                >
+                                <span className={`block truncate ${selected ? "font-bold" : "font-normal"}`}>
                                   {capitalize(loc)}
                                 </span>
                               </>
@@ -225,9 +210,7 @@ export default function TaxiPrices({
                   onClick={() => setModifyToggle(!modifyToggle)}
                   className="peer rounded-md bg-black/10 px-2 py-1 text-xs ring-1 ring-neutral-800/20 hover:bg-black/5 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5"
                 >
-                  {modifyToggle
-                    ? dictionary.directions.taxi_prices.save
-                    : dictionary.directions.taxi_prices.modify}
+                  {modifyToggle ? dictionary.directions.taxi_prices.save : dictionary.directions.taxi_prices.modify}
                 </button>
                 <div
                   role="tooltip"
@@ -279,13 +262,7 @@ export default function TaxiPrices({
             {/* Image */}
             <div className="shrink-0">
               <div className="relative">
-                <Image
-                  src="/taxi-yellow.png"
-                  alt="Standard taxi"
-                  className=""
-                  width={113}
-                  height={72}
-                />
+                <Image src="/taxi-yellow.png" alt="Standard taxi" className="" width={113} height={72} />
                 <div className="absolute bottom-0 rounded-md bg-black/40 px-2 py-1 text-center text-xs font-medium text-white shadow-lg backdrop-blur-[6px] dark:bg-white/20">
                   Taxi
                 </div>
@@ -305,9 +282,7 @@ export default function TaxiPrices({
                       nightToggle ? "text-indigo-500" : "text-amber-500 dark:text-amber-400"
                     } font-bold dark:font-semibold`}
                   >
-                    <div className="py-1">
-                      {totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}
-                    </div>
+                    <div className="py-1">{totalPrice(nightToggle ? "nightPrice" : "dayPrice").toFixed(2)}</div>
                   </div>
                 </div>
                 <div>
@@ -322,15 +297,11 @@ export default function TaxiPrices({
                         value={nightToggle ? priceData.nightPrice : priceData.dayPrice}
                         type="number"
                         step={0.01}
-                        onChange={
-                          nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")
-                        }
+                        onChange={nightToggle ? handleChange("nightPrice") : handleChange("dayPrice")}
                         className="w-full rounded-lg bg-black/5 px-2 py-1 ring-1 ring-neutral-800/20 dark:bg-white/10 dark:ring-neutral-200/20 dark:hover:bg-white/5 sm:w-auto"
                       />
                     ) : (
-                      <div className="py-1">
-                        {nightToggle ? priceData.nightPrice : priceData.dayPrice}
-                      </div>
+                      <div className="py-1">{nightToggle ? priceData.nightPrice : priceData.dayPrice}</div>
                     )}
                   </div>
                 </div>
@@ -353,21 +324,15 @@ export default function TaxiPrices({
           </div>
           <div className="card-base flex grow flex-col items-center justify-center gap-x-2 sm:flex-row sm:justify-between">
             <div className="flex items-center">
-              {duration.value > duration_in_traffic.value ? (
-                <IconTrafficCone />
-              ) : (
-                <IconClockHour4 />
-              )}
+              {duration.value > duration_in_traffic.value ? <IconTrafficCone /> : <IconClockHour4 />}
               <span className="pl-2">{dictionary.directions.taxi_prices.duration}</span>
             </div>
             <p className="text-lg font-bold text-amber-500 dark:font-semibold dark:text-amber-400 sm:text-xl">
-              {duration.value > duration_in_traffic.value
-                ? duration_in_traffic.text
-                : duration.text}
+              {duration.value > duration_in_traffic.value ? duration_in_traffic.text : duration.text}
             </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

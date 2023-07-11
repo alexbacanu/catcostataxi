@@ -1,31 +1,28 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic"
-import Image from "next/image"
-import Script from "next/script"
-import { useState, useEffect, useRef, useCallback } from "react"
-import usePlacesAutocomplete from "use-places-autocomplete"
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import useRoutesStore from "@/lib/stores/route-store"
-import type { Route } from "@/lib/helpers/mongo"
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Script from "next/script";
+import { useState, useEffect, useRef, useCallback } from "react";
+import usePlacesAutocomplete from "use-places-autocomplete";
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import useRoutesStore from "@/lib/stores/route-store";
+import type { Route } from "@/lib/helpers/mongo";
 
 type RouteMapProps = {
-  lang: string
-  dictionary: Dictionary
-  route: Route
-}
+  lang: string;
+  dictionary: Dictionary;
+  route: Route;
+};
 
 export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
   const GoogleMap = dynamic(() => import("@react-google-maps/api").then((m) => m.GoogleMap), {
     ssr: true,
-  })
+  });
 
-  const DirectionsRenderer = dynamic(
-    () => import("@react-google-maps/api").then((m) => m.DirectionsRenderer),
-    {
-      ssr: true,
-    }
-  )
+  const DirectionsRenderer = dynamic(() => import("@react-google-maps/api").then((m) => m.DirectionsRenderer), {
+    ssr: true,
+  });
 
   function initializeMap() {
     return (
@@ -34,28 +31,28 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
         strategy="lazyOnload"
         onReady={initRef.current}
       />
-    )
+    );
   }
 
   function isValidRoute() {
-    return route.selectedFrom.description && route.selectedTo.description
+    return route.selectedFrom.description && route.selectedTo.description;
   }
 
   function updateRoute() {
     if (ready && isValidRoute()) {
-      calculateRoute(route.selectedFrom.description, route.selectedTo.description)
+      calculateRoute(route.selectedFrom.description, route.selectedTo.description);
     }
   }
 
-  const [mapDirections, setMapDirections] = useState<google.maps.DirectionsResult>()
+  const [mapDirections, setMapDirections] = useState<google.maps.DirectionsResult>();
 
   const { init, ready } = usePlacesAutocomplete({
     debounce: 400,
     initOnMount: false,
-  })
+  });
 
   const calculateRoute = useCallback(async (origin: string, destination: string) => {
-    const directionsService = new google.maps.DirectionsService()
+    const directionsService = new google.maps.DirectionsService();
     const route = await directionsService.route({
       origin,
       destination,
@@ -63,27 +60,27 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
       drivingOptions: {
         departureTime: new Date(),
       },
-    })
-    setMapDirections(route)
-  }, [])
+    });
+    setMapDirections(route);
+  }, []);
 
   useEffect(() => {
-    updateRoute()
+    updateRoute();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [route.selectedFrom.description, route.selectedTo.description, ready])
+  }, [route.selectedFrom.description, route.selectedTo.description, ready]);
 
-  const initRef = useRef(init)
+  const initRef = useRef(init);
 
   useEffect(() => {
-    if (!mapDirections) return
-    useRoutesStore.setState({ mapDirections })
-  }, [mapDirections])
+    if (!mapDirections) return;
+    useRoutesStore.setState({ mapDirections });
+  }, [mapDirections]);
 
   useEffect(() => {
     if (!initRef.current) {
-      initRef.current = init
+      initRef.current = init;
     }
-  }, [init])
+  }, [init]);
 
   return (
     <>
@@ -127,5 +124,5 @@ export default function RouteMap({ lang, dictionary, route }: RouteMapProps) {
         )}
       </section>
     </>
-  )
+  );
 }

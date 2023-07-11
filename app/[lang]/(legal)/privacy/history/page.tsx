@@ -1,27 +1,27 @@
-import { Metadata } from "next"
-import Link from "next/link"
-import { fetchLegal } from "@/lib/helpers/mongo"
-import { getDictionary } from "@/lib/locale/get-dictionary"
-import type { Locale } from "@/lib/locale/i18n-config"
+import { Metadata } from "next";
+import Link from "next/link";
+import { fetchLegal } from "@/lib/helpers/mongo";
+import { getDictionary } from "@/lib/locale/get-dictionary";
+import type { Locale } from "@/lib/locale/i18n-config";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const dictionary = await getDictionary(params.lang)
+  const dictionary = await getDictionary(params.lang);
 
   return {
     title: dictionary.root.footer.privacy,
-  }
+  };
 }
 
 type Props = {
   params: {
-    lang: Locale
-  }
-}
+    lang: Locale;
+  };
+};
 
 export default async function PrivacyHistoryPage({ params }: Props) {
-  const dictionary = await getDictionary(params.lang)
-  const legal = await fetchLegal("privacy", params.lang)
-  const lang = params.lang === "ro" ? "ro-RO" : "en-GB"
+  const dictionary = await getDictionary(params.lang);
+  const legal = await fetchLegal("privacy", params.lang);
+  const lang = params.lang === "ro" ? "ro-RO" : "en-GB";
 
   return (
     <section className="layout-mx flex-col items-start gap-y-4">
@@ -38,5 +38,5 @@ export default async function PrivacyHistoryPage({ params }: Props) {
         </Link>
       ))}
     </section>
-  )
+  );
 }

@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import HCaptcha from "@hcaptcha/react-hcaptcha"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { IconSend } from "@tabler/icons-react"
-import Link from "next/link"
-import { useState, useRef } from "react"
-import { useForm } from "react-hook-form"
-import toast, { Toaster } from "react-hot-toast"
-import { z } from "zod"
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import LoadingAnimation from "@/ui/loading-animation"
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { IconSend } from "@tabler/icons-react";
+import Link from "next/link";
+import { useState, useRef } from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { z } from "zod";
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import LoadingAnimation from "@/ui/loading-animation";
 
 type Props = {
-  dictionary: Dictionary
-  lang: string
-}
+  dictionary: Dictionary;
+  lang: string;
+};
 
 export default function ContactForm({ dictionary, lang }: Props) {
   // Zod
@@ -29,9 +29,9 @@ export default function ContactForm({ dictionary, lang }: Props) {
       message: dictionary.contact.zod_agree,
     }),
     hcaptcha: z.string().min(1, { message: dictionary.contact.zod_required }),
-  })
+  });
 
-  type ValidationSchema = z.infer<typeof zodSchema>
+  type ValidationSchema = z.infer<typeof zodSchema>;
 
   const {
     register,
@@ -41,18 +41,18 @@ export default function ContactForm({ dictionary, lang }: Props) {
     formState: { errors, isSubmitting },
   } = useForm<ValidationSchema>({
     resolver: zodResolver(zodSchema),
-  })
+  });
 
   // HCaptcha
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
-  const captchaRef = useRef<HCaptcha>(null)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const onCaptchaChange = (token: string) => {
-    setCaptchaToken(token)
-  }
+    setCaptchaToken(token);
+  };
 
   const onSubmit = async (data: ValidationSchema) => {
-    if (!captchaToken) return
+    if (!captchaToken) return;
 
     try {
       const response = await fetch(`/${lang}/api/contact`, {
@@ -61,23 +61,23 @@ export default function ContactForm({ dictionary, lang }: Props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      })
+      });
 
       if (!response.ok) {
-        console.error(response.status, response.statusText)
-        throw new Error("Network response was not ok.")
+        console.error(response.status, response.statusText);
+        throw new Error("Network response was not ok.");
       }
 
       // Reset captcha
-      captchaRef.current?.resetCaptcha()
+      captchaRef.current?.resetCaptcha();
 
       // Reset form
-      reset()
-      toast.success(dictionary.contact.success, { duration: 7000 })
+      reset();
+      toast.success(dictionary.contact.success, { duration: 7000 });
     } catch (error) {
-      toast.error(dictionary.contact.error, { duration: 7000 })
+      toast.error(dictionary.contact.error, { duration: 7000 });
     }
-  }
+  };
 
   return (
     <form className="w-full space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -90,18 +90,10 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               {dictionary.contact.first_name}
             </label>
-            {errors.firstName && (
-              <p className="text-xs italic text-red-500">{errors.firstName.message}</p>
-            )}
+            {errors.firstName && <p className="text-xs italic text-red-500">{errors.firstName.message}</p>}
           </div>
           <div className="mt-1">
-            <input
-              type="text"
-              id="name"
-              autoComplete="name"
-              className="input-base pl-2"
-              {...register("firstName")}
-            />
+            <input type="text" id="name" autoComplete="name" className="input-base pl-2" {...register("firstName")} />
           </div>
         </div>
         <div>
@@ -112,18 +104,10 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               {dictionary.contact.last_name}
             </label>
-            {errors.lastName && (
-              <p className="text-xs italic text-red-500">{errors.lastName.message}</p>
-            )}
+            {errors.lastName && <p className="text-xs italic text-red-500">{errors.lastName.message}</p>}
           </div>
           <div className="mt-1">
-            <input
-              type="text"
-              id="name"
-              autoComplete="name"
-              className="input-base pl-2"
-              {...register("lastName")}
-            />
+            <input type="text" id="name" autoComplete="name" className="input-base pl-2" {...register("lastName")} />
           </div>
         </div>
         <div className="sm:col-span-2">
@@ -137,13 +121,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
             {errors.email && <p className="text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
           <div className="mt-1">
-            <input
-              type="email"
-              id="email"
-              autoComplete="email"
-              className="input-base pl-2"
-              {...register("email")}
-            />
+            <input type="email" id="email" autoComplete="email" className="input-base pl-2" {...register("email")} />
           </div>
         </div>
         <div className="sm:col-span-2">
@@ -154,9 +132,7 @@ export default function ContactForm({ dictionary, lang }: Props) {
             >
               {dictionary.contact.message}
             </label>
-            {errors.message && (
-              <p className="text-xs italic text-red-500">{errors.message.message}</p>
-            )}
+            {errors.message && <p className="text-xs italic text-red-500">{errors.message.message}</p>}
           </div>
           <div className="mt-1">
             <textarea
@@ -184,25 +160,21 @@ export default function ContactForm({ dictionary, lang }: Props) {
                   {dictionary.root.footer.terms}
                 </Link>
               </span>
-              {errors.terms && (
-                <span className="text-xs italic text-red-500">{errors.terms.message}</span>
-              )}
+              {errors.terms && <span className="text-xs italic text-red-500">{errors.terms.message}</span>}
             </div>
           </div>
           <div className="flex flex-col">
             <HCaptcha
               sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
               onVerify={(token) => {
-                onCaptchaChange(token)
-                setValue("hcaptcha", token, { shouldValidate: true })
+                onCaptchaChange(token);
+                setValue("hcaptcha", token, { shouldValidate: true });
               }}
               languageOverride={lang}
               ref={captchaRef}
               theme="light"
             />
-            {errors.hcaptcha && (
-              <p className="text-xs italic text-red-500">{errors.hcaptcha.message}</p>
-            )}
+            {errors.hcaptcha && <p className="text-xs italic text-red-500">{errors.hcaptcha.message}</p>}
           </div>
         </div>
       </div>
@@ -226,5 +198,5 @@ export default function ContactForm({ dictionary, lang }: Props) {
       </div>
       <Toaster />
     </form>
-  )
+  );
 }

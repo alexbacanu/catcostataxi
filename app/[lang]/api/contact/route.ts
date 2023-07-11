@@ -1,7 +1,7 @@
-import sendgrid from "@sendgrid/mail"
-import { NextResponse } from "next/server"
-import { fetchLegal } from "@/lib/helpers/mongo"
-import type { NextRequest } from "next/server"
+import sendgrid from "@sendgrid/mail";
+import { NextResponse } from "next/server";
+import { fetchLegal } from "@/lib/helpers/mongo";
+import type { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   const {
@@ -12,29 +12,29 @@ export async function POST(request: NextRequest) {
     terms,
     hcaptcha,
   }: {
-    firstName: string
-    lastName: string
-    email: string
-    message: string
-    terms: boolean
-    hcaptcha: string
-  } = await request.json()
+    firstName: string;
+    lastName: string;
+    email: string;
+    message: string;
+    terms: boolean;
+    hcaptcha: string;
+  } = await request.json();
 
   if (!hcaptcha) {
-    return new NextResponse("Please pass captcha test", { status: 422 })
+    return new NextResponse("Please pass captcha test", { status: 422 });
   }
 
   if (!terms) {
     return new NextResponse("Please accept the terms and conditions and privacy policy", {
       status: 400,
-    })
+    });
   }
 
   if (!firstName || !lastName || !email || !message) {
-    return new NextResponse("Please provide any required fields", { status: 400 })
+    return new NextResponse("Please provide any required fields", { status: 400 });
   }
 
-  sendgrid.setApiKey(process.env.SENDGRID_API_KEY || "")
+  sendgrid.setApiKey(process.env.SENDGRID_API_KEY || "");
 
   try {
     // Ping the hcaptcha verify API to verify the captcha code you received
@@ -44,12 +44,12 @@ export async function POST(request: NextRequest) {
       },
       body: `response=${hcaptcha}&secret=${process.env.HCAPTCHA_SECRET_KEY}`,
       method: "POST",
-    })
-    const captchaValidation = await response.json()
+    });
+    const captchaValidation = await response.json();
 
     if (captchaValidation.success) {
-      const privacyVersion = await fetchLegal("privacy", "ro")
-      const termsVersion = await fetchLegal("terms", "ro")
+      const privacyVersion = await fetchLegal("privacy", "ro");
+      const termsVersion = await fetchLegal("terms", "ro");
 
       const mail = {
         to: "hey@catcostataxi.ro", // Change to your recipient
@@ -62,15 +62,15 @@ Privacy policy: ${terms ? "Agreed" : "Not agreed"}, Version: ${privacyVersion[0]
 Terms and conditions: ${terms ? "Agreed" : "Not agreed"}, Version: ${termsVersion[0].version}
 
 Message: ${message}`,
-      }
+      };
 
-      await sendgrid.send(mail)
+      await sendgrid.send(mail);
       // Return 200 if everything is successful
-      return NextResponse.json(response)
+      return NextResponse.json(response);
     }
-    return new NextResponse("Unprocessable request, invalid captcha code", { status: 400 })
+    return new NextResponse("Unprocessable request, invalid captcha code", { status: 400 });
   } catch (error) {
-    console.error(error)
-    return new NextResponse("Something went wrong", { status: 400 })
+    console.error(error);
+    return new NextResponse("Something went wrong", { status: 400 });
   }
 }

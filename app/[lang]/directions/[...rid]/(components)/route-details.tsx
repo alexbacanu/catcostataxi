@@ -1,14 +1,14 @@
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import type { Route } from "@/lib/helpers/mongo"
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import type { Route } from "@/lib/helpers/mongo";
 
 type RouteDetailsProps = {
-  dictionary: Dictionary
-  route: Route
-}
+  dictionary: Dictionary;
+  route: Route;
+};
 
 export default function RouteDetails({ dictionary, route }: RouteDetailsProps) {
   function replacePlaceholders(text: string, routeFrom: string, routeTo: string) {
-    return text.replace("{routeFrom}", routeFrom).replace("{routeTo}", routeTo)
+    return text.replace("{routeFrom}", routeFrom).replace("{routeTo}", routeTo);
   }
 
   return (
@@ -18,7 +18,7 @@ export default function RouteDetails({ dictionary, route }: RouteDetailsProps) {
           {replacePlaceholders(
             dictionary.directions.meta.description,
             route.selectedFrom.structured_formatting.main_text,
-            route.selectedTo.structured_formatting.main_text
+            route.selectedTo.structured_formatting.main_text,
           )}
         </h1>
 
@@ -34,14 +34,14 @@ export default function RouteDetails({ dictionary, route }: RouteDetailsProps) {
         />
       </div>
     </section>
-  )
+  );
 }
 
 type RouteInfoProps = {
-  title: string
-  main_text: string
-  secondary_text: string
-}
+  title: string;
+  main_text: string;
+  secondary_text: string;
+};
 
 export const RouteInfo = ({ title, main_text, secondary_text }: RouteInfoProps) => {
   return (
@@ -52,5 +52,5 @@ export const RouteInfo = ({ title, main_text, secondary_text }: RouteInfoProps) 
         <span className="pl-1 text-sm font-normal italic">{secondary_text}</span>
       </div>
     </div>
-  )
-}
+  );
+};

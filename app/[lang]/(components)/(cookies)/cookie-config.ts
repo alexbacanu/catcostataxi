@@ -1,4 +1,4 @@
-import type { CookieConsentConfig } from "vanilla-cookieconsent"
+import type { CookieConsentConfig } from "vanilla-cookieconsent";
 
 const pluginConfig: CookieConsentConfig = {
   guiOptions: {
@@ -103,8 +103,7 @@ const pluginConfig: CookieConsentConfig = {
                   {
                     name: "cc_cookie",
                     domain: "Cookie Consent",
-                    description:
-                      'Cookie set by <a href="https://cookieconsent.orestbida.com/">Cookie Consent v3</a>.',
+                    description: 'Cookie set by <a href="https://cookieconsent.orestbida.com/">Cookie Consent v3</a>.',
                     expiration: "Expires after 12 months",
                   },
                 ],
@@ -256,6 +255,6 @@ const pluginConfig: CookieConsentConfig = {
       },
     },
   },
-}
+};
 
-export default pluginConfig
+export default pluginConfig;

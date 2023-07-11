@@ -7,13 +7,7 @@
     "meta": {
       "description": "Obțineți o estimare a tarifului unui taxi de la {routeFrom} până la {routeTo}. Verifică cât costă cursa, rapid și ușor",
       "imageUrl": "{siteUrl}/api/og?from={routeFrom}&to={routeTo}",
-      "keywords": [
-        "cost taxi",
-        "tarif taxi",
-        "estimat taxi",
-        "de la {routeFrom}",
-        "pana la {routeTo}"
-      ],
+      "keywords": ["cost taxi", "tarif taxi", "estimat taxi", "de la {routeFrom}", "pana la {routeTo}"],
       "title": "Cât costă taxi de la {routeFrom} până la {routeTo}",
       "url": "{siteUrl}/directions/{hash}/{params.rid[1]}/{params.rid[2]}"
     },

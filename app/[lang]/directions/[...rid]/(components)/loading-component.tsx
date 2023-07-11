@@ -4,4 +4,4 @@ export const LoadingComponent = ({ message }: { message: string }) => (
       <div className="card-base grow">{message}</div>
     </div>
   </section>
-)
+);

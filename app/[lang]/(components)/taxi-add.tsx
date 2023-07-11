@@ -1,9 +1,9 @@
-import Image from "next/image"
-import { Dictionary } from "@/lib/locale/get-dictionary"
+import Image from "next/image";
+import { Dictionary } from "@/lib/locale/get-dictionary";
 
 type Props = {
-  dictionary: Dictionary
-}
+  dictionary: Dictionary;
+};
 
 export default function TaxiAdd({ dictionary }: Props) {
   return (
@@ -29,13 +29,7 @@ export default function TaxiAdd({ dictionary }: Props) {
           className="absolute left-1/2 top-1/2 -z-10 ml-28 mt-10 h-[64rem] w-[64rem] -translate-y-1/2 sm:left-full sm:-ml-60 md:left-1/2 md:ml-0 md:-translate-x-1/2 md:translate-y-0"
           aria-hidden="true"
         >
-          <circle
-            cx={512}
-            cy={512}
-            r={512}
-            fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-            fillOpacity="0.9"
-          />
+          <circle cx={512} cy={512} r={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.9" />
           <defs>
             <radialGradient
               id="759c1415-0410-454c-8f7c-9a820de03641"
@@ -60,5 +54,5 @@ export default function TaxiAdd({ dictionary }: Props) {
         />
       </div>
     </section>
-  )
+  );
 }

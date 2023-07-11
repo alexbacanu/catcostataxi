@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import { Combobox, Transition } from "@headlessui/react"
-import { IconExternalLink, IconMapPin, IconSwitchVertical } from "@tabler/icons-react"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import Script from "next/script"
-import { Fragment, useCallback, useEffect, useRef, useState } from "react"
-import { Toaster, toast } from "react-hot-toast"
-import usePlacesAutocomplete from "use-places-autocomplete"
-import hashPair from "@/lib/helpers/hasher"
-import { normalizeString } from "@/lib/helpers/normalize-string"
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import useAddressStore from "@/lib/stores/address-store"
-import LoadingAnimation from "@/ui/loading-animation"
+import { Combobox, Transition } from "@headlessui/react";
+import { IconExternalLink, IconMapPin, IconSwitchVertical } from "@tabler/icons-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Script from "next/script";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import usePlacesAutocomplete from "use-places-autocomplete";
+import hashPair from "@/lib/helpers/hasher";
+import { normalizeString } from "@/lib/helpers/normalize-string";
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import useAddressStore from "@/lib/stores/address-store";
+import LoadingAnimation from "@/ui/loading-animation";
 
 type Props = {
-  dictionary: Dictionary
-  lang: string
-}
+  dictionary: Dictionary;
+  lang: string;
+};
 
 export default function AddressForm({ dictionary, lang }: Props) {
-  const [fromError, setFromError] = useState("")
-  const [toError, setToError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [fromError, setFromError] = useState("");
+  const [toError, setToError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const selectedFrom = useAddressStore((state) => state.addressFrom)
-  const selectedTo = useAddressStore((state) => state.addressTo)
-  const resetAddress = useAddressStore((state) => state.reset)
-  const switchAddress = useAddressStore((state) => state.switch)
+  const selectedFrom = useAddressStore((state) => state.addressFrom);
+  const selectedTo = useAddressStore((state) => state.addressTo);
+  const resetAddress = useAddressStore((state) => state.reset);
+  const switchAddress = useAddressStore((state) => state.switch);
 
   const {
     init,
@@ -44,35 +44,35 @@ export default function AddressForm({ dictionary, lang }: Props) {
     },
     debounce: 400,
     initOnMount: false,
-  })
+  });
 
-  const initRef = useRef(init)
-  const router = useRouter()
+  const initRef = useRef(init);
+  const router = useRouter();
 
   const validateSelectedFrom = () => {
     if (!selectedFrom.description) {
-      setFromError(dictionary.home.address_form.from_error)
-      return false
+      setFromError(dictionary.home.address_form.from_error);
+      return false;
     } else {
-      setFromError("")
-      return true
+      setFromError("");
+      return true;
     }
-  }
+  };
 
   const validateSelectedTo = () => {
     if (!selectedTo.description) {
-      setToError(dictionary.home.address_form.to_error)
-      return false
+      setToError(dictionary.home.address_form.to_error);
+      return false;
     } else {
-      setToError("")
-      return true
+      setToError("");
+      return true;
     }
-  }
+  };
 
   const fetchDirections = async (data: {
-    hash: string
-    selectedFrom: google.maps.places.AutocompletePrediction
-    selectedTo: google.maps.places.AutocompletePrediction
+    hash: string;
+    selectedFrom: google.maps.places.AutocompletePrediction;
+    selectedTo: google.maps.places.AutocompletePrediction;
   }) => {
     const response = await fetch(`/${lang}/api/directions`, {
       method: "POST",
@@ -80,60 +80,60 @@ export default function AddressForm({ dictionary, lang }: Props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
+    });
 
     if (!response.ok) {
-      console.error(response.status, response.statusText)
-      throw new Error("Network response was not ok.")
+      console.error(response.status, response.statusText);
+      throw new Error("Network response was not ok.");
     }
 
-    return response
-  }
+    return response;
+  };
 
   const onSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
+      event.preventDefault();
 
       if (!validateSelectedFrom() || !validateSelectedTo()) {
-        return
+        return;
       }
 
-      setIsLoading(true)
+      setIsLoading(true);
 
       const data = {
         hash: hashPair(selectedFrom.description, selectedTo.description),
         selectedFrom,
         selectedTo,
-      }
+      };
 
       router.prefetch(
-        `/${lang}/directions/${data.hash}/${data.selectedFrom.description}/${data.selectedTo.description}`
-      )
+        `/${lang}/directions/${data.hash}/${data.selectedFrom.description}/${data.selectedTo.description}`,
+      );
 
       try {
-        await fetchDirections(data)
+        await fetchDirections(data);
 
-        resetAddress()
+        resetAddress();
 
-        const from = normalizeString(selectedFrom.structured_formatting.main_text)
-        const to = normalizeString(selectedTo.structured_formatting.main_text)
-        router.push(`/${lang}/directions/${data.hash}/${from}/${to}`)
+        const from = normalizeString(selectedFrom.structured_formatting.main_text);
+        const to = normalizeString(selectedTo.structured_formatting.main_text);
+        router.push(`/${lang}/directions/${data.hash}/${from}/${to}`);
 
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
-        toast.error(dictionary.home.address_form.toast_error)
-        console.error("Error:", error)
+        toast.error(dictionary.home.address_form.toast_error);
+        console.error("Error:", error);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedFrom, selectedTo, resetAddress, router, lang]
-  )
+    [selectedFrom, selectedTo, resetAddress, router, lang],
+  );
 
   useEffect(() => {
     if (!initRef.current) {
-      initRef.current = init
+      initRef.current = init;
     }
-  }, [init])
+  }, [init]);
 
   return (
     <>
@@ -143,10 +143,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
         onReady={initRef.current}
       />
       <section className="bg-gradient-to-b from-amber-400 to-amber-500 text-neutral-800 shadow-md transition">
-        <form
-          className="layout-mx mb-6 justify-between pt-0 md:gap-x-12 lg:gap-x-24"
-          onSubmit={onSubmit}
-        >
+        <form className="layout-mx mb-6 justify-between pt-0 md:gap-x-12 lg:gap-x-24" onSubmit={onSubmit}>
           <div className="mx-auto space-y-6 md:mx-0">
             <h1>{dictionary.home.address_form.title}</h1>
 
@@ -184,7 +181,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
         </form>
       </section>
     </>
-  )
+  );
 
   function fromInput() {
     return (
@@ -197,8 +194,8 @@ export default function AddressForm({ dictionary, lang }: Props) {
         <Combobox
           value={selectedFrom}
           onChange={(address) => {
-            clearSuggestions()
-            return useAddressStore.setState({ addressFrom: address })
+            clearSuggestions();
+            return useAddressStore.setState({ addressFrom: address });
           }}
           disabled={!ready}
         >
@@ -206,13 +203,13 @@ export default function AddressForm({ dictionary, lang }: Props) {
             <Combobox.Input
               placeholder={dictionary.home.address_form.from}
               onChange={(event) => {
-                const inputValue = event.target.value
+                const inputValue = event.target.value;
                 if (inputValue.length >= 4) {
-                  setValue(event.target.value)
+                  setValue(event.target.value);
                 }
               }}
               displayValue={(data: google.maps.places.AutocompletePrediction) => {
-                return data.description
+                return data.description;
               }}
               className={`${fromError ? "border border-red-500" : "border-0"} input-base`}
             />
@@ -225,12 +222,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
             </div>
           </div>
 
-          <Transition
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
                 <div className="relative cursor-default select-none px-4 py-2">
@@ -269,7 +261,7 @@ export default function AddressForm({ dictionary, lang }: Props) {
           </Transition>
         </Combobox>
       </div>
-    )
+    );
   }
 
   function toInput() {
@@ -283,31 +275,26 @@ export default function AddressForm({ dictionary, lang }: Props) {
         <Combobox
           value={selectedTo}
           onChange={(address) => {
-            clearSuggestions()
-            return useAddressStore.setState({ addressTo: address })
+            clearSuggestions();
+            return useAddressStore.setState({ addressTo: address });
           }}
           disabled={!ready}
         >
           <Combobox.Input
             placeholder={dictionary.home.address_form.to}
             onChange={(event) => {
-              const inputValue = event.target.value
+              const inputValue = event.target.value;
               if (inputValue.length >= 4) {
-                setValue(event.target.value)
+                setValue(event.target.value);
               }
             }}
             displayValue={(data: google.maps.places.AutocompletePrediction) => {
-              return data.description
+              return data.description;
             }}
             className={`${toError ? "border border-red-500" : "border-0"} input-base`}
           />
 
-          <Transition
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+          <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Combobox.Options className="input-modal">
               {data.length === 0 && value !== "" ? (
                 <div className="relative cursor-default select-none px-4 py-2">
@@ -346,6 +333,6 @@ export default function AddressForm({ dictionary, lang }: Props) {
           </Transition>
         </Combobox>
       </div>
-    )
+    );
   }
 }

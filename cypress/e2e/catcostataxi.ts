@@ -678,10 +678,7 @@ export const cities = [
   },
   {
     name: "Arad",
-    fromArray: [
-      "Gara Arad, Piața Gării, Arad, Romania",
-      "Arad International Airport, Aleea Aeroport, Arad, Romania",
-    ],
+    fromArray: ["Gara Arad, Piața Gării, Arad, Romania", "Arad International Airport, Aleea Aeroport, Arad, Romania"],
     toArray: [
       "Aeroportul Internațional Arad, Arad",
       "Gara Arad, Arad",
@@ -1292,4 +1289,4 @@ export const cities = [
       "Jacob Grillhouse, Sibiu",
     ],
   },
-]
+];

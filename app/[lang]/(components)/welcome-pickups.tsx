@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default function PickupsPage() {
   return (
@@ -27,5 +27,5 @@ export default function PickupsPage() {
         />
       </a>
     </div>
-  )
+  );
 }

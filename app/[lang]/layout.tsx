@@ -1,17 +1,17 @@
-import "@/styles/globals.css"
-import { Inter } from "next/font/google"
-import Image from "next/image"
-import Link from "next/link"
-import { getDictionary } from "@/lib/locale/get-dictionary"
-import { i18n } from "@/lib/locale/i18n-config"
-import LocaleSwitcher from "@/ui/locale-switcher"
-import CookieButton from "./(components)/(cookies)/cookie-button"
-import GoogleAds from "./(components)/google-ads"
-import GoogleAnalytics from "./(components)/google-analytics"
-import type { Metadata } from "next"
+import "@/styles/globals.css";
+import { Inter } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { getDictionary } from "@/lib/locale/get-dictionary";
+import { i18n } from "@/lib/locale/i18n-config";
+import LocaleSwitcher from "@/ui/locale-switcher";
+import CookieButton from "./(components)/(cookies)/cookie-button";
+import GoogleAds from "./(components)/google-ads";
+import GoogleAnalytics from "./(components)/google-analytics";
+import type { Metadata } from "next";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const dictionary = await getDictionary(params.lang)
+  const dictionary = await getDictionary(params.lang);
 
   return {
     title: {
@@ -20,22 +20,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     description: dictionary.root.meta.description,
     keywords: dictionary.root.meta.keywords,
-  }
+  };
 }
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }))
+  return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-const inter = Inter({ subsets: ["latin"], display: "swap" })
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 type Props = {
-  children: React.ReactNode
-  params: { lang: string }
-}
+  children: React.ReactNode;
+  params: { lang: string };
+};
 
 export default async function RootLayout({ children, params }: Props) {
-  const dictionary = await getDictionary(params.lang)
+  const dictionary = await getDictionary(params.lang);
 
   return (
     <html lang={params.lang} className={inter.className}>
@@ -47,13 +47,7 @@ export default async function RootLayout({ children, params }: Props) {
         <header className="z-30 bg-amber-400 shadow-md transition">
           <div className="layout-mx flex-col justify-between gap-y-6 py-4 sm:flex-row">
             <Link href={{ pathname: `/${params.lang}` }}>
-              <Image
-                src="/logo.svg"
-                alt="CatCostaTaxi Logo"
-                className="h-14 sm:h-16"
-                width={122}
-                height={64}
-              />
+              <Image src="/logo.svg" alt="CatCostaTaxi Logo" className="h-14 sm:h-16" width={122} height={64} />
             </Link>
 
             <div className="flex gap-x-4">
@@ -104,5 +98,5 @@ export default async function RootLayout({ children, params }: Props) {
         </footer>
       </body>
     </html>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import Script from "next/script"
+import Script from "next/script";
 
 export default function GoogleAds() {
   return (
@@ -14,5 +14,5 @@ export default function GoogleAds() {
         type="text/plain"
       ></Script>
     </>
-  )
+  );
 }

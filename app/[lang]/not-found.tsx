@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default async function NotFound() {
   return (
@@ -16,5 +16,5 @@ export default async function NotFound() {
         />
       </div>
     </section>
-  )
+  );
 }

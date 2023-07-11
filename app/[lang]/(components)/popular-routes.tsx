@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Dictionary } from "@/lib/locale/get-dictionary"
-import useAddressStore from "@/lib/stores/address-store"
-import type { popularAirports } from "@/lib/data/airports"
-import type { popularStations } from "@/lib/data/stations"
+import Image from "next/image";
+import { Dictionary } from "@/lib/locale/get-dictionary";
+import useAddressStore from "@/lib/stores/address-store";
+import type { popularAirports } from "@/lib/data/airports";
+import type { popularStations } from "@/lib/data/stations";
 
 type Props = {
-  dictionary: Dictionary
-  type: "airports" | "stations"
-  data: typeof popularAirports | typeof popularStations
-}
+  dictionary: Dictionary;
+  type: "airports" | "stations";
+  data: typeof popularAirports | typeof popularStations;
+};
 
 export default function PopularRoutes({ dictionary, type, data }: Props) {
-  const addressFrom = useAddressStore((state) => state.addressFrom)
+  const addressFrom = useAddressStore((state) => state.addressFrom);
 
   function handleClick(routeData: (typeof data)[number]["routeData"]) {
     addressFrom.description === ""
       ? useAddressStore.setState({ addressFrom: routeData })
-      : useAddressStore.setState({ addressTo: routeData })
+      : useAddressStore.setState({ addressTo: routeData });
   }
 
   return (
@@ -52,15 +52,9 @@ export default function PopularRoutes({ dictionary, type, data }: Props) {
 
       {type === "stations" && (
         <div className="hidden min-w-[370px] lg:flex">
-          <Image
-            src="/undraw_subway.svg"
-            alt="Rute trenuri"
-            className="h-[244px]"
-            width={370}
-            height={244}
-          />
+          <Image src="/undraw_subway.svg" alt="Rute trenuri" className="h-[244px]" width={370} height={244} />
         </div>
       )}
     </section>
-  )
+  );
 }
