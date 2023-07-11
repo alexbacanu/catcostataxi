@@ -106,7 +106,7 @@ export default async function DirectionsPage({ params }: Props) {
   }
 
   let initialCompanies = await fetchCompaniesByLoc(route.selectedFrom.structured_formatting.secondary_text);
-  if (initialCompanies.length === 0 && route.selectedTo.structured_formatting.secondary_text) {
+  if (initialCompanies?.length === 0 && route.selectedTo.structured_formatting.secondary_text) {
     initialCompanies = await fetchCompaniesByLoc(route.selectedTo.structured_formatting.secondary_text);
   }
 

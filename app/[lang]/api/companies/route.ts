@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
   const {
     location,
   }: {
-    location: string;
+    location: string | undefined;
   } = await request.json();
 
   if (!location) {
