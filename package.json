@@ -26,7 +26,7 @@
     "cypress": "^12.17.1",
     "mongodb": "^5.7.0",
     "negotiator": "^0.6.3",
-    "next": "^13.4.9",
+    "next": "^13.5.0",
     "next-mdx-remote": "^4.4.1",
     "next-sitemap": "^4.1.8",
     "react": "^18.2.0",
